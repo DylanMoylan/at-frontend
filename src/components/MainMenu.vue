@@ -43,7 +43,7 @@
             </q-list>
         </template>
         <template v-slot:after>
-            <component :is="activeComponent" />
+            <component :is="activeComponent" style="width:500px" />
         </template>
       </q-splitter>
   </div>

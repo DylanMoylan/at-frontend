@@ -91,15 +91,22 @@
             />
             <q-btn
                 label="logfile"
-                @click="logfile"
+                @click="generate"
             />
+        </q-card-section>
+        <q-separator />
+        <q-card-section>
+            <div v-html="checklist" />
         </q-card-section>
     </q-card>
 </template>
 
 <script>
 import articles from '../../../logic/articles'
+import buildOutput from 'src/mixins/buildOutput'
+
 export default {
+    mixins: [buildOutput],
     data() {
         return {
             articleID: '',
@@ -112,19 +119,12 @@ export default {
             hasDownloadableSlideDeck: false,
             hasPDF: false,
             file: null,
-            fileOutput: ''
+            fileOutput: null
         }
     },
     methods: {
-        logfile() {
-            const displayContents = (val) => {
-                this.fileOutput = articles.spotlight.buildSpotlight(val, this.program)
-            }
-            const reader = new FileReader()
-            reader.onload = function(e) {
-                displayContents(e.target.result)
-            }
-            reader.readAsText(this.file)
+        build(val) {
+            this.fileOutput = articles.spotlight.buildSpotlight(val, this.program)
         }
     },
     computed: {
@@ -146,6 +146,9 @@ export default {
                 hasForYourPatient: this.hasPDF, 
                 hasInLanguage: false 
             }
+        },
+        checklist() {
+            return this.fileOutput && this.fileOutput.checklistHTML ? this.fileOutput.checklistHTML : ''
         }
     }
 }
