@@ -1,5 +1,5 @@
 <template>
-  <div style="width:35%">
+  <div style="max-width:60%; min-width:30rem">
       <q-splitter
         v-model="splitter"
       >
@@ -43,9 +43,7 @@
             </q-list>
         </template>
         <template v-slot:after>
-            <div class="q-pa-md">
-                <component :is="activeComponent" />
-            </div>
+            <component :is="activeComponent" />
         </template>
       </q-splitter>
   </div>
