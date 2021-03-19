@@ -3,7 +3,8 @@
 module.exports = {
     english: {
         videoConfigSuffix: "e",
-        xmlLang: "en"
+        xmlLang: "en",
+        label: 'English'
     },
     spanishLATAM: {
         videoConfigSuffix: "s",
@@ -29,7 +30,8 @@ module.exports = {
         subtitles: {
             tocType: "Sidebar",
             calloutText: "Subt&#237;tulos en espa&#241;ol"
-        }
+        },
+        label: 'Spanish (Latin America)'
     },
     spanishSpain: {
         videoConfigSuffix: "s",
@@ -55,9 +57,11 @@ module.exports = {
         subtitles: {
             tocType: "Sidebar",
             calloutText: "subt&#237;tulos en ingl&#233;s"
-        }
+        },
+        label: 'Spanish (Spain)'
     },
     french: {
+        label: 'French',
         videoConfigSuffix: "f",
         xmlLang: "fr",
         transcriptSuffix: "transcript_fre",
@@ -84,6 +88,7 @@ module.exports = {
         }
     },
     italian: {
+        label: 'Italian',
         videoConfigSuffix: "i",
         xmlLang: "it",
         transcriptSuffix: "transcript_ita",
@@ -110,6 +115,7 @@ module.exports = {
         }
     },
     german: {
+        label: 'German',
         videoConfigSuffix: "g",
         xmlLang: "de",
         transcriptSuffix: "transcript_ger",
@@ -136,6 +142,7 @@ module.exports = {
         }
     },
     portugueseBrazil: {
+        label: 'Portuguese (Brazil)',
         videoConfigSuffix: "p",
         xmlLang: "pt",
         transcriptSuffix: "transcript_por",
@@ -162,6 +169,7 @@ module.exports = {
         }
     },
     portuguesePortugal: {
+        label: 'Portuguese (Portugal)',
         videoConfigSuffix: "p",
         xmlLang: "pt",
         transcriptSuffix: "transcript_por",
@@ -188,6 +196,7 @@ module.exports = {
         }
     },
     danish: {
+        label: 'Danish',
         videoConfigSuffix: "d",
         xmlLang: "da",
         transcriptSuffix: "transcript_dan",
@@ -214,6 +223,7 @@ module.exports = {
         }
     },
     russian: {
+        label: 'Russian',
         videoConfigSuffix: "r",
         xmlLang: "ru",
         transcriptSuffix: "transcript_rus",
@@ -240,6 +250,7 @@ module.exports = {
         }
     },
     japanese: {
+        label: 'Japanese',
         videoConfigSuffix: "j",
         xmlLang: "ja",
         transcriptSuffix: "transcript_jpn",
@@ -266,6 +277,7 @@ module.exports = {
         }
     },
     korean: {
+        label: 'Korean',
         videoConfigSuffix: "k",
         xmlLang: "ko",
         transcriptSuffix: "transcript_kor",
@@ -292,6 +304,7 @@ module.exports = {
         }
     },
     chinese: {
+        label: 'Chinese',
         videoConfigSuffix: "c",
         xmlLang: "zh",
         transcriptSuffix: "transcript_chi",
@@ -318,6 +331,7 @@ module.exports = {
         }
     },
     arabic: {
+        label: 'Arabic',
         videoConfigSuffix: "a",
         xmlLang: "ar",
         transcriptSuffix: "transcript_ara",

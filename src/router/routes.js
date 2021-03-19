@@ -4,7 +4,24 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { 
+        path: '', 
+        component: () => import('pages/Index.vue'), 
+        children: [
+          {
+            path: '',
+            component: () => import('components/Menu-Items/Initial.vue')
+          },
+          {
+            path: '/generate/captions',
+            component: () => import('components/Menu-Items/GenCaptions.vue')
+          },
+          {
+            path: '/generate/curbside',
+            component: () => import('components/Menu-Items/GenCurbside.vue')
+          },
+        ]
+      }
     ]
   },
 

@@ -1,5 +1,5 @@
 <template>
-    <q-card>
+    <q-card style="max-width:90%">
         <q-card-section class="bg-primary text-white text-h6 q-pa-md text-center">
             Generate Curbside
         </q-card-section>

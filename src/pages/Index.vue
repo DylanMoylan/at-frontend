@@ -1,16 +1,11 @@
 <template>
-  <q-page class="flex flex-center">
-    <main-menu />
+  <q-page class="flex flex-center bg-grey-2">
+    <router-view />
   </q-page>
 </template>
 
 <script>
-import MainMenu from 'src/components/MainMenu.vue'
 export default {
-  name: 'PageIndex',
-  components: {
-    MainMenu
-
-  }
+  name: 'PageIndex'
 }
 </script>
