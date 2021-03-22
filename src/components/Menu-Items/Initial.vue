@@ -1,10 +1,12 @@
 <template>
-  <q-card>
-    <q-card-section class="bg-primary text-white text-h6 text-center">
+  <q-card class="secundo" style="min-width:500px;">
+    <q-card-section class="primo text-white text-h6 text-center">
       Automation Tool
     </q-card-section>
-    <q-card-section>
-      Welcome to Automation Tool. Click an item from the menu on the left to begin.
+    <q-card-section class="row items-center justify-center" style="min-height:300px">
+      <div class="text-center text-h1 q-my-md">	
+        &#128072;&#128053;&#128077;
+      </div>
     </q-card-section>
   </q-card>
 </template>

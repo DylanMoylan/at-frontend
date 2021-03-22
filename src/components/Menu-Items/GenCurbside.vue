@@ -1,6 +1,6 @@
 <template>
     <div>
-        <q-card style="max-width:90%" class="secundo">
+        <q-card class="secundo q-ma-lg">
             <q-card-section 
                 class="text-white text-h6 q-pa-md text-center primo"
             >
@@ -119,9 +119,9 @@
             </q-card-section>
         </q-card>
         <template v-if="fileOutput">
-            <div class="q-my-md text-white text-h6 q-pl-md">Preview:</div>
+            <div class="q-my-md text-white text-h6 q-ml-lg">Preview:</div>
             <q-card 
-                class="q-mt-md q-pa-md preview"
+                class="q-mt-md q-pa-md preview q-mx-lg"
             >
                 {{fileOutput.checklistHTML}}
             </q-card>
@@ -212,12 +212,9 @@ export default {
 
 <style>
     .preview {
-        max-width: 48.5vw;
         white-space: pre-wrap;
         background-color: black;
         color: white;
         font-family: 'Courier New', monospace;
-        overflow-y: scroll;
-        max-height: 60vh;
     }
 </style>
