@@ -633,7 +633,10 @@ function learningObjectives(textBlock, removeFluff=true) {
     removeRegExp = /<p>CME evaluation<\/p>/g;
     textBlock = textBlock.replace(removeRegExp, '');
 
-    removeRegExp = /.*Posttest.*/g;
+    removeRegExp = /.*Post[ ]?test.*/gi;
+    textBlock = textBlock.replace(removeRegExp, '');
+
+    removeRegExp = /.*PT*/g;
     textBlock = textBlock.replace(removeRegExp, '');
 
     removeRegExp = /.*Slides corresponding to.*/gi;
@@ -811,7 +814,7 @@ function transcript(htmlString, removeFluff=false) {
 
 
 // module.exports = {
-export default {
+    export default {
     basicHTMLSanitize,
     removeTicketFluff,
     supEdgeCases,

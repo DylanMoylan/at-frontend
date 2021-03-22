@@ -126,7 +126,6 @@ function checklistSpotlight(ticket, program) {
     
     // LEARNING OBJECTIVES
     checklist.learningObjectives.result = prodticket.getLearningObjectives(ticket, program);
-
     // PEER REVIEWER 
     if (program.hasPeerReviewer) {
         checklist.peerReviewer.result = prodticket.getPeerReviewer(ticket, program);

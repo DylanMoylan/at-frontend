@@ -43,8 +43,6 @@ var spotlightRemoveRegExps = [
 exportObject[config.programs.spotlight.codeName] = function (ticketHTML) {
     var startRegExp = stringOps.getAllMatchesInOrder(ticketHTML, spotlightStartRegExps);
     var endRegExp = stringOps.getAllMatchesInOrder(ticketHTML, spotlightEndRegExps);
-    console.log("Start RegExp", startRegExp)
-    console.log("EndRegex: ", endRegExp)
     if (startRegExp.length <= 0 || endRegExp.length <=0) {
         throw new Error("No byline found in the prodticket");
     } else {
@@ -53,7 +51,6 @@ exportObject[config.programs.spotlight.codeName] = function (ticketHTML) {
         if (stringOps.isBlankOrWhiteSpace(byline) || stringOps.isEmptyString(byline)) {
             throw new Error("No byline found in the prodticket");
         } else {
-            console.log("BYLINE: ", byline);
             for (var i = 0; i < spotlightRemoveRegExps.length; i++) {
                 byline = byline.replace(spotlightRemoveRegExps[i], "");
             }

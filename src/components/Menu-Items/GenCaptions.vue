@@ -1,6 +1,6 @@
 <template>
-  <q-card>
-        <q-card-section class="bg-primary text-white text-h6 q-pa-md text-center">
+  <q-card class="secundo">
+        <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             Generate Captions
         </q-card-section>
         <q-card-section>
@@ -106,19 +106,37 @@ export default {
     preprocess() {
       this.generate()
     },
+    downloadFailed() {
+      this.$q.dialog({
+        title: 'Error',
+        message: 'The program encountered an issue while generating the ticket. There may be an issue with the input file\'s encoding or formatting.'
+      })
+    },
     downloadResult(type) {
       let href, download
       if(type == 'vtt') {
-        href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(this.fileOutput.vttResult.cleanedString)}`
-        download = this.fileOutput.vttResult.fileName
+        try {
+          href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(this.fileOutput.vttResult.cleanedString)}`
+          download = this.fileOutput.vttResult.fileName
+          continueDownload()
+        } catch (error) {
+          this.downloadFailed()
+        }
       }else{
-        href= `data:application/octet-stream;charset=utf-8;base64,${window.btoa(this.fileOutput.xmlResult.cleanedString)}`
-        download = this.fileOutput.xmlResult.fileName
+        try {
+          href= `data:application/octet-stream;charset=utf-8;base64,${window.btoa(this.fileOutput.xmlResult.cleanedString)}`
+          download = this.fileOutput.xmlResult.fileName
+          continueDownload()
+        } catch (error) {
+          this.downloadFailed()
+        }
       }
-      const link = document.createElement('a')
-      link.href = href
-      link.download = download
-      link.click()
+      function continueDownload() {
+        const link = document.createElement('a')
+        link.href = href
+        link.download = download
+        link.click()
+      }
     }
   }
 }

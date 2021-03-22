@@ -199,8 +199,8 @@ function printDateTime(dateTime) {
 
 function printLearningObjectives(learningObjectives) {
     var formattedObjectives = formatLearningObjectives(learningObjectives.result);
-    var formattedQNAObjectives = formatQNAObjectives(learningObjectives.result);
-
+    // var formattedQNAObjectives = formatQNAObjectives(learningObjectives.result);
+    var formattedQNAObjectives = formattedObjectives
     var resultString = stripIndent`
     -----------------------------------------
     ${learningObjectives.printName}
@@ -222,8 +222,8 @@ function printLearningObjectives(learningObjectives) {
     var qnaObjectives = stripIndent`
     ${formattedQNAObjectives}
     ` + "\n\n\n\n\n";
-
-    return resultString + newString + qnaString + qnaObjectives;
+    const result = resultString + newString + qnaString + qnaObjectives;
+    return result
 }
 
 function printTestAndTeachContent(mainContent) {

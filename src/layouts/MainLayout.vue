@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-drawer show-if-above v-model="left" side="left">
-      <q-item class="bg-primary text-white text-h6" to="/">
+    <q-drawer show-if-above v-model="left" side="left" class="secundo" content-class="secundo">
+      <q-item class="primo text-white text-h6" to="/">
         <q-item-section avatar>
             <q-icon name="help" />
         </q-item-section>
@@ -15,7 +15,7 @@
                 <q-expansion-item
                   label="Generate Files"
                   group="options">
-                    <q-card>
+                    <q-card class="secundo">
                         <q-card-section>
                             <q-list separator bordered>
                                 <!-- <router-link to="/generate/captions"> -->
@@ -37,7 +37,7 @@
                   group="options"
                   disable
                   >
-                    <q-card>
+                    <q-card class="secundo">
                         <q-card-section>
                             <q-list separator bordered>
                                 <q-item clickable>
@@ -58,7 +58,7 @@
                   group="options"
                   disable
                 >
-                  <q-card>
+                  <q-card class="secundo">
                     <q-card-section>
                       <q-list separator bordered>
                         <q-item clickable>
@@ -94,7 +94,7 @@
                   group="options"
                   disable
                 >
-                  <q-card>
+                  <q-card class="secundo">
                     <q-card-section>
                       <q-list bordered separator>
                         <q-item clickable>

@@ -9,7 +9,7 @@ var exportObject = {};
 
 // Spotlight
 exportObject[config.programs.spotlight.codeName] = function (ticketHTML) {
-    var {textBlock} = stringOps.getTextBlock(ticketHTML, "<strong>Peer Reviewer</strong>", "References");
+    var {textBlock} = stringOps.getTextBlock(ticketHTML, /(<strong>&#9746; )?Peer Reviewer[: ]?<\/strong>/, "References");
 
     if (stringOps.isEmptyString(textBlock) || stringOps.isBlankOrWhiteSpace(textBlock) || textBlock.length < 10) {
         throw new Error("No peer reviewer info found in the prodticket");
