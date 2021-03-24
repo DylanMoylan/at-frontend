@@ -7,7 +7,6 @@
                 Generate Curbside
             </q-card-section>
             <q-card-section>
-                <div class="row justify-between">
                     <q-input
                         filled
                         stack-label
@@ -76,7 +75,6 @@
                             dense
                         />
                     </div>
-                </div>
             </q-card-section>
             <q-card-section>
                 <q-file

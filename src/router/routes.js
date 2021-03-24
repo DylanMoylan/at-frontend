@@ -20,6 +20,10 @@ const routes = [
             path: '/generate/curbside',
             component: () => import('components/Menu-Items/GenCurbside.vue')
           },
+          {
+            path: '/snippets/in-language',
+            component: () => import('components/Menu-Items/SnippetInLanguage.vue')
+          },
         ]
       }
     ]

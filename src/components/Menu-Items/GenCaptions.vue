@@ -10,8 +10,7 @@
                     stack-label
                     label="Article ID"
                     v-model="articleID"
-                    style="width:350px"
-                    class="row q-ma-sm"
+                    class="row q-ma-sm at-input"
                 />
                 <q-select
                   filled
@@ -19,8 +18,7 @@
                   label="Select Language"
                   :options="languageOptions"
                   v-model="language"
-                  class="row q-ma-sm"
-                  style="width:350px"
+                  class="row q-ma-sm at-input"
                   emit-value
                   map-options
                 />
@@ -29,10 +27,9 @@
         <q-card-section>
             <q-file
                 v-model="file"
-                style="max-width:300px"
                 filled
                 label="Pick 1 File"
-                class="q-ma-sm"
+                class="q-ma-sm at-input"
             />
             <div v-if="fileOutput" class="q-ma-sm">
               <q-btn 
@@ -59,6 +56,18 @@
                 :class="missingData ? 'bg-negative' : 'bg-positive'"
                 @click="preprocess"
             />
+        </q-card-section>
+        <q-card-section>
+          <q-item style="border:1px solid #787878; border-radius:3px">
+            <q-item-section avatar>
+              <q-icon name="info" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>
+                Don't forget to <router-link to="/snippets/in-language">create in-language XML</router-link>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
         </q-card-section>
     </q-card>
 </template>
