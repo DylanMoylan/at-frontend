@@ -56,11 +56,11 @@ function activity(program, title, targetAudience, goalStatement, learningObjecti
 
     activityInstance.additionalCreditAvailable = snippets.activity.additionalCreditAvailable();
 
-    var contributorGroups = articleUtils.buildContributorGroups(cmeReviewers);
+    // var contributorGroups = articleUtils.buildContributorGroups(cmeReviewers);
 
-    for (var i = 0; i < contributorGroups.length; i++) {       
-        activityInstance.insertContributorGroup(contributorGroups[i]);
-    }
+    // for (var i = 0; i < contributorGroups.length; i++) {       
+    //     activityInstance.insertContributorGroup(contributorGroups[i]);
+    // }
 
     return activityInstance.toFinalXML();
 }

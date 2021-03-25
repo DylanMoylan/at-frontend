@@ -7,11 +7,13 @@ var exportObject = {};
 exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
     var {textBlock: newsAuthor, label: newsAuthorLabel} = stringOps.getTextBlock(ticketHTML, "News Author", 'CME Author');
 
-    var {textBlock: cmeAuthor, label: cmeAuthorLabel} = stringOps.getTextBlock(ticketHTML, "CME Author", 'Editor');
+    var {textBlock: cmeAuthor, label: cmeAuthorLabel} = stringOps.getTextBlock(ticketHTML, "CME Author", /.*Faculty affiliations are confirmed to be accurate.*/g);
     
     newsAuthor = cleanHTML.singleLine(cleanHTML.plainText(newsAuthor)).trim();
     cmeAuthor = cleanHTML.singleLine(cleanHTML.plainText(cmeAuthor)).trim(); 
-
+    newsAuthor = newsAuthor.replace(/:[ ]?/, '')
+    newsAuthor = newsAuthor.replace(';', '')
+    cmeAuthor = cmeAuthor.replace(/:[ ]?/, '')
     if (stringOps.isEmptyString(newsAuthor) && stringOps.isEmptyString(cmeAuthor)) {
         throw new Error("No News Author or CME Author found in the prodticket");
     } else if (stringOps.isEmptyString(newsAuthor)) {

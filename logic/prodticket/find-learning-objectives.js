@@ -13,7 +13,8 @@ Upon completion of this activity, participants will:
 // Clinical Brief
 exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
     var startRegExp = /Upon completion of this activity.*/g;
-    var endRegExp = /.*<strong>Clinical Context.*/g;
+    var endRegExp = /.*\(Evaluations, Assessments, and Posttests\)*/g;
+    // var endRegExp = /.*<strong>Clinical Context.*/g;
     var {textBlock} = stringOps.getTextBlock(ticketHTML, startRegExp, endRegExp, true, false);
 
     if (stringOps.isEmptyString(textBlock) || stringOps.isBlankOrWhiteSpace(textBlock) || textBlock.length < 10) {

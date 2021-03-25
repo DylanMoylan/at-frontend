@@ -28,6 +28,16 @@
                                       </q-item-label>
                                     </q-item-section>
                                   </q-item>
+                                  <q-item clickable to="/generate/clinical-brief">
+                                      <q-item-section>
+                                        <q-item-label>
+                                          Generate Clinical Brief
+                                        </q-item-label>
+                                        <q-item-label caption>
+                                          Generates Clinical Brief XML code from R2Net html file.
+                                        </q-item-label>
+                                      </q-item-section>
+                                  </q-item>
                                   <q-item clickable to="/generate/curbside">
                                       <q-item-section>
                                         <q-item-label>
@@ -35,6 +45,36 @@
                                         </q-item-label>
                                         <q-item-label caption>
                                           Generates Curbside Consult XML code from R2Net html file.
+                                        </q-item-label>
+                                      </q-item-section>
+                                  </q-item>
+                                  <q-item clickable to="/generate/spotlight">
+                                      <q-item-section>
+                                        <q-item-label>
+                                          Generate Spotlight
+                                        </q-item-label>
+                                        <q-item-label caption>
+                                          Generates Spotlight XML code from R2Net html file.
+                                        </q-item-label>
+                                      </q-item-section>
+                                  </q-item>
+                                  <q-item clickable to="/generate/spotlight" disable>
+                                      <q-item-section>
+                                        <q-item-label>
+                                          Generate Video Lecture
+                                        </q-item-label>
+                                        <q-item-label caption>
+                                          Generates Video Lecture XML code from R2Net html file.
+                                        </q-item-label>
+                                      </q-item-section>
+                                  </q-item>
+                                  <q-item clickable to="/generate/spotlight" disable>
+                                      <q-item-section>
+                                        <q-item-label>
+                                          Generate First Response
+                                        </q-item-label>
+                                        <q-item-label caption>
+                                          Generates First Response XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>

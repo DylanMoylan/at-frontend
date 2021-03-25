@@ -8,3 +8,11 @@
 .at-input {
     width: 350px;
 }
+
+.at-preview {
+    max-width: 60vw;
+    white-space: pre-wrap;
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', monospace;
+}

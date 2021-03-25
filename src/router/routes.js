@@ -21,8 +21,16 @@ const routes = [
             component: () => import('components/Menu-Items/GenCurbside.vue')
           },
           {
+            path: '/generate/spotlight',
+            component: () => import('components/Menu-Items/GenSpotlight.vue')
+          },
+          {
             path: '/snippets/in-language',
             component: () => import('components/Menu-Items/SnippetInLanguage.vue')
+          },
+          {
+            path: '/generate/clinical-brief',
+            component: () => import('components/Menu-Items/GenClinicalBrief.vue')
           },
         ]
       }

@@ -4,7 +4,7 @@
             <q-card-section 
                 class="text-white text-h6 q-pa-md text-center primo"
             >
-                Generate Curbside
+                Generate Spotlight
             </q-card-section>
             <q-card-section>
                     <q-input
@@ -181,9 +181,9 @@ export default {
     computed: {
         program() {
             return {
-                name: "Curbside Consult",
-                codeName: "curbside",
-                dirName: "curbside",
+                name: "Spotlight",
+                codeName: "spotlight",
+                dirName: "spotlight",
                 profArticleType: "SlidePresentation",
                 articleID: this.articleID,
                 qnaID: "",

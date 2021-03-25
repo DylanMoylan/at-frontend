@@ -4,7 +4,7 @@
             <q-card-section 
                 class="text-white text-h6 q-pa-md text-center primo"
             >
-                Generate Curbside
+                Generate Clinical Brief
             </q-card-section>
             <q-card-section>
                     <q-input
@@ -12,66 +12,19 @@
                         stack-label
                         label="Article ID"
                         v-model="articleID"
-                        style="width:350px"
-                        class="row q-mb-md"
+                        class="row q-mb-md at-input"
+                    />
+                    <q-input
+                        filled
+                        stack-label
+                        label="Questionnaire ID"
+                        v-model="questionnaireID"
+                        class="row q-mb-md at-input"
                     />
                     <div class="row full-width justify-start">
                         <q-checkbox
-                            label="Has Transcript"
-                            v-model="hasTranscript"
-                            dense
-                        />
-                    </div>
-                    <div v-if="hasTranscript" class="row full-width items-center">
-                        <span>Transcript Type: </span>
-                        <q-option-group
-                            :options="[
-                                {
-                                    label: 'Slides',
-                                    value: 'Slides'
-                                },
-                                {
-                                    label: 'Text',
-                                    value: 'Text'
-                                }
-                            ]"
-                            v-model="transcriptType"
-                            type="radio"
-                            inline
-                        />
-                    </div>
-                    <div class="row full-width justify-start">
-                        <q-checkbox
-                            label="Has LLA"
-                            v-model="isLLA"
-                            dense
-                        />
-                    </div>
-                    <div class="row full-width justify-start">
-                        <q-checkbox
-                            label="Is OUS"
-                            v-model="isOUS"
-                            dense
-                        />
-                    </div>
-                    <div class="row full-width justify-start">
-                        <q-checkbox
-                            label="Has Peer Reviewer"
-                            v-model="hasPeerReviewer"
-                            dense
-                        />
-                    </div>
-                    <div class="row full-width justify-start">
-                        <q-checkbox
-                            label="Has Collection Page"
-                            v-model="hasCollectionPage"
-                            dense
-                        />
-                    </div>
-                    <div class="row full-width justify-start">
-                        <q-checkbox
-                            label="Has For your patient PDF"
-                            v-model="hasPDF"
+                            label="Has Pre-Assessment"
+                            v-model="hasPreAssessment"
                             dense
                         />
                     </div>
@@ -119,7 +72,7 @@
         <template v-if="fileOutput">
             <div class="q-my-md text-white text-h6 q-ml-lg">Preview:</div>
             <q-card 
-                class="q-mt-md q-pa-md at-preview q-mx-lg"
+                class="q-mt-md q-pa-md preview q-mx-lg at-preview"
             >
                 {{fileOutput.checklistHTML}}
             </q-card>
@@ -137,13 +90,8 @@ export default {
     data() {
         return {
             articleID: '',
-            hasTranscript: false,
-            transcriptType: '',
-            isLLA: false,
-            isOUS: false,
-            hasPeerReviewer: false,
-            hasCollectionPage: false,
-            hasPDF: false,
+            questionnaireID: '',
+            hasPreAssessment: false,
             file: null,
             fileOutput: null,
             xmlResult: null
@@ -151,7 +99,7 @@ export default {
     },
     methods: {
         build(val) {
-            this.fileOutput = articles.spotlight.buildSpotlight(val, this.program)
+            this.fileOutput = articles.clinicalBrief.buildClinicalBrief(val, this.program)
             this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
         },
         downloadResult(type) {
@@ -181,20 +129,19 @@ export default {
     computed: {
         program() {
             return {
-                name: "Curbside Consult",
-                codeName: "curbside",
-                dirName: "curbside",
-                profArticleType: "SlidePresentation",
+                name: "Clinical Brief",
+                codeName: "brief",
+                dirName: "brief",
+                profArticleType: "Article",
                 articleID: this.articleID,
-                qnaID: "",
-                hasTranscript: this.hasTranscript, 
-                transcriptType: this.transcriptType,
-                hasLLA: this.isLLA,
-                hasOUS: this.isOUS, 
-                hasPeerReviewer: this.hasPeerReviewer, 
-                hasCollectionPage: this.hasCollectionPage,
+                qnaID: this.questionnaireID,
+                hasPreAssessment: false,
+                hasPostAssessment: false,
+                hasOUS: false, 
+                hasPeerReviewer: false, 
+                hasCollectionPage: false,
                 hasSlideDeck: false, 
-                hasForYourPatient: this.hasPDF, 
+                hasForYourPatient: false, 
                 hasInLanguage: false 
             }
         },
@@ -202,11 +149,17 @@ export default {
             return this.fileOutput && this.fileOutput.checklistHTML ? this.fileOutput.checklistHTML : ''
         },
         missingData() {
-            return !this.articleID.length || !this.file
+            return !this.articleID.length || !this.file || !this.questionnaireID.length
         }
     }
 }
 </script>
 
 <style>
+    .preview {
+        white-space: pre-wrap;
+        background-color: black;
+        color: white;
+        font-family: 'Courier New', monospace;
+    }
 </style>

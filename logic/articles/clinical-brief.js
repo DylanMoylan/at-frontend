@@ -78,7 +78,8 @@ function getStudyHighlights (ticket) {
 function getClinicalImplications(ticket) {
     var endRegexArray = [
         /CME.*pre-assessment\/post-assessment questions/g,
-        /CME Post Test Questions/g
+        /CME Post Test Questions/g,
+        /(&#9744;|&#9745;)?[ ]?[<]strong\>COVID Program Disclaimer/g
     ];
     var endRegex = utils.stringOps.getNextRegex(ticket, endRegexArray);
     if (endRegex != -1) {
@@ -164,9 +165,10 @@ function checklistClinicalBrief(ticket, program) {
 
 /* MASTER FUNCTIONS 
 -------------------------------------- */
-function buildClinicalBrief(ticket, program) {
+function buildClinicalBrief(rawTicket, program) {
     var clinicalContext, synopsisAndPerspective, studyHighlights, clinicalImplications, cmeTest, references, title, byline, targetAudience, learningObjectives, cmeReviewers;
-    
+    let ticket = stringOps.getTextBlock(rawTicket, 'Handoff Notes and Reminders', 'General Information')
+    ticket = rawTicket.replace(ticket.textBlock, '')
     var checklistResult = checklistClinicalBrief(ticket, program);    
 
     // Clinical Brief Sections
