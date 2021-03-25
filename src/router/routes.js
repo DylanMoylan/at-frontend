@@ -29,8 +29,40 @@ const routes = [
             component: () => import('components/Menu-Items/SnippetInLanguage.vue')
           },
           {
-            path: '/generate/clinical-brief',
+            path: '/components/activity',
+            component: () => import('components/Menu-Items/ComponentActivity.vue')
+          },
+          {
+            path: '/components/text-transcript',
+            component: () => import('components/Menu-Items/ComponentTextTranscript.vue')
+          },
+          {
+            path: '/components/slides-transcript',
             component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+          },
+          {
+            path: '/components/abbreviations',
+            component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+          },
+          {
+            path: '/components/references',
+            component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+          },
+          {
+            path: '/components/table-of-contents',
+            component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+          },
+          {
+            path: '/components/credit-statements',
+            component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+          },
+          {
+            path: '/components/contributors',
+            component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+          },
+          {
+            path: '/snippets/downloadable-slides',
+            component: () => import('components/Menu-Items/SnippetDownloadableSlides.vue')
           },
         ]
       }

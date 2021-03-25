@@ -99,7 +99,7 @@
                                     </q-item-label>
                                   </q-item-section>
                                 </q-item>
-                                <q-item clickable disable>
+                                <q-item clickable to="/snippets/downloadable-slides">
                                     <q-item-section>
                                       <q-item-label>
                                         Downloadable Slides
@@ -156,34 +156,89 @@
                 <q-expansion-item
                   label="Components"
                   group="options"
-                  disable
                 >
                   <q-card class="secundo">
                     <q-card-section>
                       <q-list separator bordered>
-                        <q-item clickable>
-                          Activity
+                        <q-item clickable to="components/activity" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Activity
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates Activity XML code from R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
-                        <q-item clickable>
-                          Text Transcript
+                        <q-item clickable to="components/text-transcript" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Text Transcript
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates XML code for Sidebar Transcript from R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
-                        <q-item clickable>
-                          Slides Transcript
+                        <q-item clickable to="components/slides-transcript" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Slides Transcript
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates XML code for Slides Transcript from R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
-                        <q-item clickable>
-                          Abbreviations
+                        <q-item clickable to="components/abbreviations" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Abbreviations
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates Abbrevations TOC XML code from R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
-                        <q-item clickable>
-                          References
+                        <q-item clickable to="components/references" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              References
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates References TOC XML code from R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
-                        <q-item clickable>
-                          Table of Contents
+                        <q-item clickable to="components/table-of-contents" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Table of Contents
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates Multicomponent TOC XML code from R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
-                        <q-item clickable>
-                          Credit Statements
+                        <q-item clickable to="components/credit-statements" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Credit Statements
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates credit statements HTML code from the R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
-                        <q-item clickable>
-                          Contributors
+                        <q-item clickable to="components/contributors" disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Contributors
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates XML code for contributors using the R2Net html file.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
                       </q-list>
                     </q-card-section>
@@ -192,13 +247,40 @@
                 <q-expansion-item
                   label="Producer"
                   group="options"
-                  disable
                 >
                   <q-card class="secundo">
                     <q-card-section>
                       <q-list bordered separator>
-                        <q-item clickable>
-                          Producer Checklist
+                        <q-item clickable disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Producer Checklist
+                            </q-item-label>
+                            <q-item-label caption>
+                              Generates Checklist of D2 properties for Producers.
+                            </q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-card-section>
+                  </q-card>
+                </q-expansion-item>
+                <q-expansion-item
+                  label="Format"
+                  group="options"
+                >
+                  <q-card class="secundo">
+                    <q-card-section>
+                      <q-list bordered separator>
+                        <q-item clickable disable>
+                          <q-item-section>
+                            <q-item-label>
+                              Format Learning Objectives
+                            </q-item-label>
+                            <q-item-label caption>
+                              Formats raw Learning Objectives from the prodticket into the proper format for D2.
+                            </q-item-label>
+                          </q-item-section>
                         </q-item>
                       </q-list>
                     </q-card-section>
