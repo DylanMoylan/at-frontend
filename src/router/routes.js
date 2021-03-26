@@ -50,6 +50,10 @@ const routes = [
               path: '/snippets/certificate-links',
               component: () => import('components/Menu-Items/SnippetCertificateLinks.vue')
             },
+            {
+              path: '/snippets/misc-provider-statement',
+              component: () => import('components/Menu-Items/SnippetProviderStatement.vue')
+            },
 
             //Components
 

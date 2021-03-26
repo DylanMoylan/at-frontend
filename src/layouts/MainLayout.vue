@@ -129,7 +129,7 @@
                                     </q-item-label>
                                   </q-item-section>
                                 </q-item>
-                                <q-item clickable disable>
+                                <q-item clickable to="/snippets/misc-provider-statement">
                                     <q-item-section>
                                       <q-item-label>
                                         Misc Provider Statement
