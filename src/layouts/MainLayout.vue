@@ -109,7 +109,7 @@
                                       </q-item-label>
                                     </q-item-section>
                                 </q-item>
-                                <q-item clickable disable>
+                                <q-item clickable to="/snippets/certificate-links">
                                   <q-item-section>
                                     <q-item-label>
                                       Certificate Links

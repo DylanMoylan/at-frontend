@@ -46,6 +46,10 @@ const routes = [
               path: '/snippets/media-info',
               component: () => import('components/Menu-Items/SnippetMediaInfo.vue')
             },
+            {
+              path: '/snippets/certificate-links',
+              component: () => import('components/Menu-Items/SnippetCertificateLinks.vue')
+            },
 
             //Components
 
