@@ -54,6 +54,10 @@ const routes = [
               path: '/snippets/misc-provider-statement',
               component: () => import('components/Menu-Items/SnippetProviderStatement.vue')
             },
+            {
+              path: '/snippets/slide-tocs',
+              component: () => import('components/Menu-Items/SnippetSlideTocs.vue')
+            },
 
             //Components
 
