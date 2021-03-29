@@ -160,7 +160,7 @@
                   <q-card class="secundo">
                     <q-card-section>
                       <q-list separator bordered>
-                        <q-item clickable to="components/activity" disable>
+                        <q-item clickable to="/components/activity">
                           <q-item-section>
                             <q-item-label>
                               Activity
