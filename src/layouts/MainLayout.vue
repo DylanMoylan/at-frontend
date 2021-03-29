@@ -288,6 +288,11 @@
                 </q-expansion-item>
             </q-list>
     </q-drawer>
+    <q-btn
+      icon="menu"
+      v-if="!left"
+      @click="left = !left"
+    />
     <q-page-container>
       <router-view />
     </q-page-container>
