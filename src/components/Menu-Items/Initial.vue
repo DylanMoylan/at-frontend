@@ -50,7 +50,15 @@
             </li>
             <li class="text-positive">
               <q-icon name="check" class="q-mr-sm text-body1"/>
-              <span>All snippets</span>
+              <span>Snippets</span>
+            </li>
+            <li class="text-warning">
+              <q-icon name="help" class="q-mr-sm text-body1"/>
+              <span>Snippets/Downloadable Slides</span>
+            </li>
+            <li class="text-negative">
+              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+              <span>Snippets/Slide-Tocs</span>
             </li>
             <li class="text-negative">
               <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
