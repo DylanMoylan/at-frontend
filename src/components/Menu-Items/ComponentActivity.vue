@@ -58,36 +58,24 @@
 </template>
 
 <script>
-import config from '../../../logic/config'
 import buildOutput from '../../mixins/buildOutput'
+import programOptions from 'src/mixins/programOptions'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 
 export default {
-  mixins: [buildOutput],
+  mixins: [buildOutput, programOptions],
   data() {
     return {
       articleID: '',
       isOUS: false,
-      productType: '',
       file: null,
       fileOutput: null
     }
   },
   computed: {
-    productTypeOptions() {
-      return Object.keys(config.programs).map(key => {
-        return config.programs[key].name
-      })
-    },
     missingData() {
       return !this.articleID.length || !this.productType.length || !this.file
-    },
-    program() {
-      let selectedProgram = Object.assign({}, Object.keys(config.programs).find(key => config.programs[key].name == this.productType))
-      selectedProgram.articleID = this.articleID
-      selectedProgram.hasOUS = this.isOUS
-      return selectedProgram
     }
   },
   methods: {

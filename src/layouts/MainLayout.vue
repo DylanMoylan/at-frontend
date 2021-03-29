@@ -170,7 +170,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="components/text-transcript" disable>
+                        <q-item clickable to="/components/text-transcript">
                           <q-item-section>
                             <q-item-label>
                               Text Transcript
@@ -180,7 +180,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="components/slides-transcript" disable>
+                        <q-item clickable to="/components/slides-transcript" disable>
                           <q-item-section>
                             <q-item-label>
                               Slides Transcript
@@ -190,7 +190,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="components/abbreviations" disable>
+                        <q-item clickable to="/components/abbreviations" disable>
                           <q-item-section>
                             <q-item-label>
                               Abbreviations
@@ -200,7 +200,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="components/references" disable>
+                        <q-item clickable to="/components/references" disable>
                           <q-item-section>
                             <q-item-label>
                               References
@@ -210,7 +210,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="components/table-of-contents" disable>
+                        <q-item clickable to="/components/table-of-contents" disable>
                           <q-item-section>
                             <q-item-label>
                               Table of Contents
@@ -220,7 +220,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="components/credit-statements" disable>
+                        <q-item clickable to="/components/credit-statements" disable>
                           <q-item-section>
                             <q-item-label>
                               Credit Statements
@@ -230,7 +230,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="components/contributors" disable>
+                        <q-item clickable to="/components/contributors" disable>
                           <q-item-section>
                             <q-item-label>
                               Contributors
