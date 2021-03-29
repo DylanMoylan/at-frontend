@@ -3,6 +3,14 @@
         <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             Generate Captions
         </q-card-section>
+        <q-card-section class="q-ma-sm">
+          <ol style="border:1px solid; border-radius:3px">
+            <li style="margin-top:10px">Clean and prepare a .xlss file and convert it to HTML with LibreOffice. (See <a href="https://confluence.internetbrands.com/pages/viewpage.action?pageId=87791092">Confluence</a> for more info).</li>
+            <li>Enter article ID and select language.</li>
+            <li>Click on the file picker and select the file you've prepared.</li>
+            <li style="margin-bottom:10px">Click Go. When the process is complete, download buttons should appear for XML and VTT versions.</li>
+          </ol>
+        </q-card-section>
         <q-card-section>
             <div class="row justify-between">
                 <q-input
@@ -28,8 +36,9 @@
             <q-file
                 v-model="file"
                 filled
-                label="Pick 1 File"
-                class="q-ma-sm at-input"
+                label="Select an HTML file"
+                class="q-ma-sm q-mb-md at-input"
+                bottom-slots
             />
             <div v-if="fileOutput" class="q-ma-sm">
               <q-btn 

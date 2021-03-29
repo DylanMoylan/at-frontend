@@ -1,9 +1,11 @@
 /* app global css */
 .primo {
-    background-image: linear-gradient(140deg, #007eff, #cf1f1f, yellow, purple)
+    /* background-image: linear-gradient(140deg, #007eff, #cf1f1f, yellow, purple) */
+    background-color: #2e2b2b;
 }
 .secundo {
-    background-color: #ffff95;
+    /* background-color: #ffff95; */
+    background-color:#ffffff;
 }
 .at-input {
     width: 350px;
