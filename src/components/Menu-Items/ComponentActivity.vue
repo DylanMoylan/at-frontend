@@ -30,7 +30,7 @@
         v-model="file"
         class="at-input"
         filled
-        label="Pick 1 File"
+        label="Select Prodticket HTML File"
       />
     </q-card-section>
     <q-separator />

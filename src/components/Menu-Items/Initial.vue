@@ -1,16 +1,26 @@
 <template>
-  <q-card class="secundo" style="min-width:500px;">
+  <q-card class="secundo" style="max-width:60vw">
     <q-card-section class="primo text-white text-h6 text-center">
       Automation Tool
     </q-card-section>
     <q-card-section>
       Automation Tool (UI) - A visual update to the Automation Tool. <br />
-      All input files should be processed in the same way as with the original tool before uploading. <br />
-      Click on an item in the menu to the right to begin.
+      <ul>
+        <li>All input files should be processed in the same way as with the original tool before uploading<br />(Using R2Net or other tools - See Confluence for more details).</li>
+        <li>All output files are the same as those created by the original tool.</li>
+      </ul>
+      Click on an item in the menu to the left to begin.
     </q-card-section>
     <q-separator />
     <q-card-section>
       <div>	
+        <div class="text-center text-bold">ChangeLog</div>
+        <div>
+          <span class="text-bold">[3.30.2021]</span>
+          <span>
+            Adds some new component generators and adds copy/reset buttons to a few sections.
+          </span>
+        </div>
         <div>
           <span class="text-bold">[3.29.2021]</span>
           <span>

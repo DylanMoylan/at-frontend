@@ -34,7 +34,7 @@
                     v-model="file"
                     style="max-width:300px"
                     filled
-                    label="Pick 1 File"
+                    label="Select Prodticket HTML File"
                 />
                 <q-btn
                     label="Go"
