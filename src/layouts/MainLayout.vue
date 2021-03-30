@@ -200,7 +200,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/references" disable>
+                        <q-item clickable to="/components/references">
                           <q-item-section>
                             <q-item-label>
                               References

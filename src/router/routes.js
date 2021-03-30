@@ -79,7 +79,7 @@ const routes = [
             },
             {
               path: '/components/references',
-              component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+              component: () => import('components/Menu-Items/ComponentReferences.vue')
             },
             {
               path: '/components/table-of-contents',
