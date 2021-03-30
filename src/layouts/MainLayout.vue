@@ -190,7 +190,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/abbreviations" disable>
+                        <q-item clickable to="/components/abbreviations">
                           <q-item-section>
                             <q-item-label>
                               Abbreviations

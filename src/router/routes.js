@@ -75,7 +75,7 @@ const routes = [
             },
             {
               path: '/components/abbreviations',
-              component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+              component: () => import('components/Menu-Items/ComponentAbbreviations.vue')
             },
             {
               path: '/components/references',

@@ -124,7 +124,6 @@ export default {
             transcriptXML = "";
         }
         this.fileOutput = transcriptXML
-        console.log('transcriptXML: ', transcriptXML);
     }
     },
     downloadResult() {
