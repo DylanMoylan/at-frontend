@@ -61,12 +61,13 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
 
 export default {
-  mixins: [buildOutput, programOptions],
+  mixins: [buildOutput, programOptions, tryCatch],
   data() {
     return {
       articleID: '',
@@ -84,16 +85,19 @@ export default {
         let referencesXML = null;
         let referencesHTML = null; 
 
-        referencesHTML = prodticket.getReferences(ticket, this.program);
-
-        if (referencesHTML instanceof Error) {
-            throw referencesHTML;
-        } else if (!referencesHTML) {
-            throw new Error("Something went wrong when searching for references!");
-        } else {
-            referencesXML = utils.xmlOps.objectToXMLString(articles.articleUtils.buildReferences(referencesHTML, this.program).toObjectLiteral());
+        const createReference = () => {
+            referencesHTML = prodticket.getReferences(ticket, this.program);
+    
+            if (referencesHTML instanceof Error) {
+                throw referencesHTML;
+            } else if (!referencesHTML) {
+                throw new Error("Something went wrong when searching for references!");
+            } else {
+                referencesXML = utils.xmlOps.objectToXMLString(articles.articleUtils.buildReferences(referencesHTML, this.program).toObjectLiteral());
+            }
+            this.fileOutput = referencesXML
         }
-        this.fileOutput = referencesXML
+        this.tryCatch(createReference)
     },
     downloadResult() {
       const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`

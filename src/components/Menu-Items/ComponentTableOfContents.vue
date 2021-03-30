@@ -63,12 +63,13 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
 
 export default {
-  mixins: [buildOutput, programOptions],
+  mixins: [buildOutput, programOptions, tryCatch],
   data() {
     return {
       articleID: '',
@@ -93,10 +94,9 @@ export default {
   methods: {
     build(ticket) {
         let tocXML = null;
-        let components = null; 
-
-        components = prodticket.getComponents(ticket, this.program);
-        try {
+        let components = null;
+        const createTOC = () => {
+            components = prodticket.getComponents(ticket, this.program);
             if (components instanceof Error) {
                 throw components;
             } else if (!components) {
@@ -105,12 +105,8 @@ export default {
                 tocXML = utils.xmlOps.objectToXMLString(articles.articleUtils.buildTableOfContentsTOC(components, this.program).toObjectLiteral());
             }
             this.fileOutput = utils.cleanHTML.cleanEntities(tocXML)
-        } catch (error) {
-            console.log('error: ', error);
-            this.$q.dialog({
-                message: error
-            })
         }
+        this.tryCatch(createTOC)
     },
     downloadResult() {
       const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`

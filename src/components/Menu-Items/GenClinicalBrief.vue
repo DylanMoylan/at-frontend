@@ -21,22 +21,24 @@
                         v-model="questionnaireID"
                         class="row q-mb-md at-input"
                     />
-                    <div class="row full-width justify-start">
+                    <div class="row full-width justify-start q-mb-md">
                         <q-checkbox
                             label="Has Pre-Assessment"
                             v-model="hasPreAssessment"
                             dense
                         />
                     </div>
+                    <q-file
+                        v-model="file"
+                        style="max-width:300px"
+                        filled
+                        label="Select Prodticket HTML File"
+                        accept=".html"
+                        @input="resetOutput"
+                    />
             </q-card-section>
+            <q-separator />
             <q-card-section>
-                <q-file
-                    v-model="file"
-                    style="max-width:300px"
-                    filled
-                    label="Select Prodticket HTML File"
-                    accept=".html"
-                />
                 <q-btn
                     label="Go"
                     no-caps
@@ -45,6 +47,14 @@
                     :class="missingData ? 'bg-negative' : 'bg-positive'"
                     @click="generate"
                 />
+                <q-btn
+                    label="Reset"
+                    no-caps
+                    class="q-ma-sm text-white bg-negative"
+                    @click="reset"
+                />
+            </q-card-section>
+            <q-card-section>
                 <div v-if="fileOutput" class="q-ma-sm">
                 <q-btn 
                     v-if="fileOutput.activityXML"
@@ -85,9 +95,10 @@
 import articles from '../../../logic/articles'
 import buildOutput from '../../mixins/buildOutput'
 import utils from '../../../logic/utils'
+import tryCatch from 'src/mixins/tryCatch'
 
 export default {
-    mixins: [buildOutput],
+    mixins: [buildOutput, tryCatch],
     data() {
         return {
             articleID: '',
@@ -99,9 +110,23 @@ export default {
         }
     },
     methods: {
+        reset() {
+            this.articleID = ''
+            this.questionnaireID = ''
+            this.hasPreAssessment = false
+            this.file = null
+            this.resetOutput()
+        },
+        resetOutput(){
+            this.fileOutput = null
+            this.xmlResult = null
+        },
         build(val) {
-            this.fileOutput = articles.clinicalBrief.buildClinicalBrief(val, this.program)
-            this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
+            const createCB = () => {
+                this.fileOutput = articles.clinicalBrief.buildClinicalBrief(val, this.program)
+                this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
+            }
+            this.tryCatch(createCB)
         },
         downloadResult(type) {
             let href

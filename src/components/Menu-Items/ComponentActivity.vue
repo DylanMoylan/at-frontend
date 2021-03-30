@@ -68,11 +68,12 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 
 export default {
-  mixins: [buildOutput, programOptions],
+  mixins: [buildOutput, programOptions, tryCatch],
   data() {
     return {
       articleID: '',
@@ -88,11 +89,14 @@ export default {
   },
   methods: {
     build(val) {
-      if(this.program.codeName == 'brief'){
-        this.fileOutput = utils.cleanHTML.cleanEntities(articles.activity.buildActivityCB(val, this.program))
-      }else{
-        this.fileOutput = utils.cleanHTML.cleanEntities(articles.activity.buildActivity(val, this.program))
+      const createAct = () => {
+        if(this.program.codeName == 'brief'){
+          this.fileOutput = utils.cleanHTML.cleanEntities(articles.activity.buildActivityCB(val, this.program))
+        }else{
+          this.fileOutput = utils.cleanHTML.cleanEntities(articles.activity.buildActivity(val, this.program))
+        }
       }
+      this.tryCatch(createAct)
     },
     downloadResult() {
       const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`

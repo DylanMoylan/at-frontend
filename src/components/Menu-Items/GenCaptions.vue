@@ -94,9 +94,10 @@
 import snippets from '../../../logic/snippets'
 import languages from '../../../logic/config/languages'
 import buildOutput from 'src/mixins/buildOutput'
+import tryCatch from 'src/mixins/tryCatch'
 
 export default {
-  mixins: [buildOutput],
+  mixins: [buildOutput, tryCatch],
   data() {
     return {
       file: null,
@@ -135,9 +136,12 @@ export default {
     build(val) {
       let languageObject = null
       languageObject = languages[this.language]
-      let vttResult = snippets.captions.buildVttFile(val, this.articleID, languageObject);
-      let xmlResult = snippets.captions.buildXmlFile(val, this.articleID, languageObject)
-      this.fileOutput =  {vttResult, xmlResult}
+      const createCaptions = () => {
+        let vttResult = snippets.captions.buildVttFile(val, this.articleID, languageObject);
+        let xmlResult = snippets.captions.buildXmlFile(val, this.articleID, languageObject)
+        this.fileOutput =  {vttResult, xmlResult}
+      }
+      this.tryCatch(createCaptions)
     },
     downloadFailed() {
       this.$q.dialog({

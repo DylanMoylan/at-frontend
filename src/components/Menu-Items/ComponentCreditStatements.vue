@@ -61,11 +61,11 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import tryCatch from 'src/mixins/tryCatch'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
-
 export default {
-  mixins: [buildOutput, programOptions],
+  mixins: [buildOutput, programOptions, tryCatch],
   data() {
     return {
       articleID: '',
@@ -82,17 +82,19 @@ export default {
     build(ticket) {
         let creditStatementsHTML = null
         let creditStatementsObject = null 
-
-        creditStatementsObject = prodticket.getCreditStatements(ticket, this.program)
-
-        if (creditStatementsObject instanceof Error) {
-            throw creditStatementsObject
-        } else if (!creditStatementsObject) {
-            throw new Error("Something went wrong when searching for credit statements!")
-        } else {
-            creditStatementsHTML = utils.printFunctions.printCreditStatements(creditStatementsObject)
+        const createCredit = () => {
+            creditStatementsObject = prodticket.getCreditStatements(ticket, this.program)
+    
+            if (creditStatementsObject instanceof Error) {
+                throw creditStatementsObject
+            } else if (!creditStatementsObject) {
+                throw new Error("Something went wrong when searching for credit statements!")
+            } else {
+                creditStatementsHTML = utils.printFunctions.printCreditStatements(creditStatementsObject)
+            }
+            this.fileOutput = creditStatementsHTML
         }
-        this.fileOutput = creditStatementsHTML
+        this.tryCatch(createCredit)
     },
     downloadResult() {
       const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`

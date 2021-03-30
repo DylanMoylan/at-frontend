@@ -61,12 +61,13 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
 
 export default {
-  mixins: [buildOutput, programOptions],
+  mixins: [buildOutput, programOptions, tryCatch],
   data() {
     return {
       articleID: '',
@@ -83,16 +84,19 @@ export default {
     build(ticket) {
         let abbreviationsXML = null
         let abbreviationsHTML = null
-        abbreviationsHTML = prodticket.getAbbreviations(ticket, this.program);
+        const createAbbrev = () => {
+            abbreviationsHTML = prodticket.getAbbreviations(ticket, this.program)
 
-        if (abbreviationsHTML instanceof Error) {
-            throw abbreviationsHTML;
-        } else if (!abbreviationsHTML) {
-            throw new Error("Something went wrong when searching for abbreviations!");
-        } else {
-            abbreviationsXML = utils.xmlOps.objectToXMLString(articles.articleUtils.buildAbbreviations(abbreviationsHTML, this.program).toObjectLiteral());
+            if (abbreviationsHTML instanceof Error) {
+                throw abbreviationsHTML;
+            } else if (!abbreviationsHTML) {
+                throw new Error("Something went wrong when searching for abbreviations!");
+            } else {
+                abbreviationsXML = utils.xmlOps.objectToXMLString(articles.articleUtils.buildAbbreviations(abbreviationsHTML, this.program).toObjectLiteral());
+            }
+            this.fileOutput = abbreviationsXML
         }
-        this.fileOutput = abbreviationsXML
+        this.tryCatch(createAbbrev)
     },
     downloadResult() {
       const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
