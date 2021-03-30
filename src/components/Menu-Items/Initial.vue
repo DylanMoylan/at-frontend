@@ -18,7 +18,7 @@
         <div>
           <span class="text-bold">[3.30.2021]</span>
           <span>
-            Adds some new component generators and adds copy/reset buttons to a few sections.
+            Adds some new component generators, Snippet generators<br /> for Slide TOCs/Downloadable Slides, and adds copy/reset buttons to a few sections.
           </span>
         </div>
         <div>
@@ -61,14 +61,6 @@
             <li class="text-positive">
               <q-icon name="check" class="q-mr-sm text-body1"/>
               <span>Snippets</span>
-            </li>
-            <li class="text-warning">
-              <q-icon name="help" class="q-mr-sm text-body1"/>
-              <span>Snippets/Downloadable Slides</span>
-            </li>
-            <li class="text-negative">
-              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-              <span>Snippets/Slide-Tocs</span>
             </li>
             <li class="text-warning">
               <q-icon name="help" class="q-mr-sm text-body1"/>

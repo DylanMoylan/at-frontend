@@ -26,6 +26,7 @@
         class="at-input"
         filled
         label="Select Prodticket HTML File"
+        accept=".html"
       />
     </q-card-section>
     <q-separator />

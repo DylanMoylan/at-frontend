@@ -35,6 +35,7 @@
                     style="max-width:300px"
                     filled
                     label="Select Prodticket HTML File"
+                    accept=".html"
                 />
                 <q-btn
                     label="Go"

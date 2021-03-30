@@ -37,6 +37,7 @@
                   label="Select an HTML file"
                   class="q-ma-sm q-mb-md at-input"
                   bottom-slots
+                  accept=".html"
               />
         </q-card-section>
         <q-separator />

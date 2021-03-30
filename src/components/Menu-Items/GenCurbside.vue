@@ -82,6 +82,7 @@
                     class="at-input"
                     filled
                     label="Select Prodticket HTML File"
+                    accept=".html"
                 />
                 <q-btn
                     label="Go"

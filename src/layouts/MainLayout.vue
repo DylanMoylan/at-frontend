@@ -139,7 +139,7 @@
                                       </q-item-label>
                                     </q-item-section>
                                 </q-item>
-                                <q-item clickable disable to="/snippets/slide-tocs">
+                                <q-item clickable to="/snippets/slide-tocs">
                                   <q-item-section>
                                     <q-item-label>
                                       Slide TOCs
