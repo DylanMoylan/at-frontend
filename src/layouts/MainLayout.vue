@@ -210,7 +210,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/table-of-contents" disable>
+                        <q-item clickable to="/components/table-of-contents">
                           <q-item-section>
                             <q-item-label>
                               Table of Contents

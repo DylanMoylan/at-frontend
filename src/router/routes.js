@@ -83,7 +83,7 @@ const routes = [
             },
             {
               path: '/components/table-of-contents',
-              component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+              component: () => import('components/Menu-Items/ComponentTableOfContents.vue')
             },
             {
               path: '/components/credit-statements',
