@@ -75,15 +75,17 @@
                             dense
                         />
                     </div>
+                    <q-file
+                        v-model="file"
+                        class="at-input q-mt-md"
+                        filled
+                        label="Select Prodticket HTML File"
+                        accept=".html"
+                        @input="resetOutput"
+                    />
             </q-card-section>
+            <q-separator />
             <q-card-section>
-                <q-file
-                    v-model="file"
-                    style="max-width:300px"
-                    filled
-                    label="Select Prodticket HTML File"
-                    accept=".html"
-                />
                 <q-btn
                     label="Go"
                     no-caps
@@ -91,6 +93,12 @@
                     class="q-ma-sm text-white"
                     :class="missingData ? 'bg-negative' : 'bg-positive'"
                     @click="generate"
+                />
+                <q-btn
+                    label="Reset"
+                    no-caps
+                    class="q-ma-sm text-white bg-negative"
+                    @click="reset"
                 />
                 <div v-if="fileOutput" class="q-ma-sm">
                 <q-btn 
@@ -132,9 +140,10 @@
 import articles from '../../../logic/articles'
 import buildOutput from '../../mixins/buildOutput'
 import utils from '../../../logic/utils'
+import tryCatch from 'src/mixins/tryCatch'
 
 export default {
-    mixins: [buildOutput],
+    mixins: [buildOutput, tryCatch],
     data() {
         return {
             articleID: '',
@@ -151,9 +160,28 @@ export default {
         }
     },
     methods: {
+        resetOutput() {
+            this.fileOutput = null
+            this.xmlResult = null
+        },
+        reset() {
+            this.articleID = ''
+            this.hasTranscript = false,
+            this.transcriptType = ''
+            this.isOUS = false
+            this.isLLA = false
+            this.hasPeerReviewer = false
+            this.hasCollectionPage = false
+            this.hasPDF = false
+            this.file = null
+            this.resetOutput()
+        },
         build(val) {
-            this.fileOutput = articles.spotlight.buildSpotlight(val, this.program)
-            this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
+            const createCurb = () => {
+                this.fileOutput = articles.spotlight.buildSpotlight(val, this.program)
+                this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
+            }
+            this.tryCatch(createCurb)
         },
         downloadResult(type) {
             let href
