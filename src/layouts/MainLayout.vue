@@ -78,6 +78,36 @@
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
+                                  <q-item clickable to="/generate/spotlight" disable>
+                                      <q-item-section>
+                                        <q-item-label>
+                                          Generate Townhall Enduring
+                                        </q-item-label>
+                                        <q-item-label caption>
+                                          Generates TownHall Enduring XML code from R2Net html file.
+                                        </q-item-label>
+                                      </q-item-section>
+                                  </q-item>
+                                  <q-item clickable to="/generate/spotlight" disable>
+                                      <q-item-section>
+                                        <q-item-label>
+                                          Generate Townhall Cert
+                                        </q-item-label>
+                                        <q-item-label caption>
+                                          Generates TownHall Cert XML code from R2Net html file.
+                                        </q-item-label>
+                                      </q-item-section>
+                                  </q-item>
+                                  <q-item clickable to="/generate/spotlight" disable>
+                                      <q-item-section>
+                                        <q-item-label>
+                                          Generate Test and Teach
+                                        </q-item-label>
+                                        <q-item-label caption>
+                                          Generates Test and Teach XML code from R2Net html file.
+                                        </q-item-label>
+                                      </q-item-section>
+                                  </q-item>
                             </q-list>
                         </q-card-section>
                     </q-card>
@@ -180,7 +210,7 @@
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/slides-transcript" disable>
+                        <q-item clickable to="/components/slides-transcript">
                           <q-item-section>
                             <q-item-label>
                               Slides Transcript

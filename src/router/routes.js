@@ -71,7 +71,7 @@ const routes = [
             },
             {
               path: '/components/slides-transcript',
-              component: () => import('components/Menu-Items/GenClinicalBrief.vue')
+              component: () => import('components/Menu-Items/ComponentSlidesTranscript.vue')
             },
             {
               path: '/components/abbreviations',
