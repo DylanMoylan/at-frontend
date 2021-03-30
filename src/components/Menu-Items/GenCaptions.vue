@@ -31,39 +31,47 @@
                   map-options
                 />
             </div>
+                <q-file
+                  v-model="file"
+                  filled
+                  label="Select an HTML file"
+                  class="q-ma-sm q-mb-md at-input"
+                  bottom-slots
+              />
         </q-card-section>
+        <q-separator />
         <q-card-section>
-            <q-file
-                v-model="file"
-                filled
-                label="Select an HTML file"
-                class="q-ma-sm q-mb-md at-input"
-                bottom-slots
-            />
-            <div v-if="fileOutput" class="q-ma-sm">
-              <q-btn 
-                v-if="fileOutput.vttResult"
-                label="Download .VTT"
-                no-caps
-                class="bg-positive text-white q-mr-md"
-                @click="downloadResult('vtt')"
-              />
-              <q-btn 
-                v-if="fileOutput.xmlResult"
-                label="Download XML"
-                no-caps
-                class="bg-positive text-white"
-                @click="downloadResult('xml')"
-              />
-            </div>
             <q-btn
-                v-else
                 label="Go"
                 no-caps
                 :disable="missingData"
                 class="q-ma-sm text-white"
                 :class="missingData ? 'bg-negative' : 'bg-positive'"
-                @click="preprocess"
+                @click="generate"
+            />
+            <q-btn
+              label="Reset"
+              no-caps
+              class="bg-negative text-white"
+              @click="reset"
+              v-if="hasData"
+            />
+        </q-card-section>
+        <q-separator />
+        <q-card-section v-if="fileOutput">
+            <q-btn 
+              v-if="fileOutput.vttResult"
+              label="Download .VTT"
+              no-caps
+              class="bg-positive text-white q-mr-md"
+              @click="downloadResult('vtt')"
+            />
+            <q-btn 
+              v-if="fileOutput.xmlResult"
+              label="Download XML"
+              no-caps
+              class="bg-positive text-white"
+              @click="downloadResult('xml')"
             />
         </q-card-section>
         <q-card-section>
@@ -97,6 +105,9 @@ export default {
     }
   },
   computed: {
+    hasData() {
+      return this.file || this.articleID.length || this.language.length || this.fileOutput
+    },
     languageOptions() {
       return Object.keys(languages).map(key => {
         return {
@@ -114,15 +125,18 @@ export default {
     }
   },
   methods: {
+    reset() {
+      this.fileOutput = null
+      this.file = null
+      this.articleID = ''
+      this.language = ''
+    },
     build(val) {
       let languageObject = null
       languageObject = languages[this.language]
       let vttResult = snippets.captions.buildVttFile(val, this.articleID, languageObject);
       let xmlResult = snippets.captions.buildXmlFile(val, this.articleID, languageObject)
       this.fileOutput =  {vttResult, xmlResult}
-    },
-    preprocess() {
-      this.generate()
     },
     downloadFailed() {
       this.$q.dialog({

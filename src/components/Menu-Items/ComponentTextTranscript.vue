@@ -23,7 +23,7 @@
     <q-card-section>
       <q-file
         v-model="file"
-        style="max-width:300px"
+        class="at-input"
         filled
         label="Pick 1 File"
       />

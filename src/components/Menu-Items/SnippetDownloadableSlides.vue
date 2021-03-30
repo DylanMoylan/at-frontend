@@ -1,5 +1,5 @@
 <template>
-    <q-card class="secundo">
+    <q-card class="secundo slides-snippet">
         <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             Downloadable Slides Snippet
         </q-card-section>
@@ -10,18 +10,32 @@
                 label="Enter Article ID"
                 v-model="articleID"
                 class="row q-ma-sm at-input"
-            />
-            <q-input
-                type="textarea"
-                class="row bg-white"
-                :value="slideSnippet"
-            />
+                bottom-slots
+            >
+                <template v-slot:hint>
+                    Article ID will be automatically filled into the text below while you type.
+                </template>
+            </q-input>
+        </q-card-section>
+        <q-card-section class="at-preview">
+            <div class="row justify-end">
+                <q-btn
+                    label="Copy to Clipboard"
+                    class="text-white bg-positive"
+                    no-caps
+                    @click="copySnippet(slideSnippet)"
+                />
+            </div>
+            {{slideSnippet}}
         </q-card-section>
     </q-card>
 </template>
 
 <script>
+import copySnippet from 'src/mixins/copySnippet'
+
 export default {
+    mixins: [copySnippet],
     data() {
         return {
             articleID: ''
@@ -43,5 +57,9 @@ export default {
 </script>
 
 <style>
-
+    @media only screen and (min-width:1024px) {
+        .slides-snippet {
+            width:35vw;
+        }
+    }
 </style>

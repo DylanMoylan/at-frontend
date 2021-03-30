@@ -1,9 +1,9 @@
 <template>
-  <q-card class="secundo">
+  <q-card class="secundo text-center">
     <q-card-section class="primo text-white text-h6 q-pa-md text-center">
       Generate Credit Statements (HTML Code)
     </q-card-section>
-    <q-card-section>
+    <q-card-section class="text-center">
         <q-input
           filled
           stack-label

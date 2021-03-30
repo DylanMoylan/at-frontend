@@ -60,9 +60,9 @@
               <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
               <span>Snippets/Slide-Tocs</span>
             </li>
-            <li class="text-negative">
-              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-              <span>Components</span>
+            <li class="text-warning">
+              <q-icon name="help" class="q-mr-sm text-body1"/>
+              <span>Components: 5/8</span>
             </li>
             <li class="text-negative">
               <q-icon name="highlight_off" class="q-mr-sm text-body1"/>

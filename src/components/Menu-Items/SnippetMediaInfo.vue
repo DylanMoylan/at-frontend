@@ -65,7 +65,7 @@
                 label="Copy to Clipboard"
                 no-caps
                 class="bg-positive text-white"
-                @click="copySnippet"
+                @click="copySnippet(snippet)"
               />
             </div>
           </div>
@@ -80,8 +80,10 @@
 
 <script>
 import snippets from '../../../logic/snippets'
+import copySnippet from 'src/mixins/copySnippet'
 
 export default {
+    mixins: [copySnippet],
     data() {
         return {
             urls: null,
@@ -118,21 +120,6 @@ export default {
             link.href = href
             link.download = download
             link.click()
-        },
-        copySnippet() {
-            const text = document.createElement('textarea')
-            document.body.appendChild(text)
-            text.value = this.snippet
-            text.select()
-            document.execCommand('copy')
-            document.body.removeChild(text)
-            this.$q.notify({
-                message: 'Copied to clipboard',
-                icon: 'check',
-                color: 'primary',
-                textColor: 'white',
-                position: 'bottom-right'
-            })
         },
         clear() {
             this.snippet = ''
