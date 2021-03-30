@@ -13,7 +13,8 @@ export default {
             })
         },
         program() {
-            let selectedProgram = Object.assign({}, Object.keys(config.programs).find(key => config.programs[key].name == this.productType))
+            let p = Object.keys(config.programs).find(key => config.programs[key].name == this.productType)
+            let selectedProgram = Object.assign({}, config.programs[p])
             selectedProgram.articleID = this.articleID
             selectedProgram.hasOUS = this.isOUS || false
             return selectedProgram

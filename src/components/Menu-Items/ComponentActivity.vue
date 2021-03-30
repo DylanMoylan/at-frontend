@@ -19,21 +19,22 @@
           :options="productTypeOptions"
           class="row q-mb-md at-input"
         />
-        <div class="row full-width justify-start">
+        <div class="row full-width justify-start q-mb-md">
           <q-checkbox
             label="Is OUS"
             v-model="isOUS"
             dense
           />
         </div>
-    </q-card-section>
-    <q-card-section>
-      <q-file
+        <q-file
         v-model="file"
-        style="max-width:300px"
+        class="at-input"
         filled
         label="Pick 1 File"
       />
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
       <q-btn
         label="Go"
         no-caps
@@ -41,6 +42,12 @@
         class="q-ma-sm text-white"
         :class="missingData ? 'bg-negative' : 'bg-positive'"
         @click="generate"
+      />
+      <q-btn
+        label="Reset"
+        no-caps
+        class="text-white bg-negative"
+        @click="reset"
       />
     </q-card-section>
     <template v-if="fileOutput">
@@ -93,6 +100,13 @@ export default {
       link.href = href
       link.download = download
       link.click()
+    },
+    reset() {
+      this.articleID = ''
+      this.isOUS = false
+      this.file = null
+      this.fileOutput = null
+      this.productType = ''
     }
   }
 }

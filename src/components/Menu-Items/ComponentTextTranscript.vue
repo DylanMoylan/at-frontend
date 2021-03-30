@@ -27,6 +27,9 @@
         filled
         label="Pick 1 File"
       />
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
       <q-btn
         label="Go"
         no-caps
@@ -55,6 +58,8 @@ import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
+import TOCElement from '../../../logic/classes/toc_element'
+import prodticket from '../../../logic/prodticket'
 
 export default {
   mixins: [buildOutput, programOptions],
@@ -71,14 +76,60 @@ export default {
     }
   },
   methods: {
-    build(val) {
-      /**
-       * See commands/component/text-transcript.js
-       */
+    build(ticket) {
+      let transcriptHTML = null
+      let transcriptXML = null
+      if(this.program.codeName == 'brief'){
+        var mainTOCInstance = new TOCElement();
+        // CLINICAL CONTEXT  
+        var clinicalContext = articles.clinicalBrief.getClinicalContext(ticket);
+        // SYNOPSIS AND PERSPECTIVE 
+        var synopsisAndPerspective = articles.clinicalBrief.getSynopsisAndPerspective(ticket);
+        // STUDY HIGHLIGHTS 
+        var studyHighlights = articles.clinicalBrief.getStudyHighlights(ticket);
+        // CLINICAL IMPLICATIONS 
+        var clinicalImplications = articles.clinicalBrief.getClinicalImplications(ticket);
+        ;
+        mainTOCInstance.insertSectionElement(clinicalContext);
+        mainTOCInstance.insertSectionElement(synopsisAndPerspective);
+        mainTOCInstance.insertSectionElement(studyHighlights);
+        mainTOCInstance.insertSectionElement(clinicalImplications);
+        transcriptXML = utils.xmlOps.objectToXMLString(mainTOCInstance.toObjectLiteral())
+      }else if(this.program.codeName == 'testAndTeach'){
+        var mainContentTOCs = articles.testAndTeach.getMainContent(ticket, this.program);
+        var resultXML = "";
+        for (var i = 0; i < mainContentTOCs.mainTOCs.length; i++) {
+            resultXML += utils.xmlOps.objectToXMLString(mainContentTOCs.mainTOCs[i].toObjectLiteral()) + "\n\n\n";
+        }
+        transcriptXML = resultXML;
+      }else{
+        transcriptHTML = prodticket.getArticleContent(ticket, this.program);
+      }
+
+    if (transcriptHTML instanceof Error) {
+      throw transcriptHTML;
+    } else if (!transcriptXML) {
+        // If no transcriptXML --> then we ran brief or test and teach functions.
+        if (
+            this.program.codeName == "spotlight" ||
+            this.program.codeName == "curbside" ||
+            this.program.codeName == "video" 
+        ) {
+            transcriptXML = utils.xmlOps.objectToXMLString(articles.spotlight.getTranscriptTOC(transcriptHTML, this.program).toObjectLiteral());
+        } else if (this.program.codeName == "firstResponse") {
+            transcriptXML = utils.xmlOps.objectToXMLString(articles.firstResponse.getTranscriptTOC(transcriptHTML, this.program).toObjectLiteral());
+        } else if (this.program.codeName == "townHall") {
+            transcriptXML = utils.xmlOps.objectToXMLString(articles.townHallEnduring.getTranscriptTOC(transcriptHTML, this.program).toObjectLiteral());
+        } else {
+            transcriptXML = "";
+        }
+        this.fileOutput = transcriptXML
+        console.log('transcriptXML: ', transcriptXML);
+    }
     },
     downloadResult() {
       const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
-      const download = `${this.articleID}_activity.xml`
+      const download = `${this.articleID}_transcript.xml`
       const link = document.createElement('a')
       link.href = href
       link.download = download
