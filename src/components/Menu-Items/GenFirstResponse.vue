@@ -173,7 +173,7 @@ export default {
         },
         hasData() {
             return !!this.program.articleID.length || !!this.file || 
-            [this.program.hasTranscript, this.program.hasOUS, this.program.hasPeerReviewer,this.program.hasCollectionPage,this.program.hasForYourPatient].findIndex(item => !!item) > -1
+            [this.program.hasTranscript, this.program.hasOUS, this.program.hasPeerReviewer,this.program.hasCollectionPage,this.program.hasForYourPatient,this.program.hasLLA].findIndex(item => !!item) > -1
         }
     },
     methods: {
@@ -185,6 +185,7 @@ export default {
             this.program.hasPeerReviewer = false
             this.program.hasCollectionPage = false
             this.program.hasForYourPatient = false
+            this.program.hasLLA = false
             this.file = null
             this.resetOutput()
         },
