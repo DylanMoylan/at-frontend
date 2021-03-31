@@ -1,5 +1,5 @@
-// const sanitizeHtml = require('sanitize-html');
-import sanitizeHtml from 'sanitize-html'
+const sanitizeHtml = require('sanitize-html');
+// import sanitizeHtml from 'sanitize-html'
 const formatList = require('./format-list');
 const stringOps = require('./string-ops');
 
@@ -817,8 +817,8 @@ function transcript(htmlString, removeFluff=false) {
 }
 
 
-// module.exports = {
-    export default {
+module.exports = {
+    // export default {
     basicHTMLSanitize,
     removeTicketFluff,
     supEdgeCases,

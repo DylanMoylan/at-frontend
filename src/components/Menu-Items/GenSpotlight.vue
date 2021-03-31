@@ -233,7 +233,7 @@ export default {
             return this.fileOutput && this.fileOutput.checklistHTML ? this.fileOutput.checklistHTML : ''
         },
         missingData() {
-            return !this.articleID.length || !this.file
+            return !this.articleID.length || !this.file || this.hasTranscript ? !this.transcriptType.length : false
         },
         hasData() {
             return !!this.articleID.length || !!this.file ||

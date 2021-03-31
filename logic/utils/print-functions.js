@@ -199,7 +199,12 @@ function printDateTime(dateTime) {
 
 function printLearningObjectives(learningObjectives) {
     var formattedObjectives = formatLearningObjectives(learningObjectives.result);
-    var formattedQNAObjectives = formatQNAObjectives(learningObjectives.result);
+    var formattedQNAObjectives
+    try {
+        formattedQNAObjectives = formatQNAObjectives(learningObjectives.result);
+    } catch (error) {
+        formattedQNAObjectives = formattedObjectives
+    }
     // var formattedQNAObjectives = formattedObjectives
     var resultString = stripIndent`
     -----------------------------------------

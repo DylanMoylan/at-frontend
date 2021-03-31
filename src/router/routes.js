@@ -37,6 +37,10 @@ const routes = [
               path: '/generate/test-and-teach',
               component: () => import('components/Menu-Items/GenTestAndTeach.vue')
             },
+            {
+              path: '/generate/first-response',
+              component: () => import('components/Menu-Items/GenFirstResponse.vue')
+            },
 
             //Snippets
 
