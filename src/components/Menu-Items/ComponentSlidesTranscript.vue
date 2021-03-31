@@ -39,6 +39,13 @@
         :class="missingData ? 'bg-negative' : 'bg-positive'"
         @click="generate"
       />
+      <q-btn
+        label="Reset"
+        no-caps
+        :disable="!hasData"
+        class="q-ma-sm text-white bg-negative"
+        @click="reset"
+      />
     </q-card-section>
     <template v-if="fileOutput">
       <q-separator />
@@ -60,7 +67,6 @@ import programOptions from 'src/mixins/programOptions'
 import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
-import TOCElement from '../../../logic/classes/toc_element'
 import prodticket from '../../../logic/prodticket'
 
 export default {
@@ -76,67 +82,61 @@ export default {
     missingData() {
       return !this.articleID.length || !this.productType.length || !this.file
     },
+    hasData() {
+      return !!this.articleID.length || !!this.productType.length || !!this.file
+    },
     filteredPrograms() {
         return this.productTypeOptions.filter(item => item != 'Clinical Brief' && item != 'Test and Teach')
     }
   },
   methods: {
+    reset() {
+      this.articleID = ''
+      this.file = null
+      this.fileOutput = null
+    },
     build(ticket) {
-      let transcriptHTML = null
-      let transcriptXML = null
+      let slideComponents = null
+      let slidesTOCs = null
+      let transcriptXML = null 
+      const program = this.program
       const createTranscript = () => {
-        if(this.program.codeName == 'brief'){
-          var mainTOCInstance = new TOCElement();
-          // CLINICAL CONTEXT  
-          var clinicalContext = articles.clinicalBrief.getClinicalContext(ticket);
-          // SYNOPSIS AND PERSPECTIVE 
-          var synopsisAndPerspective = articles.clinicalBrief.getSynopsisAndPerspective(ticket);
-          // STUDY HIGHLIGHTS 
-          var studyHighlights = articles.clinicalBrief.getStudyHighlights(ticket);
-          // CLINICAL IMPLICATIONS 
-          var clinicalImplications = articles.clinicalBrief.getClinicalImplications(ticket);
-          ;
-          mainTOCInstance.insertSectionElement(clinicalContext);
-          mainTOCInstance.insertSectionElement(synopsisAndPerspective);
-          mainTOCInstance.insertSectionElement(studyHighlights);
-          mainTOCInstance.insertSectionElement(clinicalImplications);
-          transcriptXML = utils.xmlOps.objectToXMLString(mainTOCInstance.toObjectLiteral())
-        }else if(this.program.codeName == 'testAndTeach'){
-          var mainContentTOCs = articles.testAndTeach.getMainContent(ticket, this.program);
-          var resultXML = "";
-          for (var i = 0; i < mainContentTOCs.mainTOCs.length; i++) {
-              resultXML += utils.xmlOps.objectToXMLString(mainContentTOCs.mainTOCs[i].toObjectLiteral()) + "\n\n\n";
-          }
-          transcriptXML = resultXML;
-        }else{
-          transcriptHTML = prodticket.getArticleContent(ticket, this.program);
-        }
-
-        if (transcriptHTML instanceof Error) {
-          throw transcriptHTML;
-        } else if (!transcriptXML) {
+        slideComponents = prodticket.getSlides(ticket, program);
+        // SET TRANSCRIPT TO NULL IF THE RESULT RETURNED WAS AN ERROR 
+        if (slideComponents instanceof Error) {
+            throw slideComponents;
+        } else {
             // If no transcriptXML --> then we ran brief or test and teach functions.
             if (
-                this.program.codeName == "spotlight" ||
-                this.program.codeName == "curbside" ||
-                this.program.codeName == "video" 
+                program.codeName == "spotlight" ||
+                program.codeName == "curbside" ||
+                program.codeName == "video" 
             ) {
-                transcriptXML = utils.xmlOps.objectToXMLString(articles.spotlight.getTranscriptTOC(transcriptHTML, this.program).toObjectLiteral());
-            } else if (this.program.codeName == "firstResponse") {
-                transcriptXML = utils.xmlOps.objectToXMLString(articles.firstResponse.getTranscriptTOC(transcriptHTML, this.program).toObjectLiteral());
-            } else if (this.program.codeName == "townHall") {
-                transcriptXML = utils.xmlOps.objectToXMLString(articles.townHallEnduring.getTranscriptTOC(transcriptHTML, this.program).toObjectLiteral());
+                slidesTOCs = articles.spotlight.getSlidesTOC(slideComponents, program);
+                transcriptXML = utils.xmlOps.objectToXMLString(slidesTOCs.toObjectLiteral());
+            } else if (program.codeName == "firstResponse") {
+                var components = prodticket.getComponents(ticket, program);
+                if (components instanceof Error) {
+                    throw components;
+                }
+                slidesTOCs = articles.firstResponse.getSlidesTOCs(slideComponents, program, components);
+                for (var i = 0; i < slidesTOCs.length; i++) {
+                    transcriptXML += utils.xmlOps.objectToXMLString(slidesTOCs[i].toObjectLiteral()) + "\n\n\n";
+                }
+            } else if (program.codeName == "townHall") {
+                slidesTOCs = articles.townHallEnduring.getSlidesTOC(slideComponents, program).slidesTOC;
+                transcriptXML = utils.xmlOps.objectToXMLString(slidesTOCs.toObjectLiteral());
             } else {
                 transcriptXML = "";
             }
-            this.fileOutput = transcriptXML
         }
+        this.fileOutput = utils.cleanHTML.cleanEntities(transcriptXML)
       }
       this.tryCatch(createTranscript)
     },
     downloadResult() {
       const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
-      const download = `${this.articleID}_transcript.xml`
+      const download = `${this.articleID}_slides.xml`
       const link = document.createElement('a')
       link.href = href
       link.download = download

@@ -30,7 +30,7 @@
                     </div>
                     <q-file
                         v-model="file"
-                        style="max-width:300px"
+                        class="at-input"
                         filled
                         label="Select Prodticket HTML File"
                         accept=".html"
@@ -52,6 +52,7 @@
                     no-caps
                     class="q-ma-sm text-white bg-negative"
                     @click="reset"
+                    :disable="!hasData"
                 />
             </q-card-section>
             <q-card-section>
@@ -176,6 +177,9 @@ export default {
         },
         missingData() {
             return !this.articleID.length || !this.file || !this.questionnaireID.length
+        },
+        hasData() {
+            return !!this.articleID.length || !!this.file || !!this.questionnaireID.length
         }
     }
 }

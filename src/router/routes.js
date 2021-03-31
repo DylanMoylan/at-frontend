@@ -25,11 +25,13 @@ const routes = [
             },
             {
               path: '/generate/curbside',
-              component: () => import('components/Menu-Items/GenCurbside.vue')
+              component: () => import('components/Menu-Items/GenSpotlight.vue'),
+              props: { product: 'curbside' }
             },
             {
               path: '/generate/spotlight',
-              component: () => import('components/Menu-Items/GenSpotlight.vue')
+              component: () => import('components/Menu-Items/GenSpotlight.vue'),
+              props: { product: 'spotlight' }
             },
 
             //Snippets

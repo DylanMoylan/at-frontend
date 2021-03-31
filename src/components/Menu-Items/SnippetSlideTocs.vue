@@ -57,7 +57,7 @@
 <script>
 import {TOCElement, SectionElement, SubsectionElement, SlideGroup, SlideComponent} from '../../../logic/classes'
 import utils from '../../../logic/utils'
-import Vue from 'Vue'
+import Vue from 'vue'
 
 export default {
     data() {

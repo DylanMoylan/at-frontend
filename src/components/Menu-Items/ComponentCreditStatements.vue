@@ -1,5 +1,5 @@
 <template>
-  <q-card class="secundo text-center">
+  <q-card class="secundo">
     <q-card-section class="primo text-white text-h6 q-pa-md text-center">
       Generate Credit Statements (HTML Code)
     </q-card-section>
@@ -25,6 +25,7 @@
         filled
         label="Select Prodticket HTML File"
         accept=".html"
+        @input="fileOutput = null"
       />
     </q-card-section>
     <q-separator />
@@ -42,6 +43,7 @@
         no-caps
         class="text-white bg-negative"
         @click="reset"
+        :disable="!hasData"
       />
     </q-card-section>
     <template v-if="fileOutput">
@@ -76,6 +78,9 @@ export default {
   computed: {
     missingData() {
       return !this.articleID.length || !this.productType.length || !this.file
+    },
+    hasData() {
+      return !!this.articleID.length || !!this.productType.length || !!this.file
     }
   },
   methods: {

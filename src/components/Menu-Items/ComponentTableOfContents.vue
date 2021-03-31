@@ -44,6 +44,7 @@
         no-caps
         class="text-white bg-negative"
         @click="reset"
+        :disable="!hasData"
       />
     </q-card-section>
     <template v-if="fileOutput">
@@ -80,6 +81,9 @@ export default {
   computed: {
     missingData() {
       return !this.articleID.length || !this.productType.length || !this.file
+    },
+    hasData() {
+      return !!this.articleID.length || !!this.file
     },
     onlyFirstResponse() {
         return this.productTypeOptions.map(item => {

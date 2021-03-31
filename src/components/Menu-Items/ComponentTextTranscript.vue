@@ -27,6 +27,7 @@
         filled
         label="Select Prodticket HTML File"
         accept=".html"
+        @input="fileOutput = null"
       />
     </q-card-section>
     <q-separator />
@@ -38,6 +39,13 @@
         class="q-ma-sm text-white"
         :class="missingData ? 'bg-negative' : 'bg-positive'"
         @click="generate"
+      />
+      <q-btn
+        label="Reset"
+        no-caps
+        class="q-ma-sm text-white bg-negative"
+        :disable="!hasData"
+        @click="reset"
       />
     </q-card-section>
     <template v-if="fileOutput">
@@ -60,7 +68,7 @@ import programOptions from 'src/mixins/programOptions'
 import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
-import TOCElement from '../../../logic/classes/toc_element'
+import {TOCElement} from '../../../logic/classes'
 import prodticket from '../../../logic/prodticket'
 
 export default {
@@ -75,9 +83,17 @@ export default {
   computed: {
     missingData() {
       return !this.articleID.length || !this.productType.length || !this.file
+    },
+    hasData() {
+      return !!this.articleID.length || !!this.productType.length || !!this.file
     }
   },
   methods: {
+    reset() {
+      this.articleID = ''
+      this.file = null
+      this.fileOutput = null
+    },
     build(ticket) {
       let transcriptHTML = null
       let transcriptXML = null
@@ -126,7 +142,7 @@ export default {
             } else {
                 transcriptXML = "";
             }
-            this.fileOutput = transcriptXML
+            this.fileOutput = utils.cleanHTML.cleanEntities(transcriptXML)
         }
       }
       this.tryCatch(createTranscript)

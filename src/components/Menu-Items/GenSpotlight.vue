@@ -4,7 +4,7 @@
             <q-card-section 
                 class="text-white text-h6 q-pa-md text-center primo"
             >
-                Generate Spotlight
+                Generate {{ program.name }}
             </q-card-section>
             <q-card-section>
                     <q-input
@@ -99,6 +99,7 @@
                     no-caps
                     class="q-ma-sm text-white bg-negative"
                     @click="reset"
+                    :disable="!hasData"
                 />
                 <div v-if="fileOutput" class="q-ma-sm">
                 <q-btn 
@@ -143,6 +144,7 @@ import utils from '../../../logic/utils'
 import tryCatch from 'src/mixins/tryCatch'
 
 export default {
+    props: ['product'],
     mixins: [buildOutput, tryCatch],
     data() {
         return {
@@ -210,9 +212,9 @@ export default {
     computed: {
         program() {
             return {
-                name: "Spotlight",
-                codeName: "spotlight",
-                dirName: "spotlight",
+                name: this.product == 'spotlight' ? "Spotlight" : 'Curbside',
+                codeName: this.product,
+                dirName: this.product,
                 profArticleType: "SlidePresentation",
                 articleID: this.articleID,
                 qnaID: "",
@@ -232,6 +234,10 @@ export default {
         },
         missingData() {
             return !this.articleID.length || !this.file
+        },
+        hasData() {
+            return !!this.articleID.length || !!this.file ||
+            [this.hasTranscript, this.isLLA, this.isOUS, this.hasPeerReviewer, this.hasCollectionPage, this.hasForYourPatient].find(item => item === true)
         }
     }
 }
