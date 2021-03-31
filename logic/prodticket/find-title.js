@@ -24,7 +24,7 @@ exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
 
 // Spotlight 
 exportObject[config.programs.spotlight.codeName] = function (ticketHTML) {
-    var {textBlock} = stringOps.getTextBlock(ticketHTML, "Title: &#953;", "Teaser: &#953;");
+    var {textBlock} = stringOps.getTextBlock(ticketHTML, /Title:[ ]?(&#953;|&#921;)/g, "Teaser: &#953;");
     if (stringOps.isBlankOrWhiteSpace(textBlock) || stringOps.isEmptyString(textBlock)) {
         throw new Error("No title found in the prodticket")
     } else {

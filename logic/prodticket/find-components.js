@@ -54,11 +54,19 @@ exportObject[config.programs.firstResponse.codeName] = function (ticketHTML, pro
         var contentTypeString = "";
         var contentType = "";
         var components = [];
+        let componentEndRegexs = [
+            /Content Type.*/g,
+            /Medscape Micro\):/g
+        ]
         while(nextComponent != -1) {
+            let endRegExp = stringOps.getAllMatchesInOrder(productSpecificAddonsBlock, componentEndRegexs)
+            if(endRegExp.length <=0) {
+                throw new Error("No Component found in the prodticket");
+            }
             var {textBlock, label} = stringOps.getTextBlock(
                 productSpecificAddonsBlock,
                 /\>Component.*/g,
-                /Content Type.*/g,
+                endRegExp[endRegExp.length -1].symbol,
                 false,
                 true
             );
@@ -86,9 +94,14 @@ exportObject[config.programs.firstResponse.codeName] = function (ticketHTML, pro
             
             // console.log("BYLINE: ", byline);
 
-            contentTypeString = textBlock.match(/Content Type:.*/gi)[0];
-            contentTypeString = contentTypeString.replace(/Content Type:(.*)/gi, "$1");
-            contentType = cleanHTML.singleLine(cleanHTML.plainText(contentTypeString));
+            contentTypeString = textBlock.match(/Content Type:.*/gi)
+            if(!!contentTypeString){
+                contentTypeString = contentTypeString[0]
+                contentTypeString = contentTypeString.replace(/Content Type:(.*)/gi, "$1");
+                contentType = cleanHTML.singleLine(cleanHTML.plainText(contentTypeString));
+            }else{
+                contentType = ''
+            }
 
             // console.log("CONTENT TYPE: ", contentType);
             var component = new Component(componentNumber, title, teaser, byline, contentType, program.articleID); 

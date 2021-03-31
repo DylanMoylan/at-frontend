@@ -618,6 +618,9 @@ function learningObjectives(textBlock, removeFluff=true) {
 
     removeRegExp = /.*<p>Linked Pre-\/Post-assessment.*/g;
     textBlock = textBlock.replace(removeRegExp, '');
+
+    removeRegExp = /.*Segment #?[ ]?[0-9]{1,2}.*/g;
+    textBlock = textBlock.replace(removeRegExp, '');
     
     // REMOVE THE NUMBERS 
     removeRegExp = /<p>\d+.*|<p>(?:\d+\,){1,}.*|.*\d+\-\d+.*/g;
@@ -777,7 +780,8 @@ function transcript(htmlString, removeFluff=false) {
 
     var endTranscriptRegexArray = [
         /.*<em>Mandatory Insertion after Main.*/gi,
-        /.*<em>This transcript has been edited for style and clarity.*/gi
+        /.*<em>This transcript has been edited for style and clarity.*/gi,
+        /.*<em>This is a verbatim transcript and has not been copyedited.*/gi
     ];
 
     var endRegexObject = stringOps.getNextRegex(clean, endTranscriptRegexArray);
