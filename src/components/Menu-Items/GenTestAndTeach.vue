@@ -158,6 +158,7 @@ export default {
             this.program.hasPeerReviewer = false
             this.program.hasCollectionPage = false
             this.program.hasForYourPatient = false
+            this.file = null
             this.resetOutput()
         },
         resetOutput() {
