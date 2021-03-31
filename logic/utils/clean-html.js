@@ -1,5 +1,4 @@
 const sanitizeHtml = require('sanitize-html');
-// import sanitizeHtml from 'sanitize-html'
 const formatList = require('./format-list');
 const stringOps = require('./string-ops');
 
@@ -639,7 +638,7 @@ function learningObjectives(textBlock, removeFluff=true) {
     removeRegExp = /.*Post[ ]?test.*/gi;
     textBlock = textBlock.replace(removeRegExp, '');
 
-    removeRegExp = /.*PT*/g;
+    removeRegExp = /<p>PT<\/p>/g;
     textBlock = textBlock.replace(removeRegExp, '');
 
     removeRegExp = /.*Slides corresponding to.*/gi;
@@ -818,7 +817,6 @@ function transcript(htmlString, removeFluff=false) {
 
 
 module.exports = {
-    // export default {
     basicHTMLSanitize,
     removeTicketFluff,
     supEdgeCases,
