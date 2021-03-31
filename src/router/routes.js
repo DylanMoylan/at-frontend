@@ -33,6 +33,10 @@ const routes = [
               component: () => import('components/Menu-Items/GenSpotlight.vue'),
               props: { product: 'spotlight' }
             },
+            {
+              path: '/generate/test-and-teach',
+              component: () => import('components/Menu-Items/GenTestAndTeach.vue')
+            },
 
             //Snippets
 

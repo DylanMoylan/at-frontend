@@ -98,7 +98,7 @@
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/spotlight" disable>
+                                  <q-item clickable to="/generate/test-and-teach">
                                       <q-item-section>
                                         <q-item-label>
                                           Generate Test and Teach
