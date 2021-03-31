@@ -1,5 +1,5 @@
 <template>
-  <q-card class="secundo" style="max-width:60vw">
+  <q-card class="secundo q-my-lg" style="max-width:60vw">
     <q-card-section class="primo text-white text-h6 text-center">
       Automation Tool
     </q-card-section>
@@ -15,6 +15,13 @@
     <q-card-section>
       <div>	
         <div class="text-center text-bold">ChangeLog</div>
+        <div>
+          <span class="text-bold">[3.31.2021]</span>
+          <span>
+            Enables First-Response and test-and-teach Generators (Experimental).<br />
+            Adds some additional error handling, bad tickets will cause less silent failures.
+          </span>
+        </div>
         <div>
           <span class="text-bold">[3.30.2021]</span>
           <span>
@@ -57,6 +64,22 @@
             <li class="text-warning">
               <q-icon name="help" class="q-mr-sm text-body1"/>
               <span>Generate Curbside/Spotlight</span>
+            </li>
+            <li class="text-warning">
+              <q-icon name="help" class="q-mr-sm text-body1"/>
+              <span>Generate First-Response</span>
+            </li>
+            <li class="text-warning">
+              <q-icon name="help" class="q-mr-sm text-body1"/>
+              <span>Generate Test and Teach</span>
+            </li>
+            <li class="text-negative">
+              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+              <span>Generate Video Lecture</span>
+            </li>
+            <li class="text-negative">
+              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+              <span>Generate Townhall Enduring/Cert</span>
             </li>
             <li class="text-positive">
               <q-icon name="check" class="q-mr-sm text-body1"/>
