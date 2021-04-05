@@ -13,8 +13,90 @@
     </q-card-section>
     <q-separator />
     <q-card-section>
-      <div>	
+      <div class="q-my-md text-center">
+          <span class="q-mr-md text-positive">
+            <q-icon name="check" color="positive" class="q-mr-sm text-body1" />
+            <span>Confirmed functional</span>
+          </span>
+          <span class="q-mr-md text-warning">
+            <q-icon name="help" color="warning" class="q-mr-sm text-body1" />
+            <span>Added, possible errors.</span>
+          </span>
+          <span class="q-mr-md text-negative">
+            <q-icon
+              name="highlight_off"
+              color="negative"
+              class="q-mr-sm text-body1" />
+            <span>Not added.</span>
+          </span>
+      </div>
+      <div>
+        <ul class="feature-list">
+          <li class="text-positive">
+            <q-icon name="check" class="q-mr-sm text-body1"/>
+            <span>Generate Captions</span>
+          </li>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
+            <span>Generate Clinical Brief</span>
+          </li>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
+            <span>Generate Curbside/Spotlight</span>
+          </li>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
+            <span>Generate First-Response</span>
+          </li>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
+            <span>Generate Test and Teach</span>
+          </li>
+          <li class="text-negative">
+            <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+            <span>Generate Video Lecture</span>
+          </li>
+          <li class="text-negative">
+            <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+            <span>Generate Townhall Enduring/Cert</span>
+          </li>
+          <li class="text-positive">
+            <q-icon name="check" class="q-mr-sm text-body1"/>
+            <span>Snippets</span>
+          </li>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
+            <span>Components: 5/8</span>
+          </li>
+          <li class="text-negative">
+            <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+            <span>Producer</span>
+          </li>
+          <li class="text-positive">
+            <q-icon name="check" class="q-mr-sm text-body1"/>
+            <span>Format</span>
+          </li>
+        </ul>
+      </div>
+    </q-card-section>
+    <q-separator />
+    <q-card-section style="max-height: 300px;overflow-y:scroll">
         <div class="text-center text-bold">ChangeLog</div>
+        <div>
+          <span class="text-bold">[4.5.2021]</span>
+          <span>
+            <ul>
+              <li>Enables Format-Learning Objectives.</li>
+              <li>Fixes CB not finding Article/Activity Title</li>
+              <li>Fixes CB Clinical Implications section</li>
+              <li>Adds nbsp below media code</li>
+              <li>Hides content below contributors if peer reviewer isn't checked.</li>
+              <li>Fixes the order of references, abbrevs, and content in curbside TOCs.</li>
+              <li>Removes "Main Content" from transcript.</li>
+              <li>Fixes some issues finding collection page titles.</li>
+            </ul>
+          </span>
+        </div>
         <div>
           <span class="text-bold">[3.31.2021]</span>
           <span>
@@ -34,72 +116,6 @@
             Experimental Version. Some features may be incomplete.
           </span>
         </div>
-        <div class="q-my-md text-center">
-          <span class="q-mr-md text-positive">
-            <q-icon name="check" color="positive" class="q-mr-sm text-body1" />
-            <span>Confirmed functional</span>
-          </span>
-          <span class="q-mr-md text-warning">
-            <q-icon name="help" color="warning" class="q-mr-sm text-body1" />
-            <span>Added, possible errors.</span>
-          </span>
-          <span class="q-mr-md text-negative">
-            <q-icon
-              name="highlight_off"
-              color="negative"
-              class="q-mr-sm text-body1" />
-            <span>Not added.</span>
-          </span>
-        </div>
-        <div>
-          <ul class="feature-list">
-            <li class="text-positive">
-              <q-icon name="check" class="q-mr-sm text-body1"/>
-              <span>Generate Captions</span>
-            </li>
-            <li class="text-warning">
-              <q-icon name="help" class="q-mr-sm text-body1"/>
-              <span>Generate Clinical Brief</span>
-            </li>
-            <li class="text-warning">
-              <q-icon name="help" class="q-mr-sm text-body1"/>
-              <span>Generate Curbside/Spotlight</span>
-            </li>
-            <li class="text-warning">
-              <q-icon name="help" class="q-mr-sm text-body1"/>
-              <span>Generate First-Response</span>
-            </li>
-            <li class="text-warning">
-              <q-icon name="help" class="q-mr-sm text-body1"/>
-              <span>Generate Test and Teach</span>
-            </li>
-            <li class="text-negative">
-              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-              <span>Generate Video Lecture</span>
-            </li>
-            <li class="text-negative">
-              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-              <span>Generate Townhall Enduring/Cert</span>
-            </li>
-            <li class="text-positive">
-              <q-icon name="check" class="q-mr-sm text-body1"/>
-              <span>Snippets</span>
-            </li>
-            <li class="text-warning">
-              <q-icon name="help" class="q-mr-sm text-body1"/>
-              <span>Components: 5/8</span>
-            </li>
-            <li class="text-negative">
-              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-              <span>Producer</span>
-            </li>
-            <li class="text-negative">
-              <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-              <span>Format</span>
-            </li>
-          </ul>
-        </div>
-      </div>
     </q-card-section>
   </q-card>
 </template>
