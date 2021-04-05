@@ -126,6 +126,7 @@ export default {
             const createCB = () => {
                 this.fileOutput = articles.clinicalBrief.buildClinicalBrief(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
+                this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
             this.tryCatch(createCB)
         },
@@ -179,7 +180,7 @@ export default {
             return !this.articleID.length || !this.file || !this.questionnaireID.length
         },
         hasData() {
-            return !!this.articleID.length || !!this.file || !!this.questionnaireID.length
+            return !!this.articleID.length || !!this.file || !!this.questionnaireID.length || !!this.hasPreAssessment
         }
     }
 }

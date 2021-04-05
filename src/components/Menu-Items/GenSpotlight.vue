@@ -182,6 +182,7 @@ export default {
             const createCurb = () => {
                 this.fileOutput = articles.spotlight.buildSpotlight(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
+                this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
             this.tryCatch(createCurb)
         },
@@ -233,11 +234,12 @@ export default {
             return this.fileOutput && this.fileOutput.checklistHTML ? this.fileOutput.checklistHTML : ''
         },
         missingData() {
-            return !this.articleID.length || !this.file || this.hasTranscript ? !this.transcriptType.length : false
+            return !this.articleID.length || !this.file || 
+            (this.hasTranscript && !!this.articleID.length && !!this.file ? !this.transcriptType.length : false)
         },
         hasData() {
             return !!this.articleID.length || !!this.file ||
-            [this.hasTranscript, this.isLLA, this.isOUS, this.hasPeerReviewer, this.hasCollectionPage, this.hasForYourPatient].find(item => item === true)
+            [this.hasTranscript, this.isLLA, this.isOUS, this.hasPeerReviewer, this.hasCollectionPage, this.hasPDF].find(item => item === true)
         }
     }
 }

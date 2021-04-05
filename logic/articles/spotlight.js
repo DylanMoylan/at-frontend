@@ -237,15 +237,17 @@ function buildSpotlight(ticket, program) {
     finalArticle.contrbtrByline = byline;
     // insert peer reviewer and disclosure 
     // set contrbtr_post_content with Medscape disclosure
-    peerReviewer = peerReviewer.replace("<div>", "");
-    finalArticle.contrbtrPostContent = `<div>${snippets.activity.medscapeDisclosure()} ${peerReviewer}`;
+    if(program.hasPeerReviewer) {
+        peerReviewer = peerReviewer.replace("<div>", "");
+        finalArticle.contrbtrPostContent = `<div>${snippets.activity.medscapeDisclosure()} ${peerReviewer}`;
+    }
     // set contrbtr_pre_content
     finalArticle.contrbtrPreContent = checklistResult.properties.contrbtrPreContent.result;
     // set copyright holder 
     finalArticle.cpyrtHolder = checklistResult.properties.cpyrtHolder.result;
     // set backmatter front page 
     finalArticle.bkmtrFront = checklistResult.properties.bkmtrFront.result;
-
+    
     // insert collection page info - Banner image and Above title
     collectionPageInfo = (checklistResult.properties.collectionPageInfo ? checklistResult.properties.collectionPageInfo.result : null);
     if (collectionPageInfo) {
@@ -260,12 +262,14 @@ function buildSpotlight(ticket, program) {
     finalArticle.insertTOCElement(contentTOC);
     finalArticle.insertTOCElement(postAssessmentTOC);
     finalArticle.insertTOCElement(blankResultsTOC);
+    finalArticle.insertTOCElement(referencesTOC);
+    finalArticle.insertTOCElement(abbreviationsTOC);
     if (transcriptTOC) {
         finalArticle.insertTOCElement(transcriptTOC);
     }
-    finalArticle.insertTOCElement(abbreviationsTOC);
-    finalArticle.insertTOCElement(referencesTOC);
 
+    finalArticle.insertSupporterGrantAttr();
+    
     // Addons 
     if (program.hasForYourPatient) {
         forYourPatientMarkup = snippets.forYourPatient(program.articleID, "For Your Patient", `${program.articleID}_ForYourPatient.pdf`);

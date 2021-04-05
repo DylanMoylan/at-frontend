@@ -42,6 +42,7 @@ function videoEmbed (slidesComponent, articleID=null) {
             <div class="webcomp-player" data-config="en/pi/editorial/studio/configs/${currentYear}/education/${articleID}/${articleID}.json" data-playertype="edu" id="cme-video-player">
                 &nbsp;
             </div>
+            <p>&nbsp;</p>
         </div>
         `;
         return utils.cleanHTML.insertEntityPlaceholders(result);
@@ -61,6 +62,7 @@ function videoEmbed (slidesComponent, articleID=null) {
             <div class="webcomp-player" data-config="en/pi/editorial/studio/configs/${currentYear}/education/${videoEmbedPath()}.json" data-playertype="edu" id="cme-video-player">
                 &nbsp;
             </div>
+            <p>&nbsp;</p>
         </div>
         `;
     } else {
@@ -69,6 +71,7 @@ function videoEmbed (slidesComponent, articleID=null) {
             <div class="webcomp-player" data-config="en/pi/editorial/studio/configs/${currentYear}/education/${videoEmbedPath()}.json" data-playertype="edu" id="cme-video-player">
                 &nbsp;
             </div>
+            <p>&nbsp;</p>
         </div>
         <div id="page_nav_top">
             <div id="prev_page_nav">

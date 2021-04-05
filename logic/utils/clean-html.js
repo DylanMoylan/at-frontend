@@ -798,7 +798,7 @@ function transcript(htmlString, removeFluff=false) {
         var lastStartMatch = matches[matches.length - 1];
         clean = clean.substring(lastStartMatch.index + lastStartMatch.matchLength);
     }
-
+    clean = clean.replace(/<p>Main content<\/p>/i, '')
     clean = insertEntityPlaceholders(clean);
 
     var options = {

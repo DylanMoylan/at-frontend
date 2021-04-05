@@ -1,5 +1,5 @@
 <template>
-  <q-card class="secundo">
+  <q-card class="secundo q-my-lg">
         <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             Generate Captions
         </q-card-section>

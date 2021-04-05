@@ -14,7 +14,7 @@
                     v-model="program.articleID"
                     class="row q-mb-md at-input"
                 />
-                <div class="row full-width justify-start q-mb-md">
+                <div class="row full-width justify-start">
                     <q-checkbox
                         label="Has Transcript"
                         v-model="program.hasTranscript"
@@ -39,28 +39,28 @@
                         inline
                     />
                 </div>
-                <div class="row full-width justify-start q-mb-md">
+                <div class="row full-width justify-start">
                     <q-checkbox
                         label="Has LLA"
                         v-model="program.hasLLA"
                         dense
                     />
                 </div>
-                <div class="row full-width justify-start q-mb-md">
+                <div class="row full-width justify-start">
                     <q-checkbox
                         label="Program is OUS"
                         v-model="program.hasOUS"
                         dense
                     />
                 </div>
-                <div class="row full-width justify-start q-mb-md">
+                <div class="row full-width justify-start">
                     <q-checkbox
                         label="Has Peer Reviewer"
                         v-model="program.hasPeerReviewer"
                         dense
                     />
                 </div>
-                <div class="row full-width justify-start q-mb-md">
+                <div class="row full-width justify-start">
                     <q-checkbox
                         label="Has Collection Page"
                         v-model="program.hasCollectionPage"
@@ -169,7 +169,8 @@ export default {
     },
     computed: {
         missingData() {
-            return !this.program.articleID.length || !this.file || this.program.hasTranscript ? !this.program.transcriptType.length : false
+            return !this.program.articleID.length || !this.file || 
+            (!!this.program.articleID.length || !!!this.file && this.program.hasTranscript ? !this.program.transcriptType.length : false)
         },
         hasData() {
             return !!this.program.articleID.length || !!this.file || 

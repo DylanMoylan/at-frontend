@@ -6,33 +6,33 @@ module.exports = {
         xmlLang: "en",
         label: 'English'
     },
-    spanishLATAM: {
-        videoConfigSuffix: "s",
-        xmlLang: "es-419",
-        transcriptSuffix: "transcript_spa",
-        expertCommentary: {
-            tocType: "Sidebar",
-            calloutText: "Comentarios en espa&#241;ol",
-            addOnIntroduction: function (articleID, programTitle) {
-                return `
-                <p>Este comentario es parte de una actividad educativa m&#225;s extensa. Despu&#233;s de participar, vuelva a&#160;<strong><a href="/viewarticle/${articleID}">${programTitle}</a></strong>&#160;&#160;para acceder a todo el contenido educativo relacionado.</p>
-                `;
-            }
-        }, 
-        downloadablePDF: {
-            tocType: "Sidebar",
-            calloutText: "pdf descargable en espa&#241;ol"
-        },
-        transcriptPDF: {
-            tocType: "Sidebar",
-            calloutText: "Transcripci&#243;n en espa&#241;ol"
-        }, 
-        subtitles: {
-            tocType: "Sidebar",
-            calloutText: "Subt&#237;tulos en espa&#241;ol"
-        },
-        label: 'Spanish (Latin America)'
-    },
+    // spanishLATAM: {
+    //     videoConfigSuffix: "s",
+    //     xmlLang: "es-419",
+    //     transcriptSuffix: "transcript_spa",
+    //     expertCommentary: {
+    //         tocType: "Sidebar",
+    //         calloutText: "Comentarios en espa&#241;ol",
+    //         addOnIntroduction: function (articleID, programTitle) {
+    //             return `
+    //             <p>Este comentario es parte de una actividad educativa m&#225;s extensa. Despu&#233;s de participar, vuelva a&#160;<strong><a href="/viewarticle/${articleID}">${programTitle}</a></strong>&#160;&#160;para acceder a todo el contenido educativo relacionado.</p>
+    //             `;
+    //         }
+    //     }, 
+    //     downloadablePDF: {
+    //         tocType: "Sidebar",
+    //         calloutText: "pdf descargable en espa&#241;ol"
+    //     },
+    //     transcriptPDF: {
+    //         tocType: "Sidebar",
+    //         calloutText: "Transcripci&#243;n en espa&#241;ol"
+    //     }, 
+    //     subtitles: {
+    //         tocType: "Sidebar",
+    //         calloutText: "Subt&#237;tulos en espa&#241;ol"
+    //     },
+    //     label: 'Spanish (Latin America)'
+    // },
     spanishSpain: {
         videoConfigSuffix: "s",
         xmlLang: "es",

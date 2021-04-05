@@ -34,22 +34,26 @@ exportObject[config.programs.spotlight.codeName] = function (ticketHTML) {
     var collectionPageInfo = null;    
     if (yesIndex != -1) {        
         var pageURL = textBlock.match(/.*&#9746; Yes.*/g)[0];
-        pageURL = stringOps.removeFromRegexCapture(pageURL, /.*&#9746; Yes.*/g, /.*https:/g);
+        let type = pageURL.match(/type[?](?:<\/strong>)?(.*)<strong>/)
+        if(type && type.length > 1) {
+            type = type[1].replace(/[^a-z ]/gi, '').trim()
+        }
+        pageURL = stringOps.removeFromRegexCapture(pageURL, /.*&#9746; Yes.*/g, /.*strong>/g);
+        let title = pageURL.match(/([A-Za-z]+[ ])+/g)
         pageURL = pageURL.replace(/<p>|<\/p>/g, "");
-        let title = pageURL.match(/[ ]+.*$/)
+        pageURL = pageURL.trim()
         if(title && title.length){
             title = title[0].trim()
             pageURL = pageURL.replace(title, '')
         }
-        pageURL = `https:${pageURL}`;
         // return _.find(collectionPages, ['url', pageURL]);
         return {
-        title: title.trim() || '',
-        fileName: pageURL.trim().replace(/.+\//g, ''),
-        bannerFileName: null,
-        type: "Clinical Advances",
-        url: pageURL
-    }
+            title: title && title.length ? title : '',
+            fileName: pageURL.replace(/.+\//g, ''),
+            bannerFileName: "banner_evolution_laboratory_diagnostics.jpg",
+            type: type && type.length ? type : "Clinical Advances",
+            url: pageURL
+        }
     } else if (noIndex == -1) {
         throw new Error("Prodticket doesn't have correct checkboxes for collection page info. Check manually.");
     } else {
