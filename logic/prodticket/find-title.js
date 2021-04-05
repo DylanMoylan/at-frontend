@@ -11,13 +11,28 @@ const {stringOps, cleanHTML} = require('../utils');
 
 var exportObject = {};
 
+const CBTitleRegExps = [
+    /<strong>Title:([ ]?&#953;)?<\/strong>/g,
+    /Activity Title/g   
+]
+
+const CBEndTitleRegExps = [
+    /<strong>Teaser/g,
+    /Content Information/g
+]
 // Clinical Brief 
 exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
-    var {textBlock} = stringOps.getTextBlock(ticketHTML, "Activity Title", "Content Information");
-    if (stringOps.isBlankOrWhiteSpace(textBlock) || stringOps.isEmptyString(textBlock)) {
-        throw new Error("No title found in the prodticket")
-    } else {
-        return cleanHTML.singleLine(cleanHTML.plainText(textBlock)).trim();
+    let startRegExp = stringOps.getUsableRegExp(ticketHTML, CBTitleRegExps)
+    let endRegExp = stringOps.getUsableRegExp(ticketHTML, CBEndTitleRegExps)
+    if(startRegExp && endRegExp) {
+        var {textBlock} = stringOps.getTextBlock(ticketHTML, startRegExp, endRegExp);
+        if (stringOps.isBlankOrWhiteSpace(textBlock) || stringOps.isEmptyString(textBlock)) {
+            throw new Error("No title found in the prodticket")
+        } else {
+            return cleanHTML.singleLine(cleanHTML.plainText(textBlock)).trim();
+        }
+    }else{
+        throw new Error("No title found in the prodticket");
     }
 }
 

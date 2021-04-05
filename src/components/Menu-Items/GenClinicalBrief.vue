@@ -163,7 +163,7 @@ export default {
                 profArticleType: "Article",
                 articleID: this.articleID,
                 qnaID: this.questionnaireID,
-                hasPreAssessment: false,
+                hasPreAssessment: this.hasPreAssessment,
                 hasPostAssessment: false,
                 hasOUS: false, 
                 hasPeerReviewer: false, 

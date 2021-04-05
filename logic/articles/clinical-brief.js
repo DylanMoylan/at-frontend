@@ -79,12 +79,20 @@ function getClinicalImplications(ticket) {
     var endRegexArray = [
         /CME.*pre-assessment\/post-assessment questions/g,
         /CME Post Test Questions/g,
-        /(&#9744;|&#9745;)?[ ]?[<]strong\>COVID Program Disclaimer/g
+        /(&#9744;|&#9745;)?[ ]?[<]strong\>COVID Program Disclaimer/g,
+        /<p>_+<\/p>/g
     ];
-    var endRegex = utils.stringOps.getNextRegex(ticket, endRegexArray);
+    let implications = ticket
+    let implicationsIndex = utils.stringOps.regexIndexOf(ticket, /Clinical Implications/)
+    if(implicationsIndex > -1) {
+        implications = ticket.slice(implicationsIndex, ticket.length)
+    }else{
+        return new Error("Clinical Implications not found in the prodticket");
+    }
+    var endRegex = utils.stringOps.getNextRegex(implications, endRegexArray);
     if (endRegex != -1) {
         var {textBlock, label} = utils.stringOps.getTextBlock(
-            ticket,
+            implications,
             /Clinical Implications/g,
             endRegex.symbol
         );
