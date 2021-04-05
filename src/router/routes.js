@@ -69,6 +69,13 @@ const routes = [
               component: () => import('components/Menu-Items/SnippetSlideTocs.vue')
             },
 
+            //Format
+
+            {
+              path: '/format/learning-objectives',
+              component: () => import('components/Menu-Items/FormatLearningObjectives.vue')
+            },
+
             //Components
 
             {

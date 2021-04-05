@@ -4,7 +4,7 @@
             Generate Captions
         </q-card-section>
         <q-card-section class="q-ma-sm">
-          <ol style="border:1px solid; border-radius:3px">
+          <ol class="at-instructions">
             <li style="margin-top:10px">Clean and prepare a .xlss file and convert it to HTML with LibreOffice. (See <a href="https://confluence.internetbrands.com/pages/viewpage.action?pageId=87791092">Confluence</a> for more info).</li>
             <li>Enter article ID and select language.</li>
             <li>Click on the file picker and select the file you've prepared.</li>

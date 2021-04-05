@@ -302,7 +302,7 @@
                   <q-card class="secundo">
                     <q-card-section>
                       <q-list bordered separator>
-                        <q-item clickable disable>
+                        <q-item clickable to="/format/learning-objectives">
                           <q-item-section>
                             <q-item-label>
                               Format Learning Objectives

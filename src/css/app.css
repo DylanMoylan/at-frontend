@@ -19,3 +19,8 @@
     font-family: 'Courier New', monospace;
     overflow-x: scroll;
 }
+
+.at-instructions {
+    border: 1px solid;
+    border-radius: 3px;
+}
