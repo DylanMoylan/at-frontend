@@ -170,7 +170,7 @@ export default {
     computed: {
         missingData() {
             return !this.program.articleID.length || !this.file || 
-            ((!!this.program.articleID.length || !!!this.file) && this.program.hasTranscript ? !this.program.transcriptType.length : false)
+            (!!this.program.hasTranscript && !this.program.transcriptType.length)
         },
         hasData() {
             return !!this.program.articleID.length || !!this.file || 

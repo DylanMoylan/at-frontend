@@ -235,7 +235,7 @@ export default {
         },
         missingData() {
             return !this.articleID.length || !this.file || 
-            (this.hasTranscript && !!this.articleID.length && !!this.file ? !this.transcriptType.length : false)
+            (!!this.hasTranscript && !this.transcriptType.length)
         },
         hasData() {
             return !!this.articleID.length || !!this.file ||
