@@ -52,13 +52,17 @@
             <q-icon name="help" class="q-mr-sm text-body1"/>
             <span>Generate Test and Teach</span>
           </li>
-          <li class="text-negative">
-            <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
             <span>Generate Video Lecture</span>
           </li>
           <li class="text-negative">
             <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-            <span>Generate Townhall Enduring/Cert</span>
+            <span>Generate Townhall Cert</span>
+          </li>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
+            <span>Generate Townhall Enduring</span>
           </li>
           <li class="text-positive">
             <q-icon name="check" class="q-mr-sm text-body1"/>
@@ -66,7 +70,7 @@
           </li>
           <li class="text-warning">
             <q-icon name="help" class="q-mr-sm text-body1"/>
-            <span>Components: 5/8</span>
+            <span>Components: 7/8</span>
           </li>
           <li class="text-negative">
             <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
@@ -82,6 +86,16 @@
     <q-separator />
     <q-card-section style="max-height: 300px;overflow-y:scroll">
         <div class="text-center text-bold">ChangeLog</div>
+        <div>
+          <span class="text-bold">[4.6.2021]</span>
+          <span>
+            <ul>
+              <li>Adds Video Lecture Generator.</li>
+              <li>Adds TownHall Enduring Generator.</li>
+              <li>Fixes a bug that was preventing submission unless transcript was checked in certain generators.</li>
+            </ul>
+          </span>
+        </div>
         <div>
           <span class="text-bold">[4.5.2021]</span>
           <span>
