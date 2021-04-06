@@ -38,7 +38,12 @@
                   class="q-ma-sm q-mb-md at-input"
                   bottom-slots
                   accept=".html"
-              />
+                  @input="checkFile"
+              >
+                <template v-slot:hint v-if="emptyFile">
+                  <div class="text-negative text-body2">Selected File is empty!</div>
+                </template>
+                </q-file>
         </q-card-section>
         <q-separator />
         <q-card-section>
@@ -103,7 +108,8 @@ export default {
       file: null,
       articleID: '',
       language: '',
-      fileOutput: null
+      fileOutput: null,
+      emptyFile: false
     }
   },
   computed: {
@@ -123,15 +129,24 @@ export default {
       })
     },
     missingData() {
-      return !this.articleID.length || !this.language.length || !this.file
+      return !this.articleID.length || !this.language.length || !this.file || this.emptyFile
     }
   },
   methods: {
+    checkFile() {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        console.log(e.target.result.trim().length)
+        this.emptyFile = e.target.result.trim().length ? false : true
+      }
+      reader.readAsText(this.file)
+    },
     reset() {
       this.fileOutput = null
       this.file = null
       this.articleID = ''
       this.language = ''
+      this.emptyFile = false
     },
     build(val) {
       let languageObject = null
