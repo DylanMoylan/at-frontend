@@ -41,6 +41,10 @@ const routes = [
               path: '/generate/first-response',
               component: () => import('components/Menu-Items/GenFirstResponse.vue')
             },
+            {
+              path: '/generate/townhall-enduring',
+              component: () => import('components/Menu-Items/GenTownhall.vue')
+            },
 
             //Snippets
 

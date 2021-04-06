@@ -4,7 +4,7 @@
             <q-card-section 
                 class="text-white text-h6 q-pa-md text-center primo"
             >
-                Generate First Response
+                Generate Townhall Enduring
             </q-card-section>
             <q-card-section>
                 <q-input
@@ -139,7 +139,7 @@
 import tryCatch from 'src/mixins/tryCatch'
 import buildOutput from '../../mixins/buildOutput'
 import utils from '../../../logic/utils'
-import { firstResponse } from '../../../logic/articles'
+import { townHallEnduring } from '../../../logic/articles'
 
 export default {
     mixins: [tryCatch, buildOutput],
@@ -149,9 +149,9 @@ export default {
             fileOutput: null,
             xmlResult: null,
             program: {
-                name: "First Response",
-                codeName: "firstResponse",
-                dirName: "first-response",
+                name: "Town Hall",
+                codeName: "townHall",
+                dirName: "townhall-enduring",
                 profArticleType: "SlidePresentation",
                 articleID: "",
                 qnaID: "",
@@ -163,7 +163,7 @@ export default {
                 hasCollectionPage: false,
                 hasSlideDeck: false, 
                 hasForYourPatient: false, 
-                hasInLanguage: false
+                hasInLanguage: false 
             }
         }
     },
@@ -195,12 +195,12 @@ export default {
             this.xmlResult = null
         },
         build(val) {
-            const createFirstResponse = () => {
-                this.fileOutput = firstResponse.buildFirstResponse(val, this.program)
+            const createTownhall = () => {
+                this.fileOutput = townHallEnduring.buildTownHallEnduring(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
-            this.tryCatch(createFirstResponse)
+            this.tryCatch(createTownhall)
         },
         downloadResult(type) {
             let href

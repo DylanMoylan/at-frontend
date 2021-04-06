@@ -78,7 +78,7 @@
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/spotlight" disable>
+                                  <q-item clickable to="/generate/townhall-enduring">
                                       <q-item-section>
                                         <q-item-label>
                                           Generate Townhall Enduring
