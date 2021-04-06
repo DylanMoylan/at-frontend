@@ -45,6 +45,10 @@ const routes = [
               path: '/generate/townhall-enduring',
               component: () => import('components/Menu-Items/GenTownhall.vue')
             },
+            {
+              path: '/generate/video-lecture',
+              component: () => import('components/Menu-Items/GenVideoLecture.vue')
+            },
 
             //Snippets
 

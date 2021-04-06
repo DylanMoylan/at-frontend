@@ -4,7 +4,7 @@
             <q-card-section 
                 class="text-white text-h6 q-pa-md text-center primo"
             >
-                Generate Townhall Enduring
+                Generate Video Lecture
             </q-card-section>
             <q-card-section>
                 <q-input
@@ -14,10 +14,7 @@
                     v-model="program.articleID"
                     class="row q-mb-md at-input"
                 />
-                <standard-form
-                    :program="program"
-                    @input="bindValues"
-                />
+                <standard-form :program="program" @input="bindValues" />
                 <q-file
                     v-model="file"
                     class="at-input"
@@ -83,7 +80,7 @@
 import tryCatch from 'src/mixins/tryCatch'
 import buildOutput from '../../mixins/buildOutput'
 import utils from '../../../logic/utils'
-import { townHallEnduring } from '../../../logic/articles'
+import { spotlight } from '../../../logic/articles'
 import StandardForm from '../shared/StandardForm.vue'
 
 export default {
@@ -97,14 +94,14 @@ export default {
             fileOutput: null,
             xmlResult: null,
             program: {
-                name: "Town Hall",
-                codeName: "townHall",
-                dirName: "townhall-enduring",
+                name: "Video Lecture",
+                codeName: "video",
+                dirName: "video-lecture",
                 profArticleType: "SlidePresentation",
                 articleID: "",
                 qnaID: "",
                 hasTranscript: false, 
-                transcriptType: '',
+                transcriptType: "",
                 hasLLA: false,
                 hasOUS: false, 
                 hasPeerReviewer: false, 
@@ -126,9 +123,6 @@ export default {
         }
     },
     methods: {
-        bindValues(program) {
-            this.program = Object.assign(this.program, program)
-        },
         reset() {
             this.program.articleID = ''
             this.program.hasTranscript = false
@@ -146,12 +140,12 @@ export default {
             this.xmlResult = null
         },
         build(val) {
-            const createTownhall = () => {
-                this.fileOutput = townHallEnduring.buildTownHallEnduring(val, this.program)
+            const createVideoLecture = () => {
+                this.fileOutput = spotlight.buildSpotlight(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
-            this.tryCatch(createTownhall)
+            this.tryCatch(createVideoLecture)
         },
         downloadResult(type) {
             let href
@@ -175,6 +169,9 @@ export default {
             link.href = href
             link.download = download
             link.click()
+        },
+        bindValues(program) {
+            this.program = Object.assign(this.program, program)
         }
     }
 }

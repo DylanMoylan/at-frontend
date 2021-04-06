@@ -100,20 +100,28 @@
         <div>
           <span class="text-bold">[3.31.2021]</span>
           <span>
-            Enables First-Response and test-and-teach Generators (Experimental).<br />
-            Adds some additional error handling, bad tickets will cause less silent failures.
+            <ul>
+              <li>Enables First-Response and test-and-teach Generators (Experimental).</li>
+              <li>Adds some additional error handling, bad tickets will cause less silent failures.</li>
+            </ul>
           </span>
         </div>
         <div>
           <span class="text-bold">[3.30.2021]</span>
           <span>
-            Adds some new component generators, Snippet generators<br /> for Slide TOCs/Downloadable Slides, and adds copy/reset buttons to a few sections.
+            <ul>
+              <li>Adds some new component generators</li>
+              <li>Adds some Snippet generators for Slide TOCs/Downloadable Slides</li>
+              <li>Adds copy/reset buttons to a few sections.</li>
+            </ul>
           </span>
         </div>
         <div>
           <span class="text-bold">[3.29.2021]</span>
           <span>
-            Experimental Version. Some features may be incomplete.
+            <ul>
+              <li>First Release: Experimental Version. Some features may be incomplete.</li>
+            </ul>
           </span>
         </div>
     </q-card-section>
