@@ -16,7 +16,7 @@
           stack-label
           label="Select Product Type"
           v-model="productType"
-          :options="productTypeOptions"
+          :options="filteredPrograms"
           class="row q-mb-md at-input"
         />
         <q-file
@@ -52,7 +52,7 @@
           label="Download Abbreviations XML"
           no-caps
           class="bg-positive text-white q-mr-md"
-          @click="downloadResult"
+          @click="downloadResult(null, `${articleID}_abbreviations.xml`)"
         />
       </q-card-section>
     </template>
@@ -62,13 +62,14 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import downloadResult from 'src/mixins/downloadResult'
 import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
 
 export default {
-  mixins: [buildOutput, programOptions, tryCatch],
+  mixins: [buildOutput, programOptions, tryCatch, downloadResult],
   data() {
     return {
       articleID: '',
@@ -82,6 +83,9 @@ export default {
     },
     hasData() {
       return !!this.articleID.length || !!this.productType.length || !!this.file
+    },
+    filteredPrograms() {
+        return this.productTypeOptions.filter(item => item != 'Clinical Brief')
     }
   },
   methods: {
@@ -101,14 +105,6 @@ export default {
             this.fileOutput = abbreviationsXML
         }
         this.tryCatch(createAbbrev)
-    },
-    downloadResult() {
-      const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
-      const download = `${this.articleID}_abbreviations.xml`
-      const link = document.createElement('a')
-      link.href = href
-      link.download = download
-      link.click()
     },
     reset() {
       this.articleID = ''

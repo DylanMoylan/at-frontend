@@ -53,7 +53,7 @@
           label="Download Credit Statements HTML"
           no-caps
           class="bg-positive text-white q-mr-md"
-          @click="downloadResult"
+          @click="downloadResult(null, `${articleID}_credit-statements.html`)"
         />
       </q-card-section>
     </template>
@@ -62,12 +62,13 @@
 
 <script>
 import buildOutput from '../../mixins/buildOutput'
+import downloadResult from 'src/mixins/downloadResult'
 import programOptions from 'src/mixins/programOptions'
 import tryCatch from 'src/mixins/tryCatch'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
 export default {
-  mixins: [buildOutput, programOptions, tryCatch],
+  mixins: [buildOutput, programOptions, tryCatch, downloadResult],
   data() {
     return {
       articleID: '',
@@ -100,14 +101,6 @@ export default {
             this.fileOutput = creditStatementsHTML
         }
         this.tryCatch(createCredit)
-    },
-    downloadResult() {
-      const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
-      const download = `${this.articleID}_credit-statements.html`
-      const link = document.createElement('a')
-      link.href = href
-      link.download = download
-      link.click()
     },
     reset() {
       this.articleID = ''

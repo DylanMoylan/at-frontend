@@ -1,6 +1,6 @@
 export default {
     methods: {
-        downloadResult(type) {
+        downloadResult(type, fileName = null) {
             let href
             let download = this.program.articleID
             switch(type) {
@@ -13,10 +13,12 @@ export default {
                     download += '.xml'
                     break
                 case 'checklist':
-                default:
                     href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput.checklistHTML)))}`
                     download += '_checklist.html'
                     break
+                default:
+                    href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
+                    download = fileName ? fileName : 'output.xml'
             }
             const link = document.createElement('a')
             link.href = href

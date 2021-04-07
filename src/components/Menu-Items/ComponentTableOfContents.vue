@@ -54,7 +54,7 @@
           label="Download TOC XML"
           no-caps
           class="bg-positive text-white q-mr-md"
-          @click="downloadResult"
+          @click="downloadResult(null, `${this.articleID}_toc.xml`)"
         />
       </q-card-section>
     </template>
@@ -64,13 +64,14 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import downloadResult from 'src/mixins/downloadResult'
 import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
 
 export default {
-  mixins: [buildOutput, programOptions, tryCatch],
+  mixins: [buildOutput, programOptions, tryCatch, downloadResult],
   data() {
     return {
       articleID: '',
@@ -111,14 +112,6 @@ export default {
             this.fileOutput = utils.cleanHTML.cleanEntities(tocXML)
         }
         this.tryCatch(createTOC)
-    },
-    downloadResult() {
-      const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
-      const download = `${this.articleID}_toc.xml`
-      const link = document.createElement('a')
-      link.href = href
-      link.download = download
-      link.click()
     },
     reset() {
       this.articleID = ''

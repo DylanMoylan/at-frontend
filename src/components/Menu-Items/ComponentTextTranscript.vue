@@ -55,7 +55,7 @@
           label="Download Transcript XML"
           no-caps
           class="bg-positive text-white q-mr-md"
-          @click="downloadResult"
+          @click="downloadResult(null, `${articleID}_transcript.xml`)"
         />
       </q-card-section>
     </template>
@@ -65,6 +65,7 @@
 <script>
 import buildOutput from '../../mixins/buildOutput'
 import programOptions from 'src/mixins/programOptions'
+import downloadResult from 'src/mixins/downloadResult'
 import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
@@ -72,7 +73,7 @@ import {TOCElement} from '../../../logic/classes'
 import prodticket from '../../../logic/prodticket'
 
 export default {
-  mixins: [buildOutput, programOptions, tryCatch],
+  mixins: [buildOutput, programOptions, tryCatch, downloadResult],
   data() {
     return {
       articleID: '',
@@ -126,6 +127,7 @@ export default {
         }
 
         if (transcriptHTML instanceof Error) {
+          console.log(transcriptHTML.toString())
           throw transcriptHTML;
         } else if (!transcriptXML) {
             // If no transcriptXML --> then we ran brief or test and teach functions.
@@ -142,18 +144,10 @@ export default {
             } else {
                 transcriptXML = "";
             }
-            this.fileOutput = utils.cleanHTML.cleanEntities(transcriptXML)
         }
+        this.fileOutput = utils.cleanHTML.cleanEntities(transcriptXML)
       }
       this.tryCatch(createTranscript)
-    },
-    downloadResult() {
-      const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
-      const download = `${this.articleID}_transcript.xml`
-      const link = document.createElement('a')
-      link.href = href
-      link.download = download
-      link.click()
     }
   }
 }

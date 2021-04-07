@@ -54,7 +54,7 @@
           label="Download Transcript XML"
           no-caps
           class="bg-positive text-white q-mr-md"
-          @click="downloadResult"
+          @click="downloadResult(null, `${articleID}_slides.xml`)"
         />
       </q-card-section>
     </template>
@@ -63,6 +63,7 @@
 
 <script>
 import buildOutput from '../../mixins/buildOutput'
+import downloadResult from 'src/mixins/downloadResult'
 import programOptions from 'src/mixins/programOptions'
 import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
@@ -70,7 +71,7 @@ import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
 
 export default {
-  mixins: [buildOutput, programOptions, tryCatch],
+  mixins: [buildOutput, programOptions, tryCatch, downloadResult],
   data() {
     return {
       articleID: '',
@@ -133,14 +134,6 @@ export default {
         this.fileOutput = utils.cleanHTML.cleanEntities(transcriptXML)
       }
       this.tryCatch(createTranscript)
-    },
-    downloadResult() {
-      const href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput)))}`
-      const download = `${this.articleID}_slides.xml`
-      const link = document.createElement('a')
-      link.href = href
-      link.download = download
-      link.click()
     }
   }
 }

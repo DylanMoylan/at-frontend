@@ -3,15 +3,24 @@ const {stringOps, cleanHTML} = require('../utils');
 
 var exportObject = {};
 
+const briefEndRegexps = [
+    /<strong>Tagging Info/g,
+    /<\/body>/g
+]
 // Clinical Brief
 exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
-    var {textBlock} = stringOps.getTextBlock(ticketHTML, "<strong>References", "<strong>Tagging Info");
-    textBlock = cleanHTML.references(textBlock).trim();
-
-    if (stringOps.isEmptyString(textBlock) || stringOps.isBlankOrWhiteSpace(textBlock) || textBlock.length < 10) {
+    let endRegExp = stringOps.getAllMatchesInOrder(ticketHTML, briefEndRegexps)
+    if(endRegExp.length <=0) {
         throw new Error("No references found in the prodticket");
-    } else {
-        return "<ol>" + cleanHTML.singleLine(textBlock) + "</ol>";
+    }else{
+        var {textBlock} = stringOps.getTextBlock(ticketHTML, "<strong>References", endRegExp[endRegExp.length - 1].symbol);
+        textBlock = cleanHTML.references(textBlock).trim();
+    
+        if (stringOps.isEmptyString(textBlock) || stringOps.isBlankOrWhiteSpace(textBlock) || textBlock.length < 10) {
+            throw new Error("No references found in the prodticket");
+        } else {
+            return "<ol>" + cleanHTML.singleLine(textBlock) + "</ol>";
+        }
     }
 }
 
