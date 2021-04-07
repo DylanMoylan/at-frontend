@@ -85,18 +85,15 @@ export default {
             return !this.activityID.length || !this.eligibilities.length
         },
         infoObject() {
-            let hasLoc = this.eligibilities.includes('loc')
-            let hasCme = this.eligibilities.includes('cme')
-            let hasNurse = this.eligibilities.includes('nurse_ce')
-            let hasPharma = this.eligibilities.includes('pharma_ce')
+            const includeID = (type) => this.eligibilities.includes(type)
             return {
                 articleID: null,
                 activityID: this.activityID,
                 eligibilities: [
-                    {type: 'loc', activityID: hasLoc ? this.activityID : null, inActivity: hasLoc},
-                    {type: 'cme', activityID: hasCme ? this.activityID : null, inActivity: hasCme},
-                    {type: 'nurse_ce', activityID: hasNurse ? this.activityID : null, inActivity: hasNurse},
-                    {type: 'pharma_ce', activityID: hasPharma ? this.activityID : null, inActivity: hasPharma}
+                    {type: 'loc', activityID: includeID('loc') ? this.activityID : null, inActivity: includeID('loc')},
+                    {type: 'cme', activityID: includeID('cme') ? this.activityID : null, inActivity: includeID('cme')},
+                    {type: 'nurse_ce', activityID: includeID('nurse_ce') ? this.activityID : null, inActivity: includeID('nurse_ce')},
+                    {type: 'pharma_ce', activityID: includeID('pharma_ce') ? this.activityID : null, inActivity: includeID('pharma_ce')}
                 ]
             }
         }

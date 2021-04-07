@@ -81,14 +81,7 @@
                 </div>
             </q-card-section>
         </q-card>
-        <template v-if="fileOutput">
-            <div class="q-my-md text-white text-h6 q-ml-lg">Preview:</div>
-            <q-card 
-                class="q-mt-md q-pa-md preview q-mx-lg at-preview"
-            >
-                {{fileOutput.checklistHTML}}
-            </q-card>
-        </template>
+        <checklist-preview :output="fileOutput" />
     </div>
 </template>
 
@@ -98,8 +91,10 @@ import buildOutput from '../../mixins/buildOutput'
 import downloadResult from 'src/mixins/downloadResult'
 import utils from '../../../logic/utils'
 import tryCatch from 'src/mixins/tryCatch'
+import ChecklistPreview from '../shared/ChecklistPreview.vue'
 
 export default {
+    components: { ChecklistPreview },
     mixins: [buildOutput, tryCatch, downloadResult],
     data() {
         return {
