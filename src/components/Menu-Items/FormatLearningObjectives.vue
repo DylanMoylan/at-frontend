@@ -45,8 +45,8 @@
                     />
                 </q-card-section>
                 <q-separator color="white" />
-                <q-card-section>
-                    {{ fileOutput }}
+                <q-card-section class="at-preview">
+                    <code>{{ fileOutput }}</code>
                 </q-card-section>
             </q-card>
         </template>

@@ -108,6 +108,13 @@
             :class="missingData ? 'bg-negative' : 'bg-positive'"
             @click="go"
           />
+          <q-btn
+            label="Reset"
+            no-caps
+            class="q-ma-sm text-white bg-negative"
+            @click="reset"
+            :disable="!hasData"
+          />
       </q-card-section>
   </q-card>
 </template>
@@ -172,14 +179,18 @@ export default {
                 }
             }
         },
+        hasData() {
+            return !!this.articleID.length || !!this.articleTitle.length || 
+            [this.hasExpertCommentary, this.hasDownloadablePDF, this.hasTranscriptPDF, this.hasSubtitles].indexOf(true) > -1
+        },
         missingData() {
-            return !this.articleID.length || !this.articleTitle.length || !this.missingLanguageChoice
+            return !this.articleID.length || !this.articleTitle.length || this.missingLanguageChoice
         },
         missingLanguageChoice() {
-            return (this.hasExpertCommentary ? this.expertCommentary.length > 0 : true) &&
-                (this.hasDownloadablePDF ? this.downloadablePDF.length > 0 : true) &&
-                (this.hasTranscriptPDF ? this.transcriptPDF.length > 0 : true) &&
-                (this.hasSubtitles ? this.subtitles.length > 0 : true)
+            return (this.hasExpertCommentary ? this.expertCommentary.length === 0 : false) ||
+                (this.hasDownloadablePDF ? this.downloadablePDF.length  === 0 : false) ||
+                (this.hasTranscriptPDF ? this.transcriptPDF.length  === 0 : false) ||
+                (this.hasSubtitles ? this.subtitles.length  === 0 : false)
         }
     },
     methods: {
@@ -228,6 +239,19 @@ export default {
                 link.download = download
                 link.click()
             }
+        },
+        reset() {
+            this.articleID = ''
+            this.articleTitle = ''
+            this.hasExpertCommentary = false
+            this.expertCommentary = []
+            this.hasDownloadablePDF = false
+            this.downloadablePDF = []
+            this.hasTranscriptPDF = false
+            this.transcriptPDF = []
+            this.hasSubtitles = false
+            this.subtitles = []
+            this.fileOutput = null
         }
     }
 }
