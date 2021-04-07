@@ -168,7 +168,7 @@ export default {
       let href, download
       if(type == 'vtt') {
         try {
-          href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(this.fileOutput.vttResult.cleanedString)}`
+          href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput.vttResult.cleanedString)))}`
           download = this.fileOutput.vttResult.fileName
           continueDownload()
         } catch (error) {
@@ -176,7 +176,7 @@ export default {
         }
       }else{
         try {
-          href= `data:application/octet-stream;charset=utf-8;base64,${window.btoa(this.fileOutput.xmlResult.cleanedString)}`
+          href= `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput.xmlResult.cleanedString)))}`
           download = this.fileOutput.xmlResult.fileName
           continueDownload()
         } catch (error) {

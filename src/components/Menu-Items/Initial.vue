@@ -8,6 +8,7 @@
       <ul>
         <li>All input files should be processed in the same way as with the original tool before uploading<br />(Using R2Net or other tools - See Confluence for more details).</li>
         <li>All output files are the same as those created by the original tool.</li>
+        <li>If you encounter an error please send me an email or message on teams containing the error message and file you were trying to process (Dylan Moylan | dmoylan@webmd.net)</li>
       </ul>
       Click on an item in the menu to the left to begin.
     </q-card-section>
