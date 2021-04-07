@@ -140,12 +140,13 @@
 <script>
 import articles from '../../../logic/articles'
 import buildOutput from '../../mixins/buildOutput'
+import downloadResult from 'src/mixins/downloadResult'
 import utils from '../../../logic/utils'
 import tryCatch from 'src/mixins/tryCatch'
 
 export default {
     props: ['product'],
-    mixins: [buildOutput, tryCatch],
+    mixins: [buildOutput, tryCatch, downloadResult],
     data() {
         return {
             articleID: '',
@@ -185,29 +186,6 @@ export default {
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
             this.tryCatch(createCurb)
-        },
-        downloadResult(type) {
-            let href
-            let download = this.articleID
-            switch(type) {
-                case 'activity':
-                    href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput.activityXML)))}`
-                    download += '_activity.xml'
-                    break
-                case 'xml':
-                    href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.xmlResult)))}`
-                    download += '.xml'
-                    break
-                case 'checklist':
-                default:
-                    href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.fileOutput.checklistHTML)))}`
-                    download += '_checklist.html'
-                    break
-            }
-            const link = document.createElement('a')
-            link.href = href
-            link.download = download
-            link.click()
         }
     },
     computed: {
