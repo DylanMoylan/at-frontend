@@ -4,9 +4,10 @@ const {stringOps, cleanHTML} = require('../utils');
 var exportObject = {};
 
 // NO CLINICAL BRIEF ABBREVIATIONS 
-// exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
-//     return "";   
-// }
+// MAYBE CLINICAL BRIEF ABBREVIATIONS
+exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
+    return exportObject[config.programs.spotlight.codeName](ticketHTML);  
+}
 
 
 // Spotlight

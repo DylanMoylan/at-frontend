@@ -19,30 +19,30 @@ let wordList = [
 
 let objectList = [
     {
-        matchText: 'Have greater',
+        matchText: /Have greater/i,
         replacementText: 'Greater'
     },
     {
-        matchText: 'Have increased',
+        matchText: /Have increased/i,
         replacementText: 'Increased'
     },
     {
-        matchText: 'Have improved',
+        matchText: /Have improved/i,
         replacementText: 'Improved'
     },
     {
-        matchText: 'Demonstrate greater',
+        matchText: /Demonstrate greater/i,
         replacementText: 'Greater'
     },
     {
-        matchText: 'Demonstrate increased',
+        matchText: /Demonstrate increased/i,
         replacementText: 'Increased'
     },
     {
-        matchText: 'Demonstrate improved',
+        matchText: /Demonstrate improved/i,
         replacementText: 'Improved'
     }
-];
+]
 
 let setFlags = function (string) {
     var str = cleanHTML.plainText(string);
@@ -146,10 +146,34 @@ let formatQNAObjectives = function(string) {
         - return currentLine + fn(startingPhrase, remainingString, formatPhrases)
     - Replace flags with line breaks \n  
     */
-    var flaggedString = setFlags(string);
-    var result = formatPhrases(null, flaggedString, formatPhrases);
-    // console.log("RESULT: ", result.replace(bulletSymbolRegex, ""));
-    return result.replace(bulletSymbolRegex, "");
+//    var flaggedString = setFlags(string);
+//    var result = formatPhrases(null, flaggedString, formatPhrases);
+//    // console.log("RESULT: ", result.replace(bulletSymbolRegex, ""));
+//    return result.replace(bulletSymbolRegex, "");
+
+    /**
+     * New algo:
+     * Accept already formatted learningObjectives as arg.
+     * - replace all line breaks
+     * - replace starting and ending <ul>s
+     * - replace the remaining </ul> tags with line breaks
+     * - remove any remaining tags
+     * - remove any double spaces and trim.
+     */
+    function toLower(match, p1, offset, string) {
+        return p1.toLowerCase()
+    }
+    let formattedQNAObjectives = string
+        .replace(/\r?\n|\r/g, '')
+        .replace(/^<ul>/, '').replace(/<\/ul>$/, '')
+        .replace(/<\/ul>/g, "\n")
+        .replace(/<li>(.)/g, toLower)
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/[ ]+/g, ' ').trim()
+    objectList.forEach(item => {
+        formattedQNAObjectives = formattedQNAObjectives.replace(item.matchText, item.replacementText)
+    })
+    return formattedQNAObjectives
 }
 
 module.exports = formatQNAObjectives;

@@ -117,6 +117,10 @@ function getClinicalImplications(ticket) {
 -------------------------------------- */
 function checklistClinicalBrief(ticket, program) {
     var checklist = new BriefChecklist();
+
+    // ABBREVIATIONS
+    checklist.abbreviations.result = prodticket.getAbbreviations(ticket, program);
+
     // BACKMATTER FRONT PAGE      
     checklist.bkmtrFront.result = utils.wrapSubsectionContent(snippets.backmatter.backmatterFrontPage(program));
     
@@ -198,7 +202,10 @@ function buildClinicalBrief(rawTicket, program) {
     learningObjectives = utils.formatLearningObjectives(learningObjectives);
 
     cmeReviewers = (checklistResult.properties.cmeReviewers ? checklistResult.properties.cmeReviewers.result : "");
- 
+    
+    var abbreviationsMarkup = (checklistResult.properties.abbreviations ? checklistResult.properties.abbreviations.result : "");
+    abbreviationsTOC = articleUtils.buildAbbreviations(abbreviationsMarkup, program);
+
     // Build Main TOC - Insert Brief Sections & Insert CME Test Section 
     var mainTOCInstance = new TOCElement();
 
@@ -254,6 +261,7 @@ function buildClinicalBrief(rawTicket, program) {
         finalArticle.insertTOCElement(blankAnswerTOC);
     }
     finalArticle.insertTOCElement(referencesTOC);
+    finalArticle.insertTOCElement(abbreviationsTOC)
 
 
     var activityXML = activityClinicalBrief(program, title, targetAudience, learningObjectives, cmeReviewers);

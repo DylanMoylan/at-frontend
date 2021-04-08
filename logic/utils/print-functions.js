@@ -199,12 +199,15 @@ function printDateTime(dateTime) {
 
 function printLearningObjectives(learningObjectives) {
     var formattedObjectives = formatLearningObjectives(learningObjectives.result);
+    formattedObjectives = formattedObjectives && formattedObjectives.length ? formattedObjectives.replace(/<li>\s+/g, '<li>') : formattedObjectives
     var formattedQNAObjectives
-    try {
-        formattedQNAObjectives = formatQNAObjectives(learningObjectives.result);
-    } catch (error) {
-        formattedQNAObjectives = formattedObjectives
-    }
+    // try {
+    //     formattedQNAObjectives = formatQNAObjectives(learningObjectives.result);
+    // } catch (error) {
+    //     formattedQNAObjectives = formattedObjectives
+    // }
+    // formattedQNAObjectives = formatQNAObjectives(learningObjectives.result)
+    formattedQNAObjectives = formatQNAObjectives(formattedObjectives)
     // var formattedQNAObjectives = formattedObjectives
     var resultString = stripIndent`
     -----------------------------------------
