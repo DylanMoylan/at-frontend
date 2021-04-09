@@ -776,7 +776,7 @@ function transcript(htmlString, removeFluff=false) {
 
     clean = clean.replace(/.*<strong>Content.*/g, "");
     // clean = clean.replace(/<a href=".*">(.*)<\/a>/g, "$1");
-
+    clean = clean.replace(/[ \t]+/g, ' ').replace(/<p> /g, '<p>').replace(/[ ]<\/p>/g, '</p>')
     var endTranscriptRegexArray = [
         /.*<em>Mandatory Insertion after Main.*/gi,
         /.*<em>This transcript has been edited for style and clarity.*/gi,
@@ -790,7 +790,8 @@ function transcript(htmlString, removeFluff=false) {
 
     var startTranscriptRegexArray = [
         /.*(?:&lt;){1,}Insert pre-assessment.*(?:&gt;){1,}/gi,
-        /.*(?:&lt;){1,}level 1(?:&gt;){1,}\s+Educational Impact Challenge.*/gi
+        /.*(?:&lt;){1,}level 1(?:&gt;){1,}\s+Educational Impact Challenge.*/gi,
+        /<strong>COVID Program Disclaimer<\/strong>(\s+)?.*(\s+)?.*product or manufacturer\.(\s+|(&#160;)+)?<\/p>/g
     ];
 
     var matches = stringOps.getAllMatchesInOrder(clean, startTranscriptRegexArray);
