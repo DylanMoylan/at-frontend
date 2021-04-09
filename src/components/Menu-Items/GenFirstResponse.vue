@@ -14,66 +14,10 @@
                     v-model="program.articleID"
                     class="row q-mb-md at-input"
                 />
-                <div class="row full-width justify-start">
-                    <q-checkbox
-                        label="Has Transcript"
-                        v-model="program.hasTranscript"
-                        dense
-                    />
-                </div>
-                <div v-if="program.hasTranscript" class="row full-width items-center">
-                    <span>Transcript Type: </span>
-                    <q-option-group
-                        :options="[
-                            {
-                                label: 'Slides',
-                                value: 'Slides'
-                            },
-                            {
-                                label: 'Text',
-                                value: 'Text'
-                            }
-                        ]"
-                        v-model="program.transcriptType"
-                        type="radio"
-                        inline
-                    />
-                </div>
-                <div class="row full-width justify-start">
-                    <q-checkbox
-                        label="Has LLA"
-                        v-model="program.hasLLA"
-                        dense
-                    />
-                </div>
-                <div class="row full-width justify-start">
-                    <q-checkbox
-                        label="Program is OUS"
-                        v-model="program.hasOUS"
-                        dense
-                    />
-                </div>
-                <div class="row full-width justify-start">
-                    <q-checkbox
-                        label="Has Peer Reviewer"
-                        v-model="program.hasPeerReviewer"
-                        dense
-                    />
-                </div>
-                <div class="row full-width justify-start">
-                    <q-checkbox
-                        label="Has Collection Page"
-                        v-model="program.hasCollectionPage"
-                        dense
-                    />
-                </div>
-                <div class="row full-width justify-start q-mb-md">
-                    <q-checkbox
-                        label="Has for your patient PDF"
-                        v-model="program.hasForYourPatient"
-                        dense
-                    />
-                </div>
+                <standard-form 
+                    :program="program"
+                    @input="bindValues"
+                />
                 <q-file
                     v-model="file"
                     class="at-input"
@@ -135,10 +79,11 @@ import buildOutput from '../../mixins/buildOutput'
 import utils from '../../../logic/utils'
 import { firstResponse } from '../../../logic/articles'
 import ChecklistPreview from '../shared/ChecklistPreview.vue'
+import StandardForm from '../shared/StandardForm.vue'
 
 export default {
     mixins: [tryCatch, buildOutput, downloadResult],
-    components: { ChecklistPreview },
+    components: { ChecklistPreview, StandardForm },
     data() {
         return {
             file: null,
@@ -174,6 +119,9 @@ export default {
         }
     },
     methods: {
+        bindValues(program) {
+            this.program = Object.assign(this.program, program)
+        },
         reset() {
             this.program.articleID = ''
             this.program.hasTranscript = false
