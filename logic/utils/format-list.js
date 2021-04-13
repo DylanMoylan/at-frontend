@@ -243,7 +243,6 @@ var testString3 = `
  */
 var logString = "";
 function wrapUls(prevWasListItem, remainingString, fn) {
-    // console.log("REMAINING STRING: ", remainingString);
     let newLineRegExp = new RegExp('.*', 'g');
     var matchArray = remainingString.match(newLineRegExp);
     var currentLine = "";

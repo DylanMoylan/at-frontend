@@ -178,7 +178,7 @@ function checklistClinicalBrief(ticket, program) {
 /* MASTER FUNCTIONS 
 -------------------------------------- */
 function buildClinicalBrief(rawTicket, program) {
-    var clinicalContext, synopsisAndPerspective, studyHighlights, clinicalImplications, cmeTest, references, title, byline, targetAudience, learningObjectives, cmeReviewers;
+    var clinicalContext, synopsisAndPerspective, studyHighlights, clinicalImplications, cmeTest, references, title, byline, targetAudience, learningObjectives, cmeReviewers, ipce;
     let ticket = stringOps.getTextBlock(rawTicket, 'Handoff Notes and Reminders', 'General Information')
     ticket = rawTicket.replace(ticket.textBlock, '')
     var checklistResult = checklistClinicalBrief(ticket, program);    
@@ -203,6 +203,8 @@ function buildClinicalBrief(rawTicket, program) {
 
     cmeReviewers = (checklistResult.properties.cmeReviewers ? checklistResult.properties.cmeReviewers.result : "");
     
+    goalStatement = (checklistResult.properties.goalStatement ? checklistResult.properties.goalStatement.result : "")
+
     var abbreviationsMarkup = (checklistResult.properties.abbreviations ? checklistResult.properties.abbreviations.result : "");
     abbreviationsTOC = articleUtils.buildAbbreviations(abbreviationsMarkup, program);
 
@@ -261,10 +263,14 @@ function buildClinicalBrief(rawTicket, program) {
         finalArticle.insertTOCElement(blankAnswerTOC);
     }
     finalArticle.insertTOCElement(referencesTOC);
-    finalArticle.insertTOCElement(abbreviationsTOC)
+    if(abbreviationsMarkup && abbreviationsMarkup.length){
+        finalArticle.insertTOCElement(abbreviationsTOC)
+    }
 
+    //FIND IPCE Credit
+    ipce = prodticket.getIPCE(ticket, program)
 
-    var activityXML = activityClinicalBrief(program, title, targetAudience, learningObjectives, cmeReviewers);
+    var activityXML = activityClinicalBrief(program, title, targetAudience, learningObjectives, cmeReviewers, goalStatement, ipce);
     
     return {
         finishedArticleObject: finalArticle,

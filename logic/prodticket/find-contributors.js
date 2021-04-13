@@ -30,21 +30,31 @@ let titleRegexArray = [
 ];
 /* TODO: Look into why anticoag regex isn't working. */
 
+/**
+ * @param {String} ticketHTML All ticketHTML starting from <strong>Disclosures, ending with Writer Information and.
+ * @returns Array of contributors.
+ */
 function buildContributors(ticketHTML) {
     var contributors = [];
     var contributor = null;
     var disclosureStartRegExp = /(<p>Disclosure:.*)/gi; 
     var name, affiliations, disclosure;
 
+    //Retrieve the first instance of a credential/title in ticketHTML (MD, PHD, etc)
     var contribNameRegExp = stringOps.getNextRegex(ticketHTML, config.credentials.credentialRegexArray);
+    //Retrieve the first instance of a contributor title in ticketHTML (Moderator, Panelist, etc)
     var titleRegExp = stringOps.getNextRegex(ticketHTML, titleRegexArray);
+
     var testSubstring = "";
     var titleRegExp2 = null;
     var title = "";
     var previousTitle = "";
     var previousTitleSymbol = null;
+
+    //Starting with the first credential match, get the first occurance of title, name, affiliation, and disclosure, add them to an object, and push to an array. Then deletes everything before contribNameRegExp, and sets it to the next occurance. Repeats until getNextRegex returns -1.  
     while (contribNameRegExp != -1) {
-        if (titleRegExp != -1) {            
+        if (titleRegExp != -1) {    
+            //       
             if ((previousTitleSymbol == titleRegExp.symbol) && (titleRegExp.index < contribNameRegExp.index)) {
                 title = previousTitle;
             }
@@ -182,9 +192,11 @@ exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
 
 // Spotlight
 exportObject[config.programs.spotlight.codeName] = function (ticketHTML) {
-    var {textBlock: disclosureBlock} = stringOps.getTextBlock(ticketHTML, "<strong>Disclosures", '<strong>SD/Editor/Writer', true, true);
+    var {textBlock: disclosureBlock} = stringOps.getTextBlock(ticketHTML, "<strong>Disclosures", 'Writer Information and', true, true);
     // console.log("CONTRIBUTOR BLOCK 1: \n\n", disclosureBlock);
 
+    var {textBlock: contributorBlock} = stringOps.getTextBlock(disclosureBlock, /<table border=".*/g, /<\/table>/g, false, true);
+    disclosureBlock = disclosureBlock.replace(contributorBlock, '')
     var {textBlock: contributorBlock} = stringOps.getTextBlock(disclosureBlock, /<table border=".*/g, /<\/table>/g, true, false);
     // console.log("CONTRIBUTOR BLOCK 2: \n\n", contributorBlock);
     if (stringOps.isBlankOrWhiteSpace(contributorBlock) || stringOps.isEmptyString(contributorBlock) || contributorBlock.length < 10) {

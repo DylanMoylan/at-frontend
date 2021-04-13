@@ -19,7 +19,11 @@ exportObject[config.programs.spotlight.codeName] = function (ticketHTML) {
         throw new Error("No abbreviations found in the prodticket");
     } else {
         rawAbbreviations = cleanHTML.singleLine(cleanHTML.abbreviations(rawAbbreviations)).trim();
-        return '<p>' + stringOps.findLastAndReplace(rawAbbreviations, '<br/>', "") + '</p>';        
+        if (stringOps.isEmptyString(rawAbbreviations) || stringOps.isBlankOrWhiteSpace(rawAbbreviations) || rawAbbreviations.length < 5) {
+            throw new Error("No abbreviations found in the prodticket");
+        }else{
+            return '<p>' + stringOps.findLastAndReplace(rawAbbreviations, '<br/>', "") + '</p>';        
+        }
     }
 }
 

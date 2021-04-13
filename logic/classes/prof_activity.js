@@ -166,15 +166,24 @@ class ProfActivity extends XMLElement{
         this.setMarkupField("_hardware_reqs", newHardwareRequirementsMarkup);
     }
 
+    get additionalCreditAmount() {
+        return this.getWrappedMarkupField('_addl_credit_amt')
+    }
+
+    set additionalCreditAmount(newAdditionalAmountMarkup) {
+        this.setWrappedMarkupField('_addl_credit_amt', newAdditionalAmountMarkup)
+    }
+
     // Misc Provider Statement 
     get miscProviderStatement() {
         // markup field w/ wrapper 
-        return this.getWrappedMarkupField("_misc_prov_stmt");
+        // return this.getWrappedMarkupField("_misc_prov_stmt");
+        return this.getMarkupField("_misc_prov_stmt");
     }
 
     set miscProviderStatement(newProviderStatementMarkup) {
         // markup field w/ wrapper
-        this.setWrappedMarkupField("_misc_prov_stmt", newProviderStatementMarkup);
+        this.setMarkupField("_misc_prov_stmt", newProviderStatementMarkup);
     }
 
     // Additional Credit Available 

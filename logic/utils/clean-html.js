@@ -644,6 +644,9 @@ function learningObjectives(textBlock, removeFluff=true) {
     removeRegExp = /.*Slides corresponding to.*/gi;
     textBlock = textBlock.replace(removeRegExp, '');
 
+    removeRegExp = /.*participants will.*/gi;
+    textBlock = textBlock.replace(removeRegExp, '');
+
     return textBlock;
 }
 

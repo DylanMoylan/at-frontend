@@ -9,16 +9,25 @@ const snippets = require('../snippets');
 
 /* ACTIVITY FUNCTION CLINICAL BRIEF 
 -------------------------------------- */
-function activityClinicalBrief(program, title, targetAudience, learningObjectives, cmeReviewers) {
+function activityClinicalBrief(program, title, targetAudience, learningObjectives, cmeReviewers, goalStatement, ipce) {
     var activityInstance = new ProfActivity(title, program.hasOUS);
     activityInstance.targetAudience = targetAudience; // Text field
 
     learningObjectives = `<p><p>Upon completion of this activity, participants will be able to:</p>` + learningObjectives + "</p>";
 
     activityInstance.learningObjectives =  learningObjectives; // unwrapped markup
-    activityInstance.goalStatement = snippets.activity.goalStatementCB();
-    
-    activityInstance.miscProviderStatement = snippets.activity.medscapeProviderStatement(program);
+    // activityInstance.goalStatement = snippets.activity.goalStatementCB();
+    activityInstance.goalStatement = utils.cleanHTML.plainText(goalStatement)
+
+    if(ipce instanceof Error) {
+        ipce = null
+    }
+
+    if(ipce) {
+        activityInstance.additionalCreditAmount = snippets.activity.additionalCreditAmount(ipce)
+    }
+
+    activityInstance.miscProviderStatement = snippets.activity.medscapeProviderStatement(program, ipce)
 
     activityInstance.creditInstructions = snippets.activity.instructionsForCredit(program);
 
@@ -121,6 +130,9 @@ function buildActivityCB(ticketHTML, program) {
     // CME REVIEWERS 
     checklist.cmeReviewers.result = prodticket.getCMEReviewers(ticketHTML, program);
 
+    // GOAL STATEMENT
+    checklist.goalStatement.result = prodticket.getGoalStatement(ticketHTML, program)
+
     var checklistResult = checklist.print();
 
     title = (checklistResult.properties.title ? checklistResult.properties.title.result : "");
@@ -135,7 +147,9 @@ function buildActivityCB(ticketHTML, program) {
 
     cmeReviewers = (checklistResult.properties.cmeReviewers ? checklistResult.properties.cmeReviewers.result : "");
 
-    return activityClinicalBrief(program, title, targetAudience, learningObjectives, cmeReviewers);
+    let ipce = prodticket.getIPCE(ticketHTML, program)
+
+    return activityClinicalBrief(program, title, targetAudience, learningObjectives, cmeReviewers, goalStatement, ipce);
 }
 
 module.exports = {

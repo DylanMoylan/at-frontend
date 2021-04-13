@@ -10,14 +10,16 @@
             Automation Tool
           </q-item-label>
           <q-item-label caption class="text-white">
-            Updated 4/13/2021 2:22pm EST
+            Updated 4/13/2021 4:47pm EST
           </q-item-label>
         </q-item-section>
       </q-item>
       <q-list separator>
                 <q-expansion-item
                   label="Generate Files"
-                  group="options">
+                  group="options"
+                  v-model="expanded.generate"
+                  >
                     <q-card class="secundo">
                         <q-card-section>
                             <q-list separator bordered>
@@ -118,6 +120,7 @@
                 <q-expansion-item
                   label="Snippets"
                   group="options"
+                  v-model="expanded.snippets"
                   >
                     <q-card class="secundo">
                         <q-card-section>
@@ -189,6 +192,7 @@
                 <q-expansion-item
                   label="Components"
                   group="options"
+                  v-model="expanded.components"
                 >
                   <q-card class="secundo">
                     <q-card-section>
@@ -280,6 +284,7 @@
                 <q-expansion-item
                   label="Producer"
                   group="options"
+                  v-model="expanded.producer"
                 >
                   <q-card class="secundo">
                     <q-card-section>
@@ -301,6 +306,7 @@
                 <q-expansion-item
                   label="Format"
                   group="options"
+                  v-model="expanded.format"
                 >
                   <q-card class="secundo">
                     <q-card-section>
@@ -338,8 +344,41 @@ export default {
   name: 'MainLayout',
   data() {
     return {
-      left: true
+      left: true,
+      expanded: {
+        format: false,
+        producer: false,
+        components: false,
+        snippets: false,
+        generate: false
+      }
     }
+  },
+  watch: {
+    $route(val) {
+      Object.keys(this.expanded).forEach(key => {
+        if(val.path.includes(key)){
+          this.expanded[key] = true
+        }else{
+          this.expanded[key] = false
+        }
+      })
+    }
+  },
+  mounted() {
+    Object.keys(this.expanded).forEach(key => {
+      if(this.$route.path.includes(key)){
+        this.expanded[key] = true
+      }else{
+        this.expanded[key] = false
+      }
+    })
   }
 }
 </script>
+
+<style scoped>
+  .active-expand {
+    color: blue;
+  }
+</style>

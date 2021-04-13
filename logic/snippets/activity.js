@@ -62,20 +62,37 @@ function instructionsForCredit(program) {
     return utils.cleanHTML.insertEntityPlaceholders(result);
 }
 
-function medscapeProviderStatement(program=null) {
+function medscapeProviderStatement(program=null, ipce=null) {
     var result = `
-        <p><img src="/webmd/professional_assets/medscape/images/provider/medscape1.150x34.gif" alt="Medscape" /><br />
-        <img src="/webmd/professional_assets/medscape/images/provider/interprofessional-continuing-education.jpg?interpolation=lanczos-none&amp;resize=150:96" alt="Interprofessional Continuing Education" /><br />
-        In support of improving patient care, Medscape, LLC is jointly accredited by the Accreditation Council for Continuing Medical Education (ACCME), the Accreditation Council for Pharmacy Education (ACPE), and the American Nurses Credentialing Center (ANCC), to provide continuing education for the healthcare team.</p>
+        <div>
+            <p>
+                <img src="/webmd/professional_assets/medscape/images/provider/medscape1.150x34.gif" alt="Medscape" />
+                <br />
+                <img src="/webmd/professional_assets/medscape/images/provider/interprofessional-continuing-education.jpg?interpolation=lanczos-none&amp;resize=150:96" alt="Interprofessional Continuing Education" />
+                <br />
+                In support of improving patient care, Medscape, LLC is jointly accredited by the Accreditation Council for Continuing Medical Education (ACCME), the Accreditation Council for Pharmacy Education (ACPE), and the American Nurses Credentialing Center (ANCC), to provide continuing education for the healthcare team.
+            </p>
+        </div>
     `;
+    if(ipce) {
+        result = result.replace('</div>',`
+            <p>
+                <img alt="IPCE" src="/webmd/professional_assets/medscape/images/provider/IPCE-credit.jpg" width="150" />
+            </p>
+            <p>This activity was planned by and for the healthcare team, and learners will receive ${ipce} Interprofessional Continuing Education (IPCE) credit for learning and change.</p>
+        </div>        
+    `)
+    }
     if (program) {
         if (program.hasOUS) {
             return null;
         } else {        
-            return utils.cleanHTML.insertEntityPlaceholders(result);
+            // return utils.cleanHTML.insertEntityPlaceholders(result);
+            return result
         }    
     } else {
-        return utils.cleanHTML.insertEntityPlaceholders(result);
+        return result
+        // return utils.cleanHTML.insertEntityPlaceholders(result);
     }
 }
 
@@ -113,6 +130,14 @@ function additionalCreditAvailable() {
         Physicians should claim only the credit commensurate with the extent of their participation in the activity.
     </p>
     `;
+}
+
+function additionalCreditAmount(amount) {
+    return `
+    <p>
+        <strong>IPCE</strong> - ${amount} Interprofessional Continuing Education (IPCE) credit
+    </p>
+    `
 }
 
 function medscapeDisclosure() {
@@ -191,6 +216,7 @@ module.exports = {
     goalStatementCB,
     hardwareRequirements,
     additionalCreditAvailable,
+    additionalCreditAmount,
     medscapeDisclosure,
     briefStatements
 };

@@ -11,10 +11,16 @@ var exportObject = {};
 
 // Clinical Brief
 exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
-    var result = `
-    <p>The goal of this activity is to provide medical news to primary care clinicians and other healthcare professionals in order to enhance patient care.</p>
-    `;
-    return result;
+    try {
+        const res = exportObject[config.programs.spotlight.codeName](ticketHTML);
+        return res
+    } catch (error) {
+        console.log('Not Found')
+        var result = `
+        <p>The goal of this activity is to provide medical news to primary care clinicians and other healthcare professionals in order to enhance patient care.</p>
+        `;
+        return result;
+    }
 };
 
 // Spotlight

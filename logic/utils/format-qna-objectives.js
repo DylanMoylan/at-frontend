@@ -20,7 +20,8 @@ let wordList = [
 let objectList = [
     {
         matchText: /Have greater/i,
-        replacementText: 'Greater'
+        replacementText: 'Greater',
+        context: /Have greater/
     },
     {
         matchText: /Have increased/i,
@@ -152,10 +153,36 @@ let formatQNAObjectives = function(string) {
 //    return result.replace(bulletSymbolRegex, "");
 
     /**
+     * INPUT:
+     * 
+     * <ul>
+     *  <li>Have increased knowledge regarding the
+     *      <ul>
+     *          <li>Clinical trial data on the use of immune checkpoint inhibitors (ICIs) as monotherapy or in combination with other agents in advanced esophageal and gastric cancer in the first and second-line setting</li>
+     *          <li>Role of biomarkers in the management of patients with advanced esophageal and gastric cancer</li>
+     *      </ul>
+     *  </li>
+     *  <li>Demonstrate greater confidence in their ability to
+     *      <ul>
+     *          <li>Understand which patients may be eligible for treatment with emerging ICI strategies</li>
+     *      </ul>
+     *  </li>
+     * </ul>
+     * 
+     * OUTPUT:
+     * 
+     * Increased knowledge regarding the clinical trial data on the use of immune checkpoint inhibitors (ICIs) as monotherapy or in combination with other agents in advanced esophageal and gastric cancer in the first and second-line setting
+     * Increased knowledge regarding the role of biomarkers in the management of patients with advanced esophageal and gastric cancer
+     * 
+     * Greater confidence in their ability to understand which patients may be eligible for treatment with emerging ICI strategies
+     * 
+     * 
      * New algo:
      * Accept already formatted learningObjectives as arg.
+     *  :: Problem: Heading groups ("Have Increased") need to be repeated for each sub element before being removed.
      * - replace all line breaks
      * - replace starting and ending <ul>s
+     * - 
      * - replace the remaining </ul> tags with line breaks
      * - remove any remaining tags
      * - remove any double spaces and trim.
@@ -164,16 +191,16 @@ let formatQNAObjectives = function(string) {
         return p1.toLowerCase()
     }
     let formattedQNAObjectives = string
-        .replace(/\r?\n|\r/g, '')
-        .replace(/^<ul>/, '').replace(/<\/ul>$/, '')
-        .replace(/<\/ul>/g, "\n")
+        .replace(/\r?\n|\r/g, '') //Remove all line breaks
+        .replace(/^<ul>/, '').replace(/<\/ul>$/, '') //Remove starting/trailing <ul></ul>
+        .replace(/<\/ul>/g, "\n") //Replace </ul> with newline
         .replace(/<li>(.)/g, toLower)
         .replace(/<[^>]+>/g, ' ')
         .replace(/[ ]+/g, ' ').trim()
-    objectList.forEach(item => {
-        formattedQNAObjectives = formattedQNAObjectives.replace(item.matchText, item.replacementText)
-    })
-    return formattedQNAObjectives
+        objectList.forEach(item => {
+            formattedQNAObjectives = formattedQNAObjectives.replace(item.matchText, item.replacementText)
+        })
+        return formattedQNAObjectives
 }
 
 module.exports = formatQNAObjectives;

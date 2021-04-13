@@ -45,6 +45,7 @@ let findProductName = require('./find-product-name');
 let findProjectId = require('./find-project-id');
 let findCMEReviewers = require('./find-cme-reviewers');
 let findArticleContent = require('./find-article-content');
+let findIPCE = require('./find-ipce');
 
 function checkTicket(ticketHTML) {
     if (ticketHTML) {
@@ -340,6 +341,18 @@ function getArticleContent(ticketHTML, program) {
     }
 }
 
+function getIPCE(ticketHTML, program) {
+    if (checkTicket(ticketHTML)) {
+        try {   
+            var rawContent = findIPCE[program.codeName](ticketHTML);
+            return rawContent;
+        } catch (error) {
+            return error;
+        }
+    }
+}
+
+
 module.exports = {
     getTitle,
     getByline,
@@ -366,5 +379,6 @@ module.exports = {
     getAssociationDisclaimer,
     getProductType,
     getProjectId,
-    getArticleContent
+    getArticleContent,
+    getIPCE
 }

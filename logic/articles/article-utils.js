@@ -259,6 +259,7 @@ function buildReferences(referencesMarkup, program) {
     referencesSection.insertSubsectionElement(referencesSubsection);
     
     var referencesTOC = new TOCElement("References");
+    referencesTOC.tocLabel = "References"
     referencesTOC.insertSectionElement(referencesSection);
     return referencesTOC;
 }
@@ -403,8 +404,12 @@ function buildContributorGroups(contributors) {
  */
 function buildTranscriptTOC (transcript, label = "Activity Transcript") {
     var cleanTranscript = utils.cleanHTML.transcript(transcript);
-
-    cleanTranscript += "\n\n<p><em>This transcript has been edited for style and clarity.</em></p>";
+    let verbatim = /This is a verbatim transcript and has not been copyedited/ig.test(transcript)
+    if(verbatim){
+        cleanTranscript += "\n\n<p><em>This is a verbatim transcript and has not been copyedited.</em></p>";
+    }else{
+        cleanTranscript += "\n\n<p><em>This transcript has been edited for style and clarity.</em></p>";
+    }
 
     var subsectionInstance = new SubsectionElement(true, false, false);
 

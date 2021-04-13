@@ -88,6 +88,19 @@
     <q-card-section style="max-height: 300px;overflow-y:scroll">
         <div class="text-center text-bold">ChangeLog</div>
         <div>
+          <span class="text-bold">[4.13.2021]</span>
+          <span>
+            <ul>
+              <li>Updates Clinical Brief goal statement to pull from the prodticket instead of a default statement.</li>
+              <li>Updates Clinical Brief to include IPCE additional credit section in activity xml.</li>
+              <li>Adds missing TOC label to References XML section.</li>
+              <li>Transcripts now include "This is a verbatim transcript..." or "This transcript has been edited..." depending on ticket contents.</li>
+              <li>Clinical Brief no longer includes an empty abbreviations section if none exists.</li>
+              <li>Fixes an issue with Learning Objectives where "participants will" was being included in the objectives.</li>
+            </ul>
+          </span>
+        </div>
+        <div>
           <span class="text-bold">[4.6.2021]</span>
           <span>
             <ul>
