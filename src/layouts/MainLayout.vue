@@ -9,6 +9,9 @@
           <q-item-label>
             Automation Tool
           </q-item-label>
+          <q-item-label caption class="text-white">
+            Updated 4/13/2021 2:22pm EST
+          </q-item-label>
         </q-item-section>
       </q-item>
       <q-list separator>
