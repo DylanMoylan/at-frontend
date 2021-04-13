@@ -14,6 +14,36 @@
     </q-card-section>
     <q-separator />
     <q-card-section>
+      <div class="q-my-md text-center text-bold">
+        Known Issues
+      </div>
+      <ul>
+        <li><b>Contributors: </b>The code for generating contributor groups (all products) isn't implemented yet. They need to be added manually.</li>
+        <li><b>Learning Objectives (QNA): </b>There is an issue causing QnA Learning Objectives in the checklist to format incorrectly. You may sometimes need to format these manually.</li>
+        <li>
+          <div><b>Content section: </b></div>
+          <div>The formatting of tables in the content section is being removed. These sections need to be coded manually. Example:</div> 
+          <div class="row items-start justify-center q-py-lg">
+            <div>
+              <div>Original Table:</div>
+              <img 
+                src="~/src/assets/content-table.png" 
+                style="margin:15px; max-width:500px"
+              />
+            </div>
+            <div>
+              <div>Correct Code:</div>
+              <img 
+                src="~/src/assets/content-table-code-example.png" 
+                style="margin:15px; max-width:500px"
+              />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </q-card-section>
+    <q-separator />
+    <q-card-section>
       <div class="q-my-md text-center">
           <span class="q-mr-md text-positive">
             <q-icon name="check" color="positive" class="q-mr-sm text-body1" />
