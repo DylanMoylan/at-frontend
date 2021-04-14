@@ -15,7 +15,6 @@ exportObject[config.programs.clinicalBrief.codeName] = function (ticketHTML) {
     } else {  
         if(/&#9746;/.test(textBlock)) {
             result = textBlock.match(/<strong>IPCE:<\/strong>(?:[ ]+)?([0-9.]{2,})/)
-            console.log('result: ', result);
             if(result && result.length && result[1]){
                 return result[1]
             }else{

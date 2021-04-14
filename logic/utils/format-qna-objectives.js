@@ -147,60 +147,68 @@ let formatQNAObjectives = function(string) {
         - return currentLine + fn(startingPhrase, remainingString, formatPhrases)
     - Replace flags with line breaks \n  
     */
-//    var flaggedString = setFlags(string);
-//    var result = formatPhrases(null, flaggedString, formatPhrases);
-//    // console.log("RESULT: ", result.replace(bulletSymbolRegex, ""));
-//    return result.replace(bulletSymbolRegex, "");
+
+   /*
+    OLD CODE: (BROKEN)
+        var flaggedString = setFlags(string);
+        var result = formatPhrases(null, flaggedString, formatPhrases);
+        // console.log("RESULT: ", result.replace(bulletSymbolRegex, ""));
+        return result.replace(bulletSymbolRegex, "");
+    */
 
     /**
-     * INPUT:
-     * 
-     * <ul>
-     *  <li>Have increased knowledge regarding the
-     *      <ul>
-     *          <li>Clinical trial data on the use of immune checkpoint inhibitors (ICIs) as monotherapy or in combination with other agents in advanced esophageal and gastric cancer in the first and second-line setting</li>
-     *          <li>Role of biomarkers in the management of patients with advanced esophageal and gastric cancer</li>
-     *      </ul>
-     *  </li>
-     *  <li>Demonstrate greater confidence in their ability to
-     *      <ul>
-     *          <li>Understand which patients may be eligible for treatment with emerging ICI strategies</li>
-     *      </ul>
-     *  </li>
-     * </ul>
-     * 
-     * OUTPUT:
-     * 
-     * Increased knowledge regarding the clinical trial data on the use of immune checkpoint inhibitors (ICIs) as monotherapy or in combination with other agents in advanced esophageal and gastric cancer in the first and second-line setting
-     * Increased knowledge regarding the role of biomarkers in the management of patients with advanced esophageal and gastric cancer
-     * 
-     * Greater confidence in their ability to understand which patients may be eligible for treatment with emerging ICI strategies
-     * 
-     * 
-     * New algo:
-     * Accept already formatted learningObjectives as arg.
-     *  :: Problem: Heading groups ("Have Increased") need to be repeated for each sub element before being removed.
-     * - replace all line breaks
-     * - replace starting and ending <ul>s
-     * - 
-     * - replace the remaining </ul> tags with line breaks
-     * - remove any remaining tags
-     * - remove any double spaces and trim.
+     * Called once per unique objective group in the LO list. Finds the header text (Have greater, etc) and places it before each list item, then removes all tags and adds line breaks.
+     * @param {String} str A unique objective group (Have greater...and a ul with sub items)
+     * @returns {String} Plain text with all ul/li removed and replaced with appropriate line breaks.
      */
-    function toLower(match, p1, offset, string) {
-        return p1.toLowerCase()
+    const reduceObjective = (str) => {
+        let header = str.match(/(?:<li>)(.*)(?:<ul>)/)[1]//Greater, increased, etc.
+        function joinObjective(match, p1, offset, string) {
+            return header + " " + p1.toLowerCase()
+        }
+        str = str.replace(/<\/li>$/, '').replace(/^<li>/, '')//Remove starting and ending li
+        let items = str.match(/<li>(?:(?!<\/li>).)+<\/li>/g)//Find each li element text
+        return items.reduce((prev, curr) => {
+            prev += curr.replace(/<li>(.)/, joinObjective).replace(/<\/li>/, "\n")//Add the header to each, remove capitolization, add line break and replace lis
+            return prev
+        }, '')
     }
+
+    //Remove all line breaks, starting and ending <ul>s, and extra spaces from the LOs
+    let newObjectives = ''
     let formattedQNAObjectives = string
-        .replace(/\r?\n|\r/g, '') //Remove all line breaks
-        .replace(/^<ul>/, '').replace(/<\/ul>$/, '') //Remove starting/trailing <ul></ul>
-        .replace(/<\/ul>/g, "\n") //Replace </ul> with newline
-        .replace(/<li>(.)/g, toLower)
-        .replace(/<[^>]+>/g, ' ')
-        .replace(/[ ]+/g, ' ').trim()
-        objectList.forEach(item => {
+        .replace(/\r?\n|\r/g, '')
+        .replace(/^<ul>/, '').replace(/<\/ul>$/, '').replace(/[ ]{2,}/g, ' ')
+    
+    //Search through all of the keywords to see if any of them exist in the arg string.
+    let foundMatch = false
+    objectList.forEach(item => {
+        if(item.matchText.test(formattedQNAObjectives)){
+            foundMatch = true
             formattedQNAObjectives = formattedQNAObjectives.replace(item.matchText, item.replacementText)
-        })
+        }
+    })
+
+    if(!!foundMatch) { //If the LOs contain at least one of the keywords from objectList:
+
+        //Regex here = one or more groups of characters that don't include </ul>. This splits the list into distinct objectives.
+        let uniqueObjectives = formattedQNAObjectives.match(/(?:(?!<\/ul>).)+<\/ul><\/li>/g)
+
+        if(uniqueObjectives && uniqueObjectives.length > 0) {
+            newObjectives = uniqueObjectives.reduce((prev, curr) => {
+                prev += reduceObjective(curr)
+                return prev
+            }, '')
+        }else{
+            newObjectives = 'Error formatting objectives.'
+        }
+        return newObjectives
+    }else { //If no keywords are found, just return the list with line breaks instead of ul/li elements.
         return formattedQNAObjectives
+            .replace(/<\/li>/g, "\n")
+            .replace(/<li>/g, '')
+            .replace(/\n\s+/g, '\n').trim()
+    }
 }
 
 module.exports = formatQNAObjectives;

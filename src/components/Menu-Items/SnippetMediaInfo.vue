@@ -1,6 +1,6 @@
 <template>
   <div>
-      <q-card class="secundo">
+      <q-card class="secundo q-ma-lg">
       <q-card-section class="primo text-white text-h6 q-pa-md text-center">
           Media Info Snippet
       </q-card-section>
@@ -50,7 +50,7 @@
           />
       </q-card-section>
   </q-card>
-  <q-card v-if="snippet.length" class="q-mt-md q-pa-md at-preview q-mx-lg">
+  <q-card v-if="snippet.length" class="q-my-md q-pa-md at-preview q-mx-lg">
       <q-card-section class="text-white text-h6 q-pa-md row justify-between">
           <span>media-info.html</span>
           <div class="row">
@@ -72,7 +72,7 @@
       </q-card-section>
       <q-separator color="white" />
       <q-card-section>
-          {{snippet}}
+          <code>{{snippet}}</code>
       </q-card-section>
   </q-card>
   </div>

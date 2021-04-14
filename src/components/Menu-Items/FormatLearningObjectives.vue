@@ -74,7 +74,6 @@ export default {
             const buildLearningObjectives = () => {
                 let learningObjectivesHTML
                 let learningObjectives = prodticket.getLearningObjectives(ticket, this.program)
-                console.log('learningObjectives: ', learningObjectives);
                 learningObjectivesHTML = utils.cleanHTML.learningObjectives(learningObjectives)
                 learningObjectivesHTML = utils.cleanHTML.onlyParagraphTags(learningObjectivesHTML, removeFluff = false).trim()
                 this.fileOutput = utils.formatLearningObjectives(learningObjectivesHTML)
