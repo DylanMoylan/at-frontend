@@ -67,7 +67,9 @@ function getStudyHighlights (ticket) {
     if (stringOps.isBlankOrWhiteSpace(textBlock) || stringOps.isEmptyString(textBlock)) {
         return new Error("Study Highlights not found in the prodticket");
     } else {
-        textBlock = utils.wrapSubsectionContent(textBlock, utils.cleanHTML.unorderedList);
+        textBlock = utils.wrapSubsectionContent(textBlock, utils.cleanHTML.unorderedList, [true, true, [ 'ul', 'li', 'em', 'strong', 'sup', 'sub', 'tt', 'table', 'tr', 'td', 'th','tbody' ]]);
+        // textBlock = utils.wrapSubsectionContent(textBlock, utils.cleanHTML.unorderedList);
+        // return textBlock
         return articleUtils.buildSection(textBlock, label);
     }
 }

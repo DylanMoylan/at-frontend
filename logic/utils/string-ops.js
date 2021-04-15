@@ -7,9 +7,9 @@ let regexIndexOf = function(string, regex, startpos) {
 
 /**
  * @description takes a <string> and removes all matches of <removeRegex> from the first match of <regex>
- * @param {*} string 
- * @param {*} regex 
- * @param {*} removeRegex 
+ * @param {String} string 
+ * @param {RegExp} regex 
+ * @param {RegExp} removeRegex 
  */
 function removeFromRegexCapture(string, regex, removeRegex) {
     // Must take in non-global regexp   
@@ -40,8 +40,8 @@ function removeFromRegexCapture(string, regex, removeRegex) {
 
 /**
  * @description Using an array of regex, remove all matches from str  
- * @param {*} str 
- * @param {*} regexArray 
+ * @param {String} str 
+ * @param {Array} regexArray 
  */
 function removeRegexMatches(str, regexArray) {
     var resultString = str;
@@ -53,6 +53,12 @@ function removeRegexMatches(str, regexArray) {
     return resultString;
 }
 
+/**
+ * @param {String} str 
+ * @param {String} removeString 
+ * @param {String} replaceString 
+ * @returns {String}
+ */
 function findLastAndReplace(str, removeString, replaceString) {
     var index = str.lastIndexOf(removeString);
     str = str.substring(0, index) + replaceString + str.substring(index + removeString.length, str.length);
@@ -60,6 +66,13 @@ function findLastAndReplace(str, removeString, replaceString) {
     return str;
 }
 
+/**
+ * 
+ * @param {String} str 
+ * @param {String} removeString 
+ * @param {String} replaceString 
+ * @returns {String}
+ */
 function findFirstAndReplace(str, removeString, replaceString) {
     var index = str.indexOf(removeString);
     str = str.substring(0, index) + replaceString + str.substring(index + removeString.length, str.length);
@@ -74,6 +87,14 @@ function isBlankOrWhiteSpace(str) {
     return (!str || /^\s*$/.test(str) || str.trim().length === 0);
 }
 
+/**
+ * @param {String} str 
+ * @param {String|RegExp} startText 
+ * @param {String|RegExp} endText 
+ * @param {Boolean} [stripStart=true]  
+ * @param {Boolean} [includeEnd=false] 
+ * @returns {Object} - {label, textBlock, startIndex, endIndex}. label: the match of startText. textblock: the requested text, including or excluding start/end depending on those params. 
+ */
 function getTextBlock(str, startText, endText, stripStart = true, includeEnd = false) {
     if ((startText instanceof RegExp) || (endText instanceof RegExp)) {
         var startIndex = regexIndexOf(str, startText);
@@ -252,8 +273,8 @@ function getNextRegex(ticketHTML, regexArray) {
 
 /**
  * @description Returns all matches of an Array of RegExpressions. You can use this to determine the order in which the matches occur   
- * @param {*} textBlock 
- * @param {*} regexArray 
+ * @param {String} textBlock 
+ * @param {Array} regexArray 
  */
 function getAllMatchesInOrder(textBlock, regexArray)  {
     // Create a utility function that returns an array of all of the titles

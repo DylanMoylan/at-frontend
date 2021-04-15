@@ -22,11 +22,15 @@ const testString2 = `
 
 const _ = require('lodash');
 const fs = require('fs');
-const bulletSymbol = `&#8226;`;
-const subBulletSymbol = `<tt>o`;
-const subSubBulletSymbol = `&#9642;`;
+const bulletSymbol = `&#8226;`; // • bullet
+const subBulletSymbol = `<tt>o`; // Using teletype font with a "o" char
+const subSubBulletSymbol = `&#9642;`; // ▪ black square
 
-
+/**
+ * 
+ * @param {String} substring 
+ * @returns {String | Number} String containing first symbol found, or -1 if none found.
+ */
 function findNextSymbol(substring) {
     var nextBullet = {
         index: substring.search(bulletSymbol),
@@ -77,6 +81,7 @@ function findNextSymbol(substring) {
  */
 
 let formatUlItems = (substring, prevSymbol, fn) => {
+    // substring = substring.replace(/\r/g, "\n")
     // Replace &#8226; entity with <li>
     // var liRegexp = new RegExp(`&#8226;(.*)`);
     // clean = clean.replace(liRegexp, "<li>$1</li>");
@@ -93,8 +98,17 @@ let formatUlItems = (substring, prevSymbol, fn) => {
 
         // Case where there is new top list item. (DONE)
         if (nextSymbol == bulletSymbol) {
-            var liRegexp = new RegExp(bulletSymbol + `(.*)`);
-            substring = substring.replace(liRegexp, "<li>$1</li>");
+            var liRegexp 
+            // if(/autotool/.test(substring)) {
+            //     liRegexp = new RegExp(bulletSymbol + `(.*)autotool\n<table(((.*)\n(.*))+)<\/table>`, "g")
+            //     substring = substring.replace(liRegexp, "<li>$1\n<table>$2</table></li>")
+            // }else{
+            //     liRegexp = new RegExp(bulletSymbol + `(.*)`);
+            //     substring = substring.replace(liRegexp, "<li>$1</li>")
+            // }
+            liRegexp = new RegExp(bulletSymbol + `(.*)`);
+            substring = substring.replace(liRegexp, "<li>$1</li>")
+            substring = substring.replace(/<li>\s+/, '<li>');
             return fn(substring, nextSymbol, formatUlItems);
         }            
 
@@ -140,7 +154,7 @@ let formatUlItems = (substring, prevSymbol, fn) => {
             // substring = findLastAndReplace(substring, '', ''); 
             // - replace &#8226; with <li>
             var liRegexp = new RegExp(bulletSymbol + `(.*)`);
-            substring = substring.replace(liRegexp, '<li>$1</li>');           
+            substring = substring.replace(liRegexp, '<li>$1</li>').replace(/<li>\s+/, '<li>');       
             return fn(substring, nextSymbol, formatUlItems);
         }            
     }
@@ -175,7 +189,7 @@ let formatUlItems = (substring, prevSymbol, fn) => {
             // substring = findLastAndReplace(substring, '', '');
             // - replace &#8226; with <li>
             var liRegexp = new RegExp(bulletSymbol + `(.*)`);
-            substring = substring.replace(liRegexp, '<li>$1</li>');
+            substring = substring.replace(liRegexp, '<li>$1</li>').replace(/<li>\s+/, '<li>');
             return fn(substring, nextSymbol, formatUlItems);
         }
     } 
@@ -184,7 +198,7 @@ let formatUlItems = (substring, prevSymbol, fn) => {
         if (nextSymbol == bulletSymbol) {
             // Case where new list starts (DONE)
             var liRegexp = new RegExp(bulletSymbol + `(.*)`);
-            substring = substring.replace(liRegexp, "<li>$1</li>");
+            substring = substring.replace(liRegexp, "<li>$1</li>").replace(/<li>\s+/, '<li>');
             return fn(substring, nextSymbol, formatUlItems);
         }
     }

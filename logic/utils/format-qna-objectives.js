@@ -20,8 +20,7 @@ let wordList = [
 let objectList = [
     {
         matchText: /Have greater/i,
-        replacementText: 'Greater',
-        context: /Have greater/
+        replacementText: 'Greater'
     },
     {
         matchText: /Have increased/i,
@@ -180,7 +179,7 @@ let formatQNAObjectives = function(string) {
         .replace(/\r?\n|\r/g, '')
         .replace(/^<ul>/, '').replace(/<\/ul>$/, '').replace(/[ ]{2,}/g, ' ')
     
-    //Search through all of the keywords to see if any of them exist in the arg string.
+    //Search through all of the keywords to see if any of them exist in the arg string. Each match is replaced with replacementText.
     let foundMatch = false
     objectList.forEach(item => {
         if(item.matchText.test(formattedQNAObjectives)){
@@ -195,6 +194,8 @@ let formatQNAObjectives = function(string) {
         let uniqueObjectives = formattedQNAObjectives.match(/(?:(?!<\/ul>).)+<\/ul><\/li>/g)
 
         if(uniqueObjectives && uniqueObjectives.length > 0) {
+
+            //Take the match result (Array) and reduce it to a string by parsing each match with reduceObjective() <- See above.
             newObjectives = uniqueObjectives.reduce((prev, curr) => {
                 prev += reduceObjective(curr)
                 return prev

@@ -33,9 +33,12 @@ function trimObjectText(xmlJSObject) {
     return xmlJSObject;
 }
 
-function wrapSubsectionContent(textBlock, cleaningFn) {
+function wrapSubsectionContent(textBlock, cleaningFn, cleaningFnArgs) {
     // Put together final string of XML. 
     if (cleaningFn) {
+        if(cleaningFnArgs){
+            return "<subsec_content>" + cleaningFn(textBlock, ...cleaningFnArgs) + "</subsec_content>";
+        }
         return "<subsec_content>" + cleaningFn(textBlock) + "</subsec_content>";
     } else {
         return "<subsec_content>" + textBlock + "</subsec_content>";

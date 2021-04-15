@@ -185,7 +185,6 @@ function paragraph(string, removeFluff=true, allowedTags=['p','em','strong','sup
 
 function unorderedList(string, removeFluff=true, format=true, allowedTags=[ 'ul', 'li', 'em', 'strong', 'sup', 'sub', 'tt' ]) {
     var str = string;
-    
     if (removeFluff) {
         str = removeTicketFluff(str);
     }
@@ -193,6 +192,7 @@ function unorderedList(string, removeFluff=true, format=true, allowedTags=[ 'ul'
         allowedTags: allowedTags,
         allowedAttributes: {
           'sup': ["type"],
+          'table': ["class"]
         },
         parser: {
             decodeEntities: false
@@ -200,15 +200,24 @@ function unorderedList(string, removeFluff=true, format=true, allowedTags=[ 'ul'
         exclusiveFilter: function(frame) {
             // return frame.tag === 'a' && !frame.text.trim();
             return !frame.text.trim();
+        },
+        transformTags: {
+            'table': sanitizeHtml.simpleTransform('table', {class: 'inline_data_table'}, false)
         }
     }
     
     // General Cleanup 
     var clean = sanitizeHtml(str, options);
-
+    let dataTable = clean.match(/\s+<table(?:(?!<\/table>)(.|\s))+<\/table>/g)
+    let foundTable = ''
+    if(dataTable) {
+        foundTable = dataTable[0]
+        clean = clean.replace(foundTable, "at-dataTable")
+        foundTable = foundTable.replace(/\s+<table/, "\n<table")
+        foundTable = foundTable.replace(/\s+<\/td>/g, '</td>')
+    }
     // Clean entities; 
     clean = cleanEntities(clean);
-
     if (format) {
         clean = formatList.formatUlItems(clean, null, formatList.formatUlItems);
         clean = formatList.wrapUls(false, clean, formatList.wrapUls);
@@ -216,6 +225,7 @@ function unorderedList(string, removeFluff=true, format=true, allowedTags=[ 'ul'
 
     var ttRegExp = new RegExp('</tt>', 'g');
     clean = clean.replace(ttRegExp, "");
+    clean = clean.replace("at-dataTable", foundTable)
     return clean;
 }
 
