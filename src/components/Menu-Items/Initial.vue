@@ -8,7 +8,7 @@
       <ul>
         <li>All input files should be processed in the same way as with the original tool before uploading (Using R2Net or other tools - See Confluence for more details).</li>
         <li>All output files are the same as those created by the original tool.</li>
-        <li>If you encounter an error please send me an email or message on teams containing the error message and file you were trying to process (Dylan Moylan | dmoylan@webmd.net)</li>
+        <li>If you encounter an error please send me an email or message on teams containing the error message and a link to the Workfront Issue. (Dylan Moylan | dmoylan@webmd.net)</li>
       </ul>
       Click on an item in the menu to the left to begin.
     </q-card-section>
@@ -18,11 +18,11 @@
         Known Issues
       </div>
       <ul>
+        <li><b>Learning Objectives:</b> If a prodticket fails to generate, check the learning objectives in the input file. Replace any special characters at the start of each objective heading (Have increased, Demonstrate Greater, etc).</li>
         <li><b>Contributors: </b>The code for generating contributor groups (all products) isn't implemented yet. They need to be added manually.</li>
-        <li><b>Learning Objectives (QNA): </b>There is an issue causing QnA Learning Objectives in the checklist to format incorrectly. You may sometimes need to format these manually. <b>Update 4/14: This issue might be fixed.</b></li>
         <li>
-          <div><b>Content section: </b></div>
-          <div>There may be some issues with the formatting of tables in the content section. These sections may need to be coded manually or updated. Example:</div> 
+          <b>Content section: </b>
+          <span>There may be some issues with the formatting of tables in the content section. These sections may need to be coded manually or updated. Example:</span> 
           <div class="row items-start justify-center q-py-lg">
             <div>
               <div>Original Table:</div>
@@ -117,6 +117,15 @@
     <q-separator />
     <q-card-section style="max-height: 300px;overflow-y:scroll">
         <div class="text-center text-bold">ChangeLog</div>
+        <div>
+          <span class="text-bold">[4.15.2021]</span>
+          <span>
+            <ul>
+              <li>Fixes an issue with learning objectives that was sometimes breaking the program when lines started with special characters.</li>
+              <li>Added google analytics to help log errors.</li>
+            </ul>
+          </span>
+        </div>
         <div>
           <span class="text-bold">[4.15.2021]</span>
           <span>
