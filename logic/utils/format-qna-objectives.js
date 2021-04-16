@@ -129,6 +129,7 @@ let formatQNAObjectives = function(string) {
     if(typeof string != 'string' || !string.length) {
         return 'Error formatting objectives'
     }
+    return 'Test FAIL'
     /*
     Algorithm:
     - setFlags()
