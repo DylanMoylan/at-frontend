@@ -3,6 +3,8 @@
 node_modules
 .firebase
 firebaseConfig.json
+dm-test.js
+test-transcript.txt
 
 # Quasar core related directories
 .quasar
