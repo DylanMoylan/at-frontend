@@ -102,7 +102,7 @@ export default {
             }
             this.fileOutput = referencesXML
         }
-        this.tryCatch(createReference)
+        this.tryCatch(createReference, 'references')
     },
     reset() {
       this.articleID = ''

@@ -180,7 +180,7 @@ export default {
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
-            this.tryCatch(createCurb)
+            this.tryCatch(createCurb, 'curbside/spotlight')
         }
     },
     computed: {

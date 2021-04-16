@@ -141,7 +141,7 @@ export default {
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
-            this.tryCatch(createVideoLecture)
+            this.tryCatch(createVideoLecture, 'video lecture')
         },
         bindValues(program) {
             this.program = Object.assign(this.program, program)

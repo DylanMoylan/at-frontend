@@ -111,7 +111,7 @@ export default {
             }
             this.fileOutput = utils.cleanHTML.cleanEntities(tocXML)
         }
-        this.tryCatch(createTOC)
+        this.tryCatch(createTOC, 'TOC comp')
     },
     reset() {
       this.articleID = ''

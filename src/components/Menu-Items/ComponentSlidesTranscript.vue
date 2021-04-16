@@ -133,7 +133,7 @@ export default {
         }
         this.fileOutput = utils.cleanHTML.cleanEntities(transcriptXML)
       }
-      this.tryCatch(createTranscript)
+      this.tryCatch(createTranscript, 'slidesTransc comp')
     }
   }
 }

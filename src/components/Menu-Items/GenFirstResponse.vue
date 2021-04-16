@@ -144,7 +144,7 @@ export default {
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
-            this.tryCatch(createFirstResponse)
+            this.tryCatch(createFirstResponse, 'first response')
         }
     }
 }

@@ -79,7 +79,7 @@ export default {
                 this.fileOutput = utils.formatLearningObjectives(learningObjectivesHTML)
                 this.fileOutput = utils.cleanHTML.cleanEntities(this.fileOutput)
             }
-            this.tryCatch(buildLearningObjectives)
+            this.tryCatch(buildLearningObjectives, 'format LO')
         },
         reset() {
             this.fileOutput = null

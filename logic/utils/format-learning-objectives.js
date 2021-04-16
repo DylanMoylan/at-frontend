@@ -13,7 +13,8 @@ let wordList = [
     'Self-assess learning'
 ];
 
-let formatLearningObjectives = function (string) {
+let formatLearningObjectives = function (rawString) {
+    let string = rawString.replace(/\t/g, ' ')
     var regex = null;
     var hasSubLists = false;
     var index = -1;
@@ -36,7 +37,7 @@ let formatLearningObjectives = function (string) {
         // console.log("LIST IF: ", string);
     }
 
-    var removeRegex = /<tt>o(&#8226;.*)/g;
+    var removeRegex = /<tt>o[^A-Za-z0-9]?\s?(&#8226;.*)/g;
     string = string.replace(removeRegex, '$1');
 
     string = formatList.formatUlItems(string, null, formatList.formatUlItems);

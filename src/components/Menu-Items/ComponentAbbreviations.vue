@@ -104,7 +104,7 @@ export default {
             }
             this.fileOutput = abbreviationsXML
         }
-        this.tryCatch(createAbbrev)
+        this.tryCatch(createAbbrev, 'abbrevs comp')
     },
     reset() {
       this.articleID = ''

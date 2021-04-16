@@ -168,7 +168,7 @@ export default {
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
 
             }
-            this.tryCatch(createTestAndTeach)
+            this.tryCatch(createTestAndTeach, 'TandT')
         }
     }
 }

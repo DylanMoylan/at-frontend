@@ -156,7 +156,7 @@ export default {
         let xmlResult = snippets.captions.buildXmlFile(val, this.articleID, languageObject)
         this.fileOutput =  {vttResult, xmlResult}
       }
-      this.tryCatch(createCaptions)
+      this.tryCatch(createCaptions, 'caption')
     },
     downloadFailed() {
       this.$q.dialog({

@@ -100,7 +100,7 @@ export default {
             }
             this.fileOutput = creditStatementsHTML
         }
-        this.tryCatch(createCredit)
+        this.tryCatch(createCredit, 'credit statements')
     },
     reset() {
       this.articleID = ''

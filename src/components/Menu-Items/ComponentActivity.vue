@@ -102,7 +102,7 @@ export default {
           this.fileOutput = utils.cleanHTML.cleanEntities(articles.activity.buildActivity(val, this.program))
         }
       }
-      this.tryCatch(createAct)
+      this.tryCatch(createAct, 'activity comp')
     },
     reset() {
       this.articleID = ''

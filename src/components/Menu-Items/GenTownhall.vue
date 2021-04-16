@@ -147,7 +147,7 @@ export default {
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
             }
-            this.tryCatch(createTownhall)
+            this.tryCatch(createTownhall, 'TH Enduring')
         }
     }
 }
