@@ -126,6 +126,9 @@ let formatPhrases = function (startingPhrase, remainingString, fn) {
 }
 
 let formatQNAObjectives = function(string) {
+    if(typeof string != 'string' || !string.length) {
+        return 'Error formatting objectives'
+    }
     /*
     Algorithm:
     - setFlags()

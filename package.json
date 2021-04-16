@@ -6,7 +6,8 @@
   "author": "Dylan Moylan <dmoylan@webmd.net>",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "jest",
+    "watch": "jest --watch *.js"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -19,7 +20,8 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@quasar/app": "^2.0.0"
+    "@quasar/app": "^2.0.0",
+    "jest": "^26.6.3"
   },
   "browserslist": [
     "last 10 Chrome versions",
