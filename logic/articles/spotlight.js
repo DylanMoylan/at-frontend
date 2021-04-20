@@ -23,7 +23,7 @@
 const _ = require("lodash");
 const utils = require("../utils");
 const articleUtils = require('./article-utils');
-const {ProfArticle, ProfActivity, TOCElement, SectionElement, SubsectionElement, SlideGroup, SpotlightChecklist} = require("../classes");
+const {ProfArticle, ProfActivity, TOCElement, SectionElement, SubsectionElement, SlideGroup, SpotlightChecklist, ContributorGroup, ContributorElement} = require("../classes");
 const prodticket = require('../prodticket');
 const snippets = require('../snippets');
 const config = require('../config');
@@ -255,7 +255,31 @@ function buildSpotlight(ticket, program) {
         finalArticle.insertAboveTitleCollection(collectionPageInfo);
     } 
 
-    cmeReviewers = (checklistResult.properties.cmeReviewers ? checklistResult.properties.cmeReviewers.result : "");
+    cmeReviewers = (checklistResult.properties.cmeReviewers ? checklistResult.properties.cmeReviewers.result : []);
+    let contributorGroups
+    if(cmeReviewers.length) {
+        const contributorGroupTitles = cmeReviewers.reduce((accumulator, current) => {
+            if(current.title && current.title.length) {
+                if(!accumulator.includes(current.title)) {
+                    accumulator.push(current.title)
+                }
+                return accumulator
+            }
+        }, [])
+        contributorGroups = contributorGroupTitles.map(title => {
+            let instance = new ContributorGroup()
+            instance.contrbtrTypeLbl = title
+            return instance
+        })
+        cmeReviewers.forEach(reviewer => {
+            let instance = new ContributorElement()
+            instance.contrbtrNm = reviewer.name
+            instance.contrbtrTitle = reviewer.affiliation
+            instance.contrbtrDisclsr = reviewer.disclosure
+            let group = contributorGroups.find(group => group.contrbtrTypeLbl == reviewer.title)
+            group.insertContributorElement(instance)
+        })
+    }
           
     // Insert Main TOC Objects  
     finalArticle.insertTOCElement(preAssessmentTOC);
@@ -269,6 +293,11 @@ function buildSpotlight(ticket, program) {
     }
 
     finalArticle.insertSupporterGrantAttr();
+    if(contributorGroups){
+        contributorGroups.forEach(group => {
+            finalArticle.insertContributorGroup(group)
+        })
+    }
     
     // Addons 
     if (program.hasForYourPatient) {

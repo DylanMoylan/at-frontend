@@ -43,7 +43,6 @@ class ProfArticle extends XMLElement{
             "name": "contrbtr_byline",
             "elements": []
         };
-        this._contrbtr_groups = [];
         this._contrbtr_bulk_info = {
             "type": "element",
             "name": "contrbtr_bulk_info",
@@ -158,35 +157,35 @@ class ProfArticle extends XMLElement{
             "name": "img_publ_logo",
             "elements": []
         }; 
-
+        this._contrbtr_groups = [];
         this._elements[0] = this._front_label;
         this._elements[1] = this._above_title;
         this._elements[2] = this._title;
         this._elements[3] = this._contrbtr_pre_content;
         this._elements[4] = this._contrbtr_byline;
-        this._elements[5] = this._contrbtr_groups;
-        this._elements[6] = this._contrbtr_bulk_info;
-        this._elements[7] = this._contrbtr_post_content;
-        this._elements[8] = this._supprtr_grant_group;
-        this._elements[9] = this._body_label;
+        this._elements[5] = this._contrbtr_bulk_info;
+        this._elements[6] = this._contrbtr_post_content;
+        this._elements[7] = this._supprtr_grant_group;
+        this._elements[8] = this._body_label;
         // First slice
         // child elements 
-        this._elements[10] = this._back_label;
-        this._elements[11] = this._layer_grps;
-        this._elements[12] = this._ref_grp;
-        this._elements[13] = this._cpyrt_holder;
-        this._elements[14] = this._cpyrt_ovrd;
-        this._elements[15] = this._disclmr_ovrd;
-        this._elements[16] = this._bkmtr_front;
-        this._elements[17] = this._bkmtr_glossary;
-        this._elements[18] = this._bkmtr_ack;
-        this._elements[19] = this._bkmtr_discl;
-        this._elements[20] = this._bkmtr_funding;
-        this._elements[21] = this._bkmtr_reprnt_addr;
-        this._elements[22] = this._bkmtr_abbr_notes;
-        this._elements[23] = this._bkmtr_last;
-        this._elements[24] = this._img_ttl_bkgrd;
-        this._elements[25] = this._img_publ_logo;
+        this._elements[9] = this._back_label;
+        this._elements[10] = this._layer_grps;
+        this._elements[11] = this._ref_grp;
+        this._elements[12] = this._cpyrt_holder;
+        this._elements[13] = this._cpyrt_ovrd;
+        this._elements[14] = this._disclmr_ovrd;
+        this._elements[15] = this._bkmtr_front;
+        this._elements[16] = this._bkmtr_glossary;
+        this._elements[17] = this._bkmtr_ack;
+        this._elements[18] = this._bkmtr_discl;
+        this._elements[19] = this._bkmtr_funding;
+        this._elements[20] = this._bkmtr_reprnt_addr;
+        this._elements[21] = this._bkmtr_abbr_notes;
+        this._elements[22] = this._bkmtr_last;
+        this._elements[23] = this._img_ttl_bkgrd;
+        this._elements[24] = this._img_publ_logo;
+        this._elements[25] = this._contrbtr_groups;
         // this._elements[10] = this._toc_elements;
         // this._elements[11] = this._back_label;
         // this._elements[12] = this._layer_grps;

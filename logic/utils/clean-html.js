@@ -632,7 +632,7 @@ function learningObjectives(textBlock, removeFluff=true) {
     textBlock = textBlock.replace(removeRegExp, '');
     
     // REMOVE THE NUMBERS 
-    removeRegExp = /<p>\d+.*|<p>(?:\d+\,){1,}.*|.*\d+\-\d+.*/g;
+    removeRegExp = /<p>\d+.*|<p>(?:\d+\,){1,}.*|.*\d+\-\d+.*|<p>#[ ]?\d+.*/g;
     textBlock = textBlock.replace(removeRegExp, '');
 
     // BULLET DOT
@@ -804,7 +804,8 @@ function transcript(htmlString, removeFluff=false) {
     var startTranscriptRegexArray = [
         /.*(?:&lt;){1,}Insert pre-assessment.*(?:&gt;){1,}/gi,
         /.*(?:&lt;){1,}level 1(?:&gt;){1,}\s+Educational Impact Challenge.*/gi,
-        /<strong>COVID Program Disclaimer<\/strong>(\s+)?.*(\s+)?.*product or manufacturer\.(\s+|(&#160;)+)?<\/p>/g
+        /<strong>COVID Program Disclaimer<\/strong>(\s+)?.*(\s+)?.*product or manufacturer\.(\s+|(&#160;)+)?<\/p>/g,
+        /<strong>.*BEGIN TRANSCRIPT.*<\/strong>/g
     ];
 
     var matches = stringOps.getAllMatchesInOrder(clean, startTranscriptRegexArray);

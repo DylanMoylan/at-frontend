@@ -145,6 +145,7 @@ function caseImage(articleID, contentMarkup, caseNumber) {
 
 function earnCreditButton(qnaID) {
     var result = `
+    <p>&nbsp;</p>
     <p><a class="cme_btn cme_erncr-bttm_btn" href="/qna/processor/${qnaID}?showStandAlone=true" onclick="wmdTrack(&apos;vwart-erncr_bttm&apos;);">Earn Credit</a></p>
     `;
     return utils.cleanHTML.insertEntityPlaceholders(result);

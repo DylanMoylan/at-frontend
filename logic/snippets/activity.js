@@ -87,12 +87,12 @@ function medscapeProviderStatement(program=null, ipce=null) {
         if (program.hasOUS) {
             return null;
         } else {        
-            // return utils.cleanHTML.insertEntityPlaceholders(result);
-            return result
+            return utils.cleanHTML.insertEntityPlaceholders(result);
+            // return result
         }    
     } else {
-        return result
-        // return utils.cleanHTML.insertEntityPlaceholders(result);
+        // return result
+        return utils.cleanHTML.insertEntityPlaceholders(result);
     }
 }
 
