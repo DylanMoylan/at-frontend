@@ -118,6 +118,17 @@
     <q-card-section style="max-height: 300px;overflow-y:scroll">
         <div class="text-center text-bold">ChangeLog</div>
         <div>
+          <span class="text-bold">[4.20.2021]</span>
+          <span>
+            <ul>
+              <li>Adds missing 'Post-assessment' option to clinical-brief generator.</li>
+              <li>Fixes an issue in the medscape provider statement that wasn't replacing & with the html entity.</li>
+              <li>Adds a missing blank space after the earn credit button</li>
+              <li>Adds more exceptions for parsing learning objective formatting.</li>
+            </ul>
+          </span>
+        </div>
+        <div>
           <span class="text-bold">[4.15.2021]</span>
           <span>
             <ul>
