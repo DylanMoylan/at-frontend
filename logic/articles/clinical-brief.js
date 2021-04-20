@@ -277,6 +277,7 @@ function buildClinicalBrief(rawTicket, program) {
     return {
         finishedArticleObject: finalArticle,
         checklistHTML: checklistResult.printHTML,
+        checklistRaw: checklistResult,
         activityXML: utils.cleanHTML.cleanEntities(activityXML)  
     };
 };

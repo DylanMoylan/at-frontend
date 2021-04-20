@@ -65,7 +65,8 @@
                 />
             </q-card-section>
         </q-card>
-        <checklist-preview :output="fileOutput" />
+        <!-- <checklist-preview :output="fileOutput" /> -->
+        <validator :output="fileOutput" />
     </div>
 </template>
 
@@ -77,12 +78,14 @@ import utils from '../../../logic/utils'
 import { spotlight } from '../../../logic/articles'
 import StandardForm from '../shared/StandardForm.vue'
 import ChecklistPreview from '../shared/ChecklistPreview.vue'
+import Validator from '../shared/Validator.vue'
 
 export default {
     mixins: [tryCatch, buildOutput, downloadResult],
     components: {
         StandardForm,
-        ChecklistPreview
+        ChecklistPreview,
+        Validator
     },
     data() {
         return {

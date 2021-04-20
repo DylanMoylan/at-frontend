@@ -126,7 +126,8 @@
                 </div>
             </q-card-section>
         </q-card>
-        <checklist-preview :output="fileOutput" />
+        <!-- <checklist-preview :output="fileOutput" /> -->
+        <validator :output="fileOutput" />
     </div>
 </template>
 
@@ -137,11 +138,12 @@ import downloadResult from 'src/mixins/downloadResult'
 import utils from '../../../logic/utils'
 import tryCatch from 'src/mixins/tryCatch'
 import ChecklistPreview from '../shared/ChecklistPreview.vue'
+import Validator from '../shared/Validator.vue'
 
 export default {
     props: ['product'],
     mixins: [buildOutput, tryCatch, downloadResult],
-    components: { ChecklistPreview },
+    components: { ChecklistPreview, Validator },
     data() {
         return {
             articleID: '',
@@ -213,6 +215,11 @@ export default {
         hasData() {
             return !!this.articleID.length || !!this.file ||
             [this.hasTranscript, this.isLLA, this.isOUS, this.hasPeerReviewer, this.hasCollectionPage, this.hasPDF].find(item => item === true)
+        }
+    },
+    watch: {
+        $route(val) {
+            this.reset()
         }
     }
 }

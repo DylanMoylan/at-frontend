@@ -24,3 +24,11 @@
     border: 1px solid;
     border-radius: 3px;
 }
+
+.previewSnippet {
+    width: 27rem; 
+    border: 1px solid; 
+    padding:10px;
+    max-height: 300px;
+    overflow-y: scroll;
+}

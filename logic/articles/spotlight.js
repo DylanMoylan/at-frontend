@@ -323,6 +323,7 @@ function buildSpotlight(ticket, program) {
 
     return {
         finishedArticleObject: finalArticle,
+        checklistRaw: checklistResult,
         checklistHTML: checklistResult.printHTML,
         activityXML: utils.cleanHTML.cleanEntities(activityXML)     
     };

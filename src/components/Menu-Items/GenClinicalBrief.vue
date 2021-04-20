@@ -100,7 +100,8 @@
                 </div>
             </q-card-section>
         </q-card>
-        <checklist-preview :output="fileOutput" />
+        <!-- <checklist-preview :output="fileOutput" /> -->
+        <validator :output="fileOutput" />
     </div>
 </template>
 
@@ -111,9 +112,10 @@ import downloadResult from 'src/mixins/downloadResult'
 import utils from '../../../logic/utils'
 import tryCatch from 'src/mixins/tryCatch'
 import ChecklistPreview from '../shared/ChecklistPreview.vue'
+import Validator from '../shared/Validator.vue'
 
 export default {
-    components: { ChecklistPreview },
+    components: { ChecklistPreview, Validator},
     mixins: [buildOutput, tryCatch, downloadResult],
     data() {
         return {
