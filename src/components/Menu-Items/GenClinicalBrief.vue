@@ -22,10 +22,29 @@
                         class="row q-mb-md at-input"
                     />
                     <div class="row full-width justify-start q-mb-md">
-                        <q-checkbox
+                        <!-- <q-checkbox
                             label="Has Pre-Assessment"
                             v-model="hasPreAssessment"
                             dense
+                        /> -->
+                        <q-option-group
+                            type="radio"
+                            dense
+                            :options="[
+                                {
+                                    value: 'pre',
+                                    label: 'Has Pre-Assessment'
+                                },
+                                {
+                                    value: 'post',
+                                    label: 'Has Post-Assessment'
+                                },
+                                {
+                                    value: 'none',
+                                    label: 'None'
+                                }
+                            ]"
+                            v-model="question"
                         />
                     </div>
                     <q-file
@@ -100,17 +119,17 @@ export default {
         return {
             articleID: '',
             questionnaireID: '',
-            hasPreAssessment: false,
             file: null,
             fileOutput: null,
-            xmlResult: null
+            xmlResult: null,
+            question: 'none'
         }
     },
     methods: {
         reset() {
             this.articleID = ''
             this.questionnaireID = ''
-            this.hasPreAssessment = false
+            this.question = 'none'
             this.file = null
             this.resetOutput()
         },
@@ -136,8 +155,8 @@ export default {
                 profArticleType: "Article",
                 articleID: this.articleID,
                 qnaID: this.questionnaireID,
-                hasPreAssessment: this.hasPreAssessment,
-                hasPostAssessment: false,
+                hasPreAssessment: this.question == 'pre',
+                hasPostAssessment: this.question == 'post',
                 hasOUS: false, 
                 hasPeerReviewer: false, 
                 hasCollectionPage: false,
@@ -153,7 +172,7 @@ export default {
             return !this.articleID.length || !this.file || !this.questionnaireID.length
         },
         hasData() {
-            return !!this.articleID.length || !!this.file || !!this.questionnaireID.length || !!this.hasPreAssessment
+            return !!this.articleID.length || !!this.file || !!this.questionnaireID.length || !!(this.question && this.question.length && this.question != 'none')
         }
     }
 }
