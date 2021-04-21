@@ -57,6 +57,10 @@
           @click="downloadResult(null, `${this.articleID}_toc.xml`)"
         />
       </q-card-section>
+      <q-separator />
+      <q-card-section>
+        <editor :output="fileOutput" buttons />
+      </q-card-section>
     </template>
   </q-card>
 </template>
@@ -69,8 +73,10 @@ import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
+import Editor from '../shared/Editor.vue'
 
 export default {
+  components: { Editor },
   mixins: [buildOutput, programOptions, tryCatch, downloadResult],
   data() {
     return {

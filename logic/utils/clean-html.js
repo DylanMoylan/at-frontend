@@ -610,7 +610,7 @@ function learningObjectives(textBlock, removeFluff=true) {
     removeRegExp = /.*Question #.*/g;
     textBlock = textBlock.replace(removeRegExp, '');
 
-    removeRegExp = /.*<p>Slide #.*/g;
+    removeRegExp = /.*<p>Slides? #?[0-9].*/g;
     textBlock = textBlock.replace(removeRegExp, '');
 
     removeRegExp = /.*Slide #.*/g;

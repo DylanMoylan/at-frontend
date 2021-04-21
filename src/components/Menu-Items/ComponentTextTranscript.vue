@@ -58,6 +58,10 @@
           @click="downloadResult(null, `${articleID}_transcript.xml`)"
         />
       </q-card-section>
+      <q-separator />
+      <q-card-section>
+        <editor :output="fileOutput" buttons />
+      </q-card-section>
     </template>
   </q-card>
 </template>
@@ -71,9 +75,11 @@ import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
 import {TOCElement} from '../../../logic/classes'
 import prodticket from '../../../logic/prodticket'
+import Editor from '../shared/Editor.vue'
 
 export default {
   mixins: [buildOutput, programOptions, tryCatch, downloadResult],
+  components: { Editor },
   data() {
     return {
       articleID: '',

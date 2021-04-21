@@ -50,29 +50,9 @@
           />
       </q-card-section>
   </q-card>
-  <q-card v-if="snippet.length" class="q-my-md q-pa-md at-preview q-mx-lg">
-      <q-card-section class="text-white text-h6 q-pa-md row justify-between">
-          <span>media-info.html</span>
-          <div class="row">
-            <q-btn
-                label="Download File"
-                no-caps
-                class="bg-positive text-white q-mr-sm"
-                @click="download"
-            />
-            <div>
-              <q-btn
-                label="Copy to Clipboard"
-                no-caps
-                class="bg-positive text-white"
-                @click="copySnippet(snippet)"
-              />
-            </div>
-          </div>
-      </q-card-section>
-      <q-separator color="white" />
+  <q-card v-if="snippet.length">
       <q-card-section>
-          <code>{{snippet}}</code>
+          <editor :output="snippet" buttons />
       </q-card-section>
   </q-card>
   </div>
@@ -80,10 +60,10 @@
 
 <script>
 import snippets from '../../../logic/snippets'
-import copySnippet from 'src/mixins/copySnippet'
+import Editor from 'src/components/shared/Editor'
 
 export default {
-    mixins: [copySnippet],
+    components: { Editor },
     data() {
         return {
             urls: null,
@@ -111,15 +91,6 @@ export default {
                 prev += snippets.customForm.mediaInfo(this.articleID, curr) + "\n\n\n"
                 return prev
             }, '')
-            console.log('this.snippet: ', this.snippet);
-        },
-        download() {
-            let href = `data:application/octet-stream;charset=utf-8;base64,${window.btoa(unescape(encodeURIComponent(this.snippet)))}`
-            let download = 'media-info.html'
-            const link = document.createElement('a')
-            link.href = href
-            link.download = download
-            link.click()
         },
         clear() {
             this.snippet = ''

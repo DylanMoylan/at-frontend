@@ -68,7 +68,8 @@ export default {
                 "indent_inner_html": false,
                 "comma_first": false,
                 "e4x": false,
-                "indent_empty_lines": false
+                "indent_empty_lines": false,
+                "unformatted": ["img"]
             })
         }
     }

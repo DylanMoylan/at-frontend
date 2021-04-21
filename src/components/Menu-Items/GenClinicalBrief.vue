@@ -180,10 +180,5 @@ export default {
 </script>
 
 <style>
-    .preview {
-        white-space: pre-wrap;
-        background-color: black;
-        color: white;
-        font-family: 'Courier New', monospace;
-    }
+
 </style>

@@ -63,6 +63,10 @@
           @click="downloadResult(null, `${articleID}_activity.xml`)"
         />
       </q-card-section>
+      <q-separator />
+      <q-card-section>
+        <editor :output="fileOutput" buttons />
+      </q-card-section>
     </template>
   </q-card>
 </template>
@@ -74,9 +78,11 @@ import programOptions from 'src/mixins/programOptions'
 import tryCatch from 'src/mixins/tryCatch'
 import articles from '../../../logic/articles'
 import utils from '../../../logic/utils'
+import Editor from '../shared/Editor.vue'
 
 export default {
   mixins: [buildOutput, programOptions, tryCatch, downloadResult],
+  components: { Editor },
   data() {
     return {
       articleID: '',
