@@ -117,114 +117,29 @@
     <q-separator />
     <q-card-section style="max-height: 300px;overflow-y:scroll">
         <div class="text-center text-bold">ChangeLog</div>
-        <div>
-          <span class="text-bold">[4.20.2021]</span>
-          <span>
+        <div v-for="(item, index) in changes" :key="`change${index}`">
+          <div class="text-bold">
+            {{ item.date }}
+          </div>
+          <div>
             <ul>
-              <li>Adds missing 'Post-assessment' option to clinical-brief generator.</li>
-              <li>Fixes an issue in the medscape provider statement that wasn't replacing & with the html entity.</li>
-              <li>Adds a missing blank space after the earn credit button</li>
-              <li>Adds more exceptions for parsing learning objective formatting.</li>
+              <li v-for="(message, key) in item.messages" :key="`messg${index}-${key}`">{{ message }}</li>
             </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[4.15.2021]</span>
-          <span>
-            <ul>
-              <li>Fixes an issue with learning objectives that was sometimes breaking the program when lines started with special characters.</li>
-              <li>Added google analytics to help log errors.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[4.15.2021]</span>
-          <span>
-            <ul>
-              <li>Changes the Study Highlights section of clinical-brief articles so that tables are no longer removed.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[4.14.2021]</span>
-          <span>
-            <ul>
-              <li>Adds a fix for QnA Learning Objectives formatting.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[4.13.2021]</span>
-          <span>
-            <ul>
-              <li>Updates Clinical Brief goal statement to pull from the prodticket instead of a default statement.</li>
-              <li>Updates Clinical Brief to include IPCE additional credit section in activity xml.</li>
-              <li>Adds missing TOC label to References XML section.</li>
-              <li>Transcripts now include "This is a verbatim transcript..." or "This transcript has been edited..." depending on ticket contents.</li>
-              <li>Clinical Brief no longer includes an empty abbreviations section if none exists.</li>
-              <li>Fixes an issue with Learning Objectives where "participants will" was being included in the objectives.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[4.6.2021]</span>
-          <span>
-            <ul>
-              <li>Adds Video Lecture Generator.</li>
-              <li>Adds TownHall Enduring Generator.</li>
-              <li>Fixes a bug that was preventing submission unless transcript was checked in certain generators.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[4.5.2021]</span>
-          <span>
-            <ul>
-              <li>Enables Format-Learning Objectives.</li>
-              <li>Fixes CB not finding Article/Activity Title</li>
-              <li>Fixes CB Clinical Implications section</li>
-              <li>Adds nbsp below media code</li>
-              <li>Hides content below contributors if peer reviewer isn't checked.</li>
-              <li>Fixes the order of references, abbrevs, and content in curbside TOCs.</li>
-              <li>Removes "Main Content" from transcript.</li>
-              <li>Fixes some issues finding collection page titles.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[3.31.2021]</span>
-          <span>
-            <ul>
-              <li>Enables First-Response and test-and-teach Generators (Experimental).</li>
-              <li>Adds some additional error handling, bad tickets will cause less silent failures.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[3.30.2021]</span>
-          <span>
-            <ul>
-              <li>Adds some new component generators</li>
-              <li>Adds some Snippet generators for Slide TOCs/Downloadable Slides</li>
-              <li>Adds copy/reset buttons to a few sections.</li>
-            </ul>
-          </span>
-        </div>
-        <div>
-          <span class="text-bold">[3.29.2021]</span>
-          <span>
-            <ul>
-              <li>First Release: Experimental Version. Some features may be incomplete.</li>
-            </ul>
-          </span>
+          </div>
         </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script>
-export default {
+import ChangeLog from 'src/mixins/changelog'
 
+export default {
+  computed: {
+    changes() {
+      return ChangeLog.sort((a,b)=> (parseInt(a.date.replace(/\./g, '')) > parseInt(b.date.replace('.', ''))) ? - 1 : 1)
+    }
+  }
 }
 </script>
 
