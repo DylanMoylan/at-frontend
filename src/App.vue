@@ -13,7 +13,9 @@ export default {
   mounted() {
       // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
+    if(!/localhost/.test(window.location.href)){
+      firebase.analytics();
+    }
   }
 }
 </script>

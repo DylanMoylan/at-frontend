@@ -1,17 +1,17 @@
 <template>
     <div>
-        <template v-if="output">
-            <div class="q-my-md text-white text-h6 q-ml-lg">Preview:</div>
-            <q-card class="q-mx-lg q-mb-lg" style="max-width:60vw;">
-                <q-tabs
-
-                />
-                <codemirror
-                    :value="formattedOutput"
-                    :options="cmOptions"
-                />
-            </q-card>
-        </template>
+        <div v-if="buttons" class="row justify-end q-mb-md">
+            <q-btn
+                class="bg-positive text-white"
+                no-caps
+                label="Copy to Clipboard"
+                @click="copySnippet(formattedOutput)"
+            />
+        </div>
+        <codemirror
+            :value="formattedOutput"
+            :options="cmOptions"
+        />
     </div>
 </template>
 
@@ -21,9 +21,21 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/dracula.css'
 import 'codemirror/mode/xml/xml.js'
 import jsbeautify from 'js-beautify'
+import copySnippet from 'src/mixins/copySnippet'
 
 export default {
-    props: ['output'],
+    mixins: [copySnippet],
+    props: {
+        buttons: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        output: {
+            type: String,
+            required: true
+        }
+    },
     components: { codemirror },
     data() {
         return {
@@ -39,7 +51,7 @@ export default {
     },
     computed: {
         formattedOutput() {
-            return jsbeautify.html(this.output.checklistHTML, {
+            return jsbeautify.html(this.output, {
                 "indent_size": "4",
                 "indent_char": " ",
                 "max_preserve_newlines": "1",
@@ -59,13 +71,12 @@ export default {
                 "indent_empty_lines": false
             })
         }
-    },
+    }
 }
 </script>
 
 <style scoped>
-    .vue-codemirror >>> .CodeMirror {
-        height: 500px!important;
-        width: 60vw;
+.vue-codemirror >>> .CodeMirror {
+        max-width: 60vw;
     }
 </style>

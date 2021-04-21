@@ -35,18 +35,8 @@
         </q-card>
         <template v-if="fileOutput">
             <q-card class="q-mt-md q-pa-md q-mx-lg" v-if="fileOutput">
-                <q-card-section class="text-white text-h6 q-pa-md row justify-between items-center" style="white-space:normal">
-                    <span>Learning Objectives</span>
-                    <q-btn
-                        label="Copy to Clipboard"
-                        no-caps
-                        class="text-white bg-positive"
-                        @click="copySnippet(fileOutput)"
-                    />
-                </q-card-section>
-                <q-separator color="white" />
-                <q-card-section class="at-preview">
-                    <code>{{ fileOutput }}</code>
+                <q-card-section>
+                    <editor :output="fileOutput" buttons/>
                 </q-card-section>
             </q-card>
         </template>
@@ -57,12 +47,13 @@
 import buildOutput from 'src/mixins/buildOutput'
 import tryCatch from 'src/mixins/tryCatch'
 import programOptions from 'src/mixins/programOptions'
-import copySnippet from 'src/mixins/copySnippet'
 import utils from '../../../logic/utils'
 import prodticket from '../../../logic/prodticket'
+import Editor from '../shared/Editor'
 
 export default {
-    mixins: [buildOutput, tryCatch, programOptions, copySnippet],
+    mixins: [buildOutput, tryCatch, programOptions],
+    components: { 'editor' : Editor },
     data() {
         return {
             file: null,

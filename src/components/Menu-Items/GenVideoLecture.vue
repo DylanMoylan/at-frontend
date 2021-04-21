@@ -65,8 +65,7 @@
                 />
             </q-card-section>
         </q-card>
-        <!-- <checklist-preview :output="fileOutput" /> -->
-        <validator :output="fileOutput" />
+        <checklist-preview :output="fileOutput" />
     </div>
 </template>
 

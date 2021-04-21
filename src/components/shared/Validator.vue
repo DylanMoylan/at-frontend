@@ -32,6 +32,9 @@
                         </div>
                   </div>
               </q-card-section>
+              <codemirror ref="myCm"
+                :value="beautifyTest" 
+                :options="cmOptions"></codemirror>
           </q-card>
       </template>
   </div>
@@ -40,10 +43,33 @@
 <script>
 import formatQnA from '../../../logic/utils/format-qna-objectives'
 import formatLOs from '../../../logic/utils/format-learning-objectives'
+import { codemirror } from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/dracula.css'
+import 'codemirror/mode/xml/xml.js'
+import jsbeautify from 'js-beautify'
 
 export default {
     props: ['output'],
+    data() {
+        return {
+            test: `<ul><li>Assess the rate of renal allograft damage related to immune mediated causes</li>
+<li>Distinguish the components and efficacy of a laboratory study to measure the risk for renal allograft rejection</li>
+<li>Outline implications for the healthcare team</li></ul>`,
+            cmOptions: {
+                tabSize: 4,
+                mode: 'text/html',
+                theme: 'dracula',
+                lineNumbers: true,
+                line: true,
+                lineWrapping: true
+            }
+        }
+    },
     computed: {
+        beautifyTest() {
+            return jsbeautify.html(this.output.checklistHTML)
+        },
         validations() {
             let validations = {
                 goalStatement: {
@@ -88,7 +114,8 @@ export default {
         hasData() {
             return this.output && this.output.checklistRaw && this.output.checklistRaw.properties && Object.keys(this.output.checklistRaw.properties).length > 0
         },
-    }
+    },
+    components: { codemirror }
 }
 </script>
 

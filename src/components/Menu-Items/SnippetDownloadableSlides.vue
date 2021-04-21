@@ -1,5 +1,5 @@
 <template>
-    <q-card class="secundo slides-snippet">
+    <q-card class="secundo q-mx-lg q-mb-lg">
         <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             Downloadable Slides Snippet
         </q-card-section>
@@ -17,25 +17,21 @@
                 </template>
             </q-input>
         </q-card-section>
-        <q-card-section class="at-preview">
-            <div class="row justify-end">
-                <q-btn
-                    label="Copy to Clipboard"
-                    class="text-white bg-positive"
-                    no-caps
-                    @click="copySnippet(slideSnippet)"
-                />
-            </div>
-            {{slideSnippet}}
+        <q-separator />
+        <q-card-section>
+            <editor
+                :output="slideSnippet"
+                buttons
+            />
         </q-card-section>
     </q-card>
 </template>
 
 <script>
-import copySnippet from 'src/mixins/copySnippet'
+import Editor from '../shared/Editor'
 
 export default {
-    mixins: [copySnippet],
+    components: { Editor },
     data() {
         return {
             articleID: ''
@@ -43,11 +39,7 @@ export default {
     },
     computed: {
         slideSnippet() {
-            return `<div id="dlSlides">
-        <p>A Powerpoint version of the slides from this presentation<br />
-            is available for use as a professional resource from Medscape Education.</p>
-        <div class="dlBtn"><a class="cme_btn" href="https://img.medscapestatic.com/images/${this.computeArticleID.slice(0, 3)}/${this.computeArticleID.slice(3)}/${this.computeArticleID}_slides.pptx" target="_blank">Download Now</a></div>
-</div>`
+            return `<div id="dlSlides"><p>A Powerpoint version of the slides from this presentation<br />is available for use as a professional resource from Medscape Education.</p><div class="dlBtn"><a class="cme_btn" href="https://img.medscapestatic.com/images/${this.computeArticleID.slice(0, 3)}/${this.computeArticleID.slice(3)}/${this.computeArticleID}_slides.pptx" target="_blank">Download Now</a></div></div>`
         },
         computeArticleID() {
             return this.articleID.length ? this.articleID : 'XXXXXX'
@@ -56,10 +48,8 @@ export default {
 }
 </script>
 
-<style>
-    @media only screen and (min-width:1024px) {
-        .slides-snippet {
-            width:35vw;
-        }
+<style scoped>
+    .vue-codemirror >>> .CodeMirror {
+        height: 200px!important;
     }
 </style>

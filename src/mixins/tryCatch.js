@@ -6,12 +6,12 @@ export default {
         tryCatch(fn, eventName) {
             try {
                 fn()
-                if(eventName) {
+                if(eventName && !this.isLocalHost) {
                     this.defaultAnalytics.logEvent(`Creating a ${eventName}`)
                 }
             } catch (error) {
                 console.log('error: ', error);
-                if(eventName) {
+                if(eventName && !this.isLocalHost) {
                     this.defaultAnalytics.logEvent(`${eventName} Error`)
                 }
                 this.$q.dialog({
@@ -21,7 +21,14 @@ export default {
             }
         }
     },
+    computed: {
+        isLocalHost() {
+            return /localhost/.test(window.location.href)
+        }
+    },
     mounted() {
-        this.defaultAnalytics = firebase.analytics()
+        if(!this.isLocalHost){
+            this.defaultAnalytics = firebase.analytics()
+        }
     }
 }
