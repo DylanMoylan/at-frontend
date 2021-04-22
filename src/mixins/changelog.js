@@ -43,4 +43,8 @@ export default [
         date: "4.21.2021",
         messages: [`Adds a new editor for viewing and formatting (indentation) output files and strings`]
     },
+    {
+        date: "4.22.2021",
+        messages: [`Adds some more cleaning of learning objectives junk.`, `Updates preview editor to render previews of each output file, in a separate tab.`, `Adds preview editor to captions generator.`]
+    },
 ]

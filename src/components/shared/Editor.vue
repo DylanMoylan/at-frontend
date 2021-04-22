@@ -78,6 +78,6 @@ export default {
 
 <style scoped>
 .vue-codemirror >>> .CodeMirror {
-        max-width: 60vw;
+        width: 60vw;
     }
 </style>

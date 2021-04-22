@@ -111,10 +111,9 @@ import downloadResult from 'src/mixins/downloadResult'
 import utils from '../../../logic/utils'
 import tryCatch from 'src/mixins/tryCatch'
 import ChecklistPreview from '../shared/ChecklistPreview.vue'
-import Validator from '../shared/Validator.vue'
 
 export default {
-    components: { ChecklistPreview, Validator},
+    components: { ChecklistPreview },
     mixins: [buildOutput, tryCatch, downloadResult],
     data() {
         return {
@@ -143,6 +142,7 @@ export default {
                 this.fileOutput = articles.clinicalBrief.buildClinicalBrief(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
+                this.fileOutput = Object.assign(this.fileOutput, {xmlResult: this.xmlResult})
             }
             this.tryCatch(createCB, 'clinical brief')
         }

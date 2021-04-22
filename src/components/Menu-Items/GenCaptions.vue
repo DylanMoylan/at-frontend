@@ -1,5 +1,6 @@
 <template>
-  <q-card class="secundo q-my-lg">
+  <div>
+    <q-card class="secundo q-my-lg">
         <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             Generate Captions
         </q-card-section>
@@ -93,6 +94,8 @@
           </q-item>
         </q-card-section>
     </q-card>
+    <checklist-preview :output="preview" />
+  </div>
 </template>
 
 <script>
@@ -100,9 +103,11 @@ import snippets from '../../../logic/snippets'
 import languages from '../../../logic/config/languages'
 import buildOutput from 'src/mixins/buildOutput'
 import tryCatch from 'src/mixins/tryCatch'
+import ChecklistPreview from '../shared/ChecklistPreview.vue'
 
 export default {
   mixins: [buildOutput, tryCatch],
+  components: { ChecklistPreview },
   data() {
     return {
       file: null,
@@ -113,6 +118,14 @@ export default {
     }
   },
   computed: {
+    preview() {
+      if(!!this.fileOutput){
+        return {
+          vtt: this.fileOutput.vttResult.cleanedString,
+          captionHTML: this.fileOutput.xmlResult.cleanedString
+        }
+      }
+    },
     hasData() {
       return this.file || this.articleID.length || this.language.length || this.fileOutput
     },

@@ -180,6 +180,7 @@ export default {
                 this.fileOutput = articles.spotlight.buildSpotlight(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
+                this.fileOutput = Object.assign(this.fileOutput, {xmlResult: this.xmlResult})
             }
             this.tryCatch(createCurb, 'curbside/spotlight')
         }

@@ -142,6 +142,7 @@ export default {
                 this.fileOutput = spotlight.buildSpotlight(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
+                this.fileOutput = Object.assign(this.fileOutput, {xmlResult: this.xmlResult})
             }
             this.tryCatch(createVideoLecture, 'video lecture')
         },

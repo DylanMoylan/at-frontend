@@ -2,31 +2,52 @@
     <div>
         <template v-if="output">
             <div class="q-my-md text-white text-h6 q-ml-lg">Preview:</div>
-            <q-card class="q-mx-lg q-mb-lg" style="max-width:60vw;">
-                <q-tabs
-
-                />
-                <codemirror
-                    :value="formattedOutput"
-                    :options="cmOptions"
-                />
+            <q-card class="q-mx-lg q-mb-lg text-left" style="border-radius:0">
+                <template v-if="outputIsString">
+                    <editor :output="output" />
+                </template>
+                <template v-else>
+                    <q-tabs
+                        :value="defaultTab"
+                        @input="val => tab = val"
+                        dense
+                        no-caps
+                        align="left"
+                        switch-indicator
+                        indicator-color="positive"
+                    >
+                        <q-tab
+                          v-for="(item, index) in outputToShow"
+                          :name="item.value"
+                          :label="item.label"
+                          class="bg-black text-white q-mr-md"
+                          :key="`tab${index}`" />
+                    </q-tabs>
+                    <q-separator />
+                    <q-tab-panels :value="defaultTab">
+                        <q-tab-panel
+                            v-for="(item, index) in outputToShow"
+                            :key="`tabP${index}`"
+                            :name="item.value"
+                        >
+                            <editor :output="output[item.value]" buttons />
+                        </q-tab-panel>
+                    </q-tab-panels>
+                </template>
             </q-card>
         </template>
     </div>
 </template>
 
 <script>
-import { codemirror } from 'vue-codemirror'
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/dracula.css'
-import 'codemirror/mode/xml/xml.js'
-import jsbeautify from 'js-beautify'
+import Editor from './Editor.vue'
 
 export default {
     props: ['output'],
-    components: { codemirror },
+    components: { Editor },
     data() {
         return {
+            tab: '',
             cmOptions: {
                 tabSize: 4,
                 mode: 'text/html',
@@ -38,28 +59,42 @@ export default {
         }
     },
     computed: {
-        formattedOutput() {
-            return jsbeautify.html(this.output.checklistHTML, {
-                "indent_size": "4",
-                "indent_char": " ",
-                "max_preserve_newlines": "1",
-                "preserve_newlines": true,
-                "keep_array_indentation": false,
-                "break_chained_methods": false,
-                "indent_scripts": "normal",
-                "brace_style": "collapse",
-                "space_before_conditional": true,
-                "unescape_strings": false,
-                "jslint_happy": false,
-                "end_with_newline": false,
-                "wrap_line_length": "160",
-                "indent_inner_html": false,
-                "comma_first": false,
-                "e4x": false,
-                "indent_empty_lines": false
-            })
+        defaultTab() {
+            if(this.tab.length > 0) {
+                return this.tab
+            }else{
+                return Object.keys(this.output).includes('captionHTML') ? 'captionHTML' : 'checklistHTML'
+            }
+        },
+        outputIsString() {
+            return typeof this.output == 'string'
+        },
+        outputToShow() {
+            return [
+                {
+                    value: 'checklistHTML', 
+                    label: 'Checklist'
+                },
+                {
+                    value: 'activityXML', 
+                    label: 'Activity XML'
+                },
+                {
+                    value: 'xmlResult', 
+                    label: 'Article XML'
+                },
+                {
+                    value: 'captionHTML', 
+                    label: 'XML Captions'
+                },
+                {
+                    value: 'vtt', 
+                    label: 'VTT Captions'
+                },
+            ]
+            .filter(item => Object.keys(this.output).includes(item.value))
         }
-    },
+    }
 }
 </script>
 
