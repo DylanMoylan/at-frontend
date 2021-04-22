@@ -326,6 +326,17 @@
                   </q-card>
                 </q-expansion-item>
             </q-list>
+            <div class="q-ma-md">
+              <div>
+                <q-icon name="warning_amber" class="q-mr-sm"/><span>Disable previews to improve performance:</span>
+              </div>
+              <q-toggle
+                :value="performanceMode"
+                @input="val => setPerformanceMode(val)"
+                color="blue"
+                label="Hide Previews"
+              />
+            </div>
     </q-drawer>
     <q-btn
       icon="menu"
@@ -339,6 +350,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'MainLayout',
@@ -353,6 +365,12 @@ export default {
         generate: false
       }
     }
+  },
+  methods: {
+    ...mapActions('settings', ['setPerformanceMode'])
+  },
+  computed: {
+    ...mapGetters('settings', ['performanceMode'])
   },
   watch: {
     $route(val) {
