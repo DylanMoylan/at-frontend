@@ -4,9 +4,9 @@
             <q-card-section 
                 class="text-white text-h6 q-pa-md text-center primo"
             >
-                Generate Townhall Enduring
+                Generate Townhall Certificate XML
             </q-card-section>
-                <disclaimer />
+            <disclaimer />
             <q-card-section>
                 <q-input
                     filled
@@ -15,10 +15,20 @@
                     v-model="program.articleID"
                     class="row q-mb-md at-input"
                 />
-                <standard-form
-                    :program="program"
-                    @input="bindValues"
-                />
+                <div class="row full-width justify-start">
+                    <q-checkbox
+                        label="Program is OUS"
+                        v-model="program.hasOUS"
+                        dense
+                    />
+                </div>
+                <div class="row full-width justify-start q-mb-md">
+                    <q-checkbox
+                        label="Has Peer Reviewer"
+                        v-model="program.hasPeerReviewer"
+                        dense
+                    />
+                </div>
                 <q-file
                     v-model="file"
                     class="at-input"
@@ -78,32 +88,27 @@ import tryCatch from 'src/mixins/tryCatch'
 import downloadResult from 'src/mixins/downloadResult'
 import buildOutput from '../../mixins/buildOutput'
 import utils from '../../../logic/utils'
-import { townHallEnduring } from '../../../logic/articles'
-import StandardForm from '../shared/StandardForm.vue'
+import { townHallCert } from '../../../logic/articles'
 import ChecklistPreview from '../shared/ChecklistPreview.vue'
 import Disclaimer from '../shared/Disclaimer.vue'
 
 export default {
     mixins: [tryCatch, buildOutput,downloadResult],
-    components: {
-        StandardForm,
-        ChecklistPreview,
-        Disclaimer
-    },
+    components: { ChecklistPreview, Disclaimer },
     data() {
         return {
             file: null,
             fileOutput: null,
             xmlResult: null,
             program: {
-                name: "Town Hall",
-                codeName: "townHall",
-                dirName: "townhall-enduring",
-                profArticleType: "SlidePresentation",
+                name: "Town Hall Cert Page",
+                codeName: "townHallCert",
+                dirName: "townhall-cert",
+                profArticleType: "Article",
                 articleID: "",
                 qnaID: "",
                 hasTranscript: false, 
-                transcriptType: '',
+                transcriptType: 'Slides',
                 hasLLA: false,
                 hasOUS: false, 
                 hasPeerReviewer: false, 
@@ -116,27 +121,17 @@ export default {
     },
     computed: {
         missingData() {
-            return !this.program.articleID.length || !this.file || 
-            (!!this.program.hasTranscript && !this.program.transcriptType.length)
+            return !this.program.articleID.length || !this.file
         },
         hasData() {
-            return !!this.program.articleID.length || !!this.file || 
-            [this.program.hasTranscript, this.program.hasOUS, this.program.hasPeerReviewer,this.program.hasCollectionPage,this.program.hasForYourPatient,this.program.hasLLA].findIndex(item => !!item) > -1
+            return !!this.program.articleID.length || !!this.file
         }
     },
     methods: {
-        bindValues(program) {
-            this.program = Object.assign(this.program, program)
-        },
         reset() {
             this.program.articleID = ''
-            this.program.hasTranscript = false
-            this.transcriptType = ''
             this.program.hasOUS = false
             this.program.hasPeerReviewer = false
-            this.program.hasCollectionPage = false
-            this.program.hasForYourPatient = false
-            this.program.hasLLA = false
             this.file = null
             this.resetOutput()
         },
@@ -145,12 +140,13 @@ export default {
             this.xmlResult = null
         },
         build(val) {
-            const createTownhall = () => {
-                this.fileOutput = townHallEnduring.buildTownHallEnduring(val, this.program)
+            const createTownhallCert = () => {
+                this.fileOutput = townHallCert.buildTownHallCert(val, this.program)
                 this.xmlResult = this.fileOutput.finishedArticleObject ? utils.xmlOps.objectToXMLString(this.fileOutput.finishedArticleObject.toObjectLiteral()) : ''
                 this.xmlResult = utils.cleanHTML.cleanEntities(this.xmlResult)
+                this.fileOutput = Object.assign(this.fileOutput, {xmlResult: this.xmlResult})
             }
-            this.tryCatch(createTownhall, 'TH Enduring')
+            this.tryCatch(createTownhallCert, 'TH Cert')
         }
     }
 }

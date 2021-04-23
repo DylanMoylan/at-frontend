@@ -46,6 +46,10 @@ const routes = [
               component: () => import('components/Menu-Items/GenTownhall.vue')
             },
             {
+              path: '/generate/townhall-cert',
+              component: () => import('components/Menu-Items/GenTHCert.vue')
+            },
+            {
               path: '/generate/video-lecture',
               component: () => import('components/Menu-Items/GenVideoLecture.vue')
             },
