@@ -18,6 +18,7 @@
           v-model="productType"
           :options="productTypeOptions"
           class="row q-mb-md at-input"
+          popup-content-class="secundo"
         />
         <div class="row full-width justify-start q-mb-md">
           <q-checkbox

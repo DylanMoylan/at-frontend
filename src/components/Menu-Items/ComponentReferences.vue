@@ -18,6 +18,7 @@
           v-model="productType"
           :options="productTypeOptions"
           class="row q-mb-md at-input"
+          popup-content-class="secundo"
         />
         <q-file
         v-model="file"

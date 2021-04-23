@@ -18,6 +18,7 @@
           v-model="productType"
           :options="filteredPrograms"
           class="row q-mb-md at-input"
+          popup-content-class="secundo"
         />
     </q-card-section>
     <q-card-section>

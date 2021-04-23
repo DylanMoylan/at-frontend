@@ -20,6 +20,7 @@
           class="row q-mb-md at-input"
           emit-value
           map-options
+          popup-content-class="secundo"
         />
         <q-file
             v-model="file"

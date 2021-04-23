@@ -36,6 +36,8 @@
                     :options="languageOptions"
                     map-options
                     emit-value
+                    popup-content-class="secundo"
+                    clearable
                 />
             </div>
             <div class="row q-mb-sm justify-between">
@@ -56,6 +58,8 @@
                     :options="languageOptions"
                     map-options
                     emit-value
+                    popup-content-class="secundo"
+                    clearable
                 />
             </div>
             <div class="row q-mb-sm justify-between">
@@ -76,6 +80,8 @@
                     :options="languageOptions"
                     map-options
                     emit-value
+                    popup-content-class="secundo"
+                    clearable
                 />
             </div>
             <div class="row q-mb-sm justify-between">
@@ -96,6 +102,8 @@
                     :options="languageOptions"
                     map-options
                     emit-value
+                    popup-content-class="secundo"
+                    clearable
                 />
             </div>
       </q-card-section>

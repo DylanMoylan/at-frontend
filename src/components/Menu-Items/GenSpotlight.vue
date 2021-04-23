@@ -12,8 +12,7 @@
                         stack-label
                         label="Article ID"
                         v-model="articleID"
-                        style="width:350px"
-                        class="row q-mb-md"
+                        class="row q-mb-md at-input"
                     />
                     <div class="row full-width justify-start">
                         <q-checkbox

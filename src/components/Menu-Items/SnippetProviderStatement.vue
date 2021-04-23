@@ -1,5 +1,5 @@
 <template>
-    <q-card>
+    <q-card class="secundo">
         <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             <span>Misc Provider Statement Snippet</span>
         </q-card-section>

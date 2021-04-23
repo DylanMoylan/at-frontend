@@ -23,7 +23,7 @@
             v-model="urls"
             use-chips
             bottom-slots
-            class="row q-ma-sm"
+            class="row q-ma-sm at-input"
             style="max-width:450px"
         >
             <template v-slot:hint>

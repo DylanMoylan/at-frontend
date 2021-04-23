@@ -19,96 +19,98 @@
                   label="Generate Files"
                   group="options"
                   v-model="expanded.generate"
+                  dense
+                  :duration="0"
                   >
                     <q-card class="secundo">
                         <q-card-section>
-                            <q-list separator bordered>
-                                  <q-item clickable to="/generate/captions">
+                            <q-list separator dense>
+                                  <q-item clickable to="/generate/captions" class="at-show">
                                     <q-item-section>
                                       <q-item-label>
-                                        Generate Captions
+                                        Captions
                                       </q-item-label>
-                                      <q-item-label caption>
+                                      <q-item-label caption class="at-hide">
                                         Generates .vtt and .xml files for in language captions.
                                       </q-item-label>
                                     </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/clinical-brief">
+                                  <q-item clickable to="/generate/clinical-brief" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate Clinical Brief
+                                          Clinical Brief
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates Clinical Brief XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/curbside">
+                                  <q-item clickable to="/generate/curbside" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate Curbside
+                                          Curbside
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates Curbside Consult XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/spotlight">
+                                  <q-item clickable to="/generate/spotlight" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate Spotlight
+                                          Spotlight
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates Spotlight XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/video-lecture">
+                                  <q-item clickable to="/generate/video-lecture" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate Video Lecture
+                                          Video Lecture
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates Video Lecture XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/first-response">
+                                  <q-item clickable to="/generate/first-response" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate First Response
+                                          First Response
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates First Response XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/townhall-enduring">
+                                  <q-item clickable to="/generate/townhall-enduring" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate Townhall Enduring
+                                          Townhall Enduring
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates TownHall Enduring XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/townhall-cert">
+                                  <q-item clickable to="/generate/townhall-cert" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate Townhall Cert
+                                          Townhall Cert
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates TownHall Cert XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
                                   </q-item>
-                                  <q-item clickable to="/generate/test-and-teach">
+                                  <q-item clickable to="/generate/test-and-teach" class="at-show">
                                       <q-item-section>
                                         <q-item-label>
-                                          Generate Test and Teach
+                                          Test and Teach
                                         </q-item-label>
-                                        <q-item-label caption>
+                                        <q-item-label caption class="at-hide">
                                           Generates Test and Teach XML code from R2Net html file.
                                         </q-item-label>
                                       </q-item-section>
@@ -121,69 +123,71 @@
                   label="Snippets"
                   group="options"
                   v-model="expanded.snippets"
+                  dense
+                  :duration="0"
                   >
                     <q-card class="secundo">
                         <q-card-section>
-                            <q-list separator bordered>
-                                <q-item clickable to="/snippets/in-language">
+                            <q-list separator dense>
+                                <q-item clickable to="/snippets/in-language" class="at-show">
                                   <q-item-section>
                                     <q-item-label>
                                       In-Language
                                     </q-item-label>
-                                    <q-item-label caption>
+                                    <q-item-label caption class="at-hide">
                                       Generates code for in language add-ons.
                                     </q-item-label>
                                   </q-item-section>
                                 </q-item>
-                                <q-item clickable to="/snippets/downloadable-slides">
+                                <q-item clickable to="/snippets/downloadable-slides" class="at-show">
                                     <q-item-section>
                                       <q-item-label>
                                         Downloadable Slides
                                       </q-item-label>
-                                      <q-item-label caption>
+                                      <q-item-label caption class="at-hide">
                                         Generates HTML snippet for downloadable slides.
                                       </q-item-label>
                                     </q-item-section>
                                 </q-item>
-                                <q-item clickable to="/snippets/certificate-links">
+                                <q-item clickable to="/snippets/certificate-links" class="at-show">
                                   <q-item-section>
                                     <q-item-label>
                                       Certificate Links
                                     </q-item-label>
-                                    <q-item-label caption>
+                                    <q-item-label caption class="at-hide">
                                       Generates snippet for activity certificate links.
                                     </q-item-label>
                                   </q-item-section>
                                 </q-item>
-                                <q-item clickable to="/snippets/media-info">
+                                <q-item clickable to="/snippets/media-info" class="at-show">
                                   <q-item-section>
                                     <q-item-label>
                                       Media Info
                                     </q-item-label>
-                                    <q-item-label caption>
+                                    <q-item-label caption class="at-hide">
                                       Generates snippet for custom form media info.
                                     </q-item-label>
                                   </q-item-section>
                                 </q-item>
-                                <q-item clickable to="/snippets/misc-provider-statement">
-                                    <q-item-section>
-                                      <q-item-label>
-                                        Misc Provider Statement
-                                      </q-item-label>
-                                      <q-item-label caption>
-                                        Generates HTML snippet for "Misc Provider Statement" field. Comes with Interprofessional CE logo and Medscape logo.
-                                      </q-item-label>
-                                    </q-item-section>
-                                </q-item>
-                                <q-item clickable to="/snippets/slide-tocs">
+                                <q-item clickable to="/snippets/slide-tocs" class="at-show">
                                   <q-item-section>
                                     <q-item-label>
                                       Slide TOCs
                                     </q-item-label>
-                                    <q-item-label caption>
+                                    <q-item-label caption class="at-hide">
                                       Generates XML for TOC elements with empty slide groups.
                                     </q-item-label>
                                   </q-item-section>
+                                </q-item>
+                                <q-item clickable to="/snippets/misc-provider-statement" class="at-show">
+                                    <q-item-section>
+                                      <q-item-label>
+                                        Misc Provider Statement
+                                      </q-item-label>
+                                      <q-item-label caption class="at-hide">
+                                        Generates HTML snippet for "Misc Provider Statement" field. Comes with Interprofessional CE logo and Medscape logo.
+                                      </q-item-label>
+                                    </q-item-section>
                                 </q-item>
                             </q-list>
                         </q-card-section>
@@ -193,76 +197,78 @@
                   label="Components"
                   group="options"
                   v-model="expanded.components"
+                  dense
+                  :duration="0"
                 >
                   <q-card class="secundo">
                     <q-card-section>
-                      <q-list separator bordered>
-                        <q-item clickable to="/components/activity">
+                      <q-list separator dense>
+                        <q-item clickable to="/components/activity" class="at-show">
                           <q-item-section>
                             <q-item-label>
                               Activity
                             </q-item-label>
-                            <q-item-label caption>
+                            <q-item-label caption class="at-hide">
                               Generates Activity XML code from R2Net html file.
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/text-transcript">
+                        <q-item clickable to="/components/text-transcript" class="at-show">
                           <q-item-section>
                             <q-item-label>
                               Text Transcript
                             </q-item-label>
-                            <q-item-label caption>
+                            <q-item-label caption class="at-hide">
                               Generates XML code for Sidebar Transcript from R2Net html file.
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/slides-transcript">
+                        <q-item clickable to="/components/slides-transcript" class="at-show">
                           <q-item-section>
                             <q-item-label>
                               Slides Transcript
                             </q-item-label>
-                            <q-item-label caption>
+                            <q-item-label caption class="at-hide">
                               Generates XML code for Slides Transcript from R2Net html file.
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/abbreviations">
+                        <q-item clickable to="/components/abbreviations" class="at-show">
                           <q-item-section>
                             <q-item-label>
                               Abbreviations
                             </q-item-label>
-                            <q-item-label caption>
+                            <q-item-label caption class="at-hide">
                               Generates Abbrevations TOC XML code from R2Net html file.
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/references">
+                        <q-item clickable to="/components/references" class="at-show">
                           <q-item-section>
                             <q-item-label>
                               References
                             </q-item-label>
-                            <q-item-label caption>
+                            <q-item-label caption class="at-hide">
                               Generates References TOC XML code from R2Net html file.
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/table-of-contents">
+                        <q-item clickable to="/components/table-of-contents" class="at-show">
                           <q-item-section>
                             <q-item-label>
                               Table of Contents
                             </q-item-label>
-                            <q-item-label caption>
+                            <q-item-label caption class="at-hide">
                               Generates Multicomponent TOC XML code from R2Net html file.
                             </q-item-label>
                           </q-item-section>
                         </q-item>
-                        <q-item clickable to="/components/credit-statements">
+                        <q-item clickable to="/components/credit-statements" class="at-show">
                           <q-item-section>
                             <q-item-label>
                               Credit Statements
                             </q-item-label>
-                            <q-item-label caption>
+                            <q-item-label caption class="at-hide">
                               Generates credit statements HTML code from the R2Net html file.
                             </q-item-label>
                           </q-item-section>
@@ -285,6 +291,8 @@
                   label="Producer"
                   group="options"
                   v-model="expanded.producer"
+                  dense
+                  :duration="0"
                 >
                   <q-card class="secundo">
                     <q-card-section>
@@ -307,6 +315,8 @@
                   label="Format"
                   group="options"
                   v-model="expanded.format"
+                  dense
+                  :duration="0"
                 >
                   <q-card class="secundo">
                     <q-card-section>
@@ -326,7 +336,7 @@
                   </q-card>
                 </q-expansion-item>
             </q-list>
-            <div class="q-ma-md">
+            <!-- <div class="q-ma-md">
               <div>
                 <q-icon name="warning_amber" class="q-mr-sm"/><span>Disable previews to improve performance:</span>
               </div>
@@ -336,7 +346,7 @@
                 color="blue"
                 label="Hide Previews"
               />
-            </div>
+            </div> -->
     </q-drawer>
     <q-btn
       icon="menu"
@@ -398,5 +408,21 @@ export default {
 <style scoped>
   .active-expand {
     color: blue;
+  }
+  .at-hide {
+    display: none;
+  }
+  .at-show:hover {
+    padding: 8px 16px;
+  }
+
+  .at-show:hover .at-hide {
+    display: initial;
+  }
+  .q-router-link--active.at-show >>> .at-hide {
+    display: initial;
+  }
+  .q-router-link--active {
+    padding: 8px 16px;
   }
 </style>

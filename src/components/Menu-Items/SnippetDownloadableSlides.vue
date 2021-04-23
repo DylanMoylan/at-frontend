@@ -1,5 +1,5 @@
 <template>
-    <q-card class="secundo q-mx-lg q-mb-lg">
+    <q-card class="secundo q-ma-lg">
         <q-card-section class="primo text-white text-h6 q-pa-md text-center">
             Downloadable Slides Snippet
         </q-card-section>

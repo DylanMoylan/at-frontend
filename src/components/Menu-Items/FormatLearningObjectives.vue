@@ -1,6 +1,6 @@
 <template>
     <div>
-        <q-card class="secundo">
+        <q-card class="secundo q-mt-lg">
             <q-card-section class="primo text-white text-h6 q-pa-md text-center">
                 Format Learning Objectives
             </q-card-section>
@@ -12,6 +12,7 @@
                     v-model="productType"
                     :options="productTypeOptions"
                     class="row q-mb-md at-input"
+                    popup-content-class="secundo"
                     />
                 <q-file
                     v-model="file"
@@ -34,7 +35,7 @@
             </q-card-section>
         </q-card>
         <template v-if="fileOutput">
-            <q-card class="q-mt-md q-pa-md q-mx-lg" v-if="fileOutput">
+            <q-card class="q-mt-md q-mb-lg q-pa-md q-mx-lg" v-if="fileOutput">
                 <q-card-section>
                     <editor :output="fileOutput" buttons/>
                 </q-card-section>

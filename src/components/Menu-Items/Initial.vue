@@ -79,6 +79,18 @@
             <q-icon name="check" class="q-mr-sm text-body1"/>
             <span>Generate Video Lecture</span>
           </li>
+          <li class="text-positive">
+            <q-icon name="check" class="q-mr-sm text-body1"/>
+            <span>Snippets</span>
+          </li>
+          <li class="text-positive">
+            <q-icon name="check" class="q-mr-sm text-body1"/>
+            <span>Format (Learning Objectives)</span>
+          </li>
+          <li class="text-positive">
+            <q-icon name="check" class="q-mr-sm text-body1"/>
+            <span>Components: 7/8</span>
+          </li>
           <li class="text-warning">
             <q-icon name="help" class="q-mr-sm text-body1"/>
             <span>Generate First-Response</span>
@@ -87,29 +99,21 @@
             <q-icon name="help" class="q-mr-sm text-body1"/>
             <span>Generate Test and Teach</span>
           </li>
-          <li class="text-negative">
-            <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+          <li class="text-warning">
+            <q-icon name="help" class="q-mr-sm text-body1"/>
             <span>Generate Townhall Cert</span>
           </li>
           <li class="text-warning">
             <q-icon name="help" class="q-mr-sm text-body1"/>
             <span>Generate Townhall Enduring</span>
           </li>
-          <li class="text-positive">
-            <q-icon name="check" class="q-mr-sm text-body1"/>
-            <span>Snippets</span>
-          </li>
-          <li class="text-warning">
-            <q-icon name="help" class="q-mr-sm text-body1"/>
-            <span>Components: 7/8</span>
+          <li class="text-negative">
+            <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
+            <span>Component: Contributors</span>
           </li>
           <li class="text-negative">
             <q-icon name="highlight_off" class="q-mr-sm text-body1"/>
-            <span>Producer</span>
-          </li>
-          <li class="text-positive">
-            <q-icon name="check" class="q-mr-sm text-body1"/>
-            <span>Format</span>
+            <span>Producer (Producer Checklist)</span>
           </li>
         </ul>
       </div>

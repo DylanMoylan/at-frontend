@@ -2,7 +2,7 @@
     <div>
         <template v-if="output">
             <div class="q-my-md text-white text-h6 q-ml-lg">Preview:</div>
-            <q-card class="q-mx-lg q-mb-lg text-left" style="border-radius:0">
+            <q-card class="q-mx-lg q-mb-lg text-left secundo" style="border-radius:0">
                 <template v-if="outputIsString">
                     <editor :output="output" />
                 </template>
@@ -29,6 +29,7 @@
                             v-for="(item, index) in outputToShow"
                             :key="`tabP${index}`"
                             :name="item.value"
+                            class="secundo"
                         >
                             <editor :output="output[item.value]" buttons />
                         </q-tab-panel>

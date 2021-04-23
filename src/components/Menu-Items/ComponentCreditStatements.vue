@@ -17,6 +17,7 @@
           label="Select Product Type"
           v-model="productType"
           :options="productTypeOptions"
+          popup-content-class="secundo"
           class="row q-mb-md at-input"
         />
         <q-file
